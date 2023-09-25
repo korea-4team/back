@@ -18,5 +18,7 @@ public interface ResponseMessage {
   String SIGN_IN_FAIL = "Sign In Data Mismatch";
 
   String DATABASE_ERROR = "Database Error";
+
+  String NOT_ADMIN_ID = "Not Admin Id";
   
 }

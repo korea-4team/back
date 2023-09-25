@@ -18,5 +18,7 @@ public interface ResponseCode {
   String SIGN_IN_FAIL = "DM";
 
   String DATABASE_ERROR = "DE";
+
+  String NOT_ADMIN_ID = "NA";
   
 }
