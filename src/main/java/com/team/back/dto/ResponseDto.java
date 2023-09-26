@@ -2,6 +2,7 @@ package com.team.back.dto;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
@@ -20,5 +21,9 @@ public class ResponseDto {
   public static ResponseEntity<ResponseDto> databaseError() {
     ResponseDto result = new ResponseDto(ResponseCode.DATABASE_ERROR, ResponseMessage.DATABASE_ERROR);
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+  }
+
+  public static BodyBuilder status(HttpStatus badRequest) {
+    return null;
   }
 }
