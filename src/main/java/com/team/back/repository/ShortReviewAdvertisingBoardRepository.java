@@ -29,7 +29,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   
 
   @Transactional
-  void deleteAdvertisingBoard(Integer boardNumber);
+  void deleteByBoardNumber(Integer boardNumber);
     
 
 }

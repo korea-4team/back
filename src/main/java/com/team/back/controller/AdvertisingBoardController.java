@@ -13,20 +13,21 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/advertising-board")
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class AdvertisingBoardController {
 
-  private final AdvertisingService advertisingService;
+  // private final AdvertisingService advertisingService;
 
   @GetMapping("/advertising-board/board-list")
   public static void GetAdvertisingBoard() {
 
   }
 
-  @GetMapping("/advertising-board/board-list")
-  public static void GetCurrentAdvertisingBoard() {
+  // @GetMapping("/advertising-board/board-list")
+  // public static void GetCurrentAdvertisingBoard() {
 
-  }
+  // }
+  
   @PostMapping("/advertising-board/detail/{boardNumber}/short-review")
   public static void PostShortReviewList() {
 
