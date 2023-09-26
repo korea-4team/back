@@ -11,7 +11,7 @@ import com.team.back.common.response.CustomRsponse;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/v1/review-board")
+@RequestMapping("/review-board")
 @RequiredArgsConstructor
 public class ReviewBoardController {
 
