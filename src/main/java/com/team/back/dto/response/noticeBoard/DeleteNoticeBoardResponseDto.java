@@ -13,21 +13,22 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class DeleteNoticeBoardResponseDto extends ResponseDto {
-	private DeleteNoticeBoardResponseDto(String code, String message) {
+	
+	private DeleteNoticeBoardResponseDto(String code, String message){
 		super(code, message);
 	}
 
-	public ResponseEntity<DeleteNoticeBoardResponseDto> success() {
+	public static ResponseEntity<DeleteNoticeBoardResponseDto> success() {
 		DeleteNoticeBoardResponseDto result = new DeleteNoticeBoardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
-	public ResponseEntity<DeleteNoticeBoardResponseDto> notAdminId() {
+	public static ResponseEntity<DeleteNoticeBoardResponseDto> notAdminId() {
 		DeleteNoticeBoardResponseDto result = new DeleteNoticeBoardResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 	}
 
-	public ResponseEntity<DeleteNoticeBoardResponseDto> notExistedBoard() {
+	public static ResponseEntity<DeleteNoticeBoardResponseDto> noExistedBoard() {
 		DeleteNoticeBoardResponseDto result = new DeleteNoticeBoardResponseDto(ResponseCode.NO_EXISTED_BOARD, ResponseMessage.NO_EXISTED_BOARD);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 	}
