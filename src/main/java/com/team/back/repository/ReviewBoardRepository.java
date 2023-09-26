@@ -35,6 +35,6 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoardEntity, 
         nativeQuery=true
     )
     
-    List<ReviewBoardListResultSet> getReviewBoardList(Integer section);
+    List<ReviewBoardListResultSet> getReviewBoardCurrentList(Integer section);
   
 }
