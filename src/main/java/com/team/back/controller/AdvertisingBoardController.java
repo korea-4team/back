@@ -18,42 +18,37 @@ public class AdvertisingBoardController {
 
   private final AdvertisingService advertisingService;
 
-  @GetMapping("/advertising-board-list")
+  @GetMapping("/advertising-board/board-list")
   public static void GetAdvertisingBoard() {
 
   }
 
-  @GetMapping("/advertising-board-list")
+  @GetMapping("/advertising-board/board-list")
   public static void GetCurrentAdvertisingBoard() {
 
   }
-  @GetMapping
-  public static void GetSearchAdvertisingBoard() {
+  @PostMapping("/advertising-board/detail/{boardNumber}/short-review")
+  public static void PostShortReviewList() {
 
   }
-  @GetMapping
-  public static void GetShortReviewList() {
-
-  }
-  @GetMapping
-  public static void GetUserListAdvertising() {
-
-  }
-
-  @PatchMapping
+  @PatchMapping("/advertising-board/update/{boardNumber}")
   public static void PatchAdvertisingBoard() {
 
   }
-  @PostMapping
+  @PostMapping("/advertising-board/write/menu-list")
   public static void PostAdvertisingBoard() {
 
   }
-  @DeleteMapping
+  @DeleteMapping("/advertising-board/delete/{boardNumber}")
   public static void DeleteAdvertisingBoard() {
 
   }
-  @DeleteMapping
+  @DeleteMapping("/advertising-board/delete/{boardNumber}/short-review")
   public static void DeleteShortCommentAdvertisingBoard() {
+    
+  }
+  @PostMapping("/advertising-board/detail/{boardNumber}/reservation")
+  public static void ReservationAdvertisingBoard(){
     
   }
   
