@@ -18,4 +18,10 @@ public class PatchReviewBoardRequestDto {
   private String contents;
 
   private String imageUrl;
+
+  @NotBlank
+  private String location;
+
+  @NotBlank
+  private String businessType;
 }

@@ -12,6 +12,7 @@ public interface ResponseCode {
 
   String NO_EXISTED_USER = "NU";
   String NO_EXISTED_BOARD = "NB";
+  String NO_EXISTED_COMMENT = "NC";
 
   String NO_PERMISSION = "NP";
 
