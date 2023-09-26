@@ -7,5 +7,7 @@ import com.team.back.entity.AdminEntity;
 
 @Repository
 public interface AdminRepository extends JpaRepository<AdminEntity, String>{
+
 	boolean existsByAdminId(String adminId);
+	
 }

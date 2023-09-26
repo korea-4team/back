@@ -38,7 +38,7 @@ public class NoticeBoardEntity {
 
 	private String writerEmail;
 
-	public NoticeBoardEntity(String adminId, PostNoticeBoardRequestDto dto) {
+	public NoticeBoardEntity(String writerEmail, PostNoticeBoardRequestDto dto) {
 		Date now = Date.from(Instant.now());
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String writeDatetime = simpleDateFormat.format(now);
@@ -47,7 +47,7 @@ public class NoticeBoardEntity {
 		this.contents = dto.getContents();
 		this.imageUrl = dto.getImageUrl();
 		this.writeDatetime = writeDatetime;
-		this.writerEmail = adminId;
+		this.writerEmail = writerEmail;
 	}
 
 	// 공지사항 수정 시

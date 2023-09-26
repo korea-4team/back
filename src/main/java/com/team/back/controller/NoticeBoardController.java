@@ -48,17 +48,17 @@ public class NoticeBoardController {
 	// 공지사항 작성 메서드
 	@PostMapping("/write")
 	public ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(
-		@AuthenticationPrincipal String adminId, @RequestBody @Valid PostNoticeBoardRequestDto requestBody
+		@AuthenticationPrincipal String writerEmail, @RequestBody @Valid PostNoticeBoardRequestDto requestBody
 	) {
-		ResponseEntity<? super PostNoticeBoardResponseDto> response = noticeBoardService.postNoticeBoard(adminId, requestBody);
+		ResponseEntity<? super PostNoticeBoardResponseDto> response = noticeBoardService.postNoticeBoard(writerEmail, requestBody);
 		return response;
 	}
 	
 	// 공지사항 수정 메서드
 	@PatchMapping("/update/{boardNumber}")
 	public ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(
-		@AuthenticationPrincipal String adminId, @PathVariable(value = "boardNumber",required = true) Integer boardNumber, @RequestBody @Valid PatchNoticeBoardRequestDto requestBody) {
-		ResponseEntity<? super PatchNoticeBoardResponseDto> response = noticeBoardService.patchNoticeBoard(boardNumber, adminId, requestBody);
+		@AuthenticationPrincipal String writerEmail, @PathVariable(value = "boardNumber",required = true) Integer boardNumber, @RequestBody @Valid PatchNoticeBoardRequestDto requestBody) {
+		ResponseEntity<? super PatchNoticeBoardResponseDto> response = noticeBoardService.patchNoticeBoard(boardNumber, writerEmail, requestBody);
 		return response;
 	}
 
@@ -66,8 +66,8 @@ public class NoticeBoardController {
 	// 공지사항 삭제 메서드
 	@DeleteMapping("/delete/{boardNumber}")
 	public ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(
-		@AuthenticationPrincipal String adminId, @PathVariable(value = "boardNumber", required = true) Integer boardNumber) {
-		ResponseEntity<? super DeleteNoticeBoardResponseDto> response = noticeBoardService.deleteNoticeBoard(boardNumber, adminId);
+		@AuthenticationPrincipal String writerEmail, @PathVariable(value = "boardNumber", required = true) Integer boardNumber) {
+		ResponseEntity<? super DeleteNoticeBoardResponseDto> response = noticeBoardService.deleteNoticeBoard(boardNumber, writerEmail);
 		return response;
 	}
 }
