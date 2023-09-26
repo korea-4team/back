@@ -15,13 +15,13 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
    @Query(
     value=
     "SELECT " +
-      "U.nickname AS nickname, " +
-      "C.contents AS contents, " +
-      "C.write_datetime AS writeDatetime " +
-    "FROM comment AS C INNER JOIN user AS U " +
-    "ON C.user_email = U.email " +
+    "U.nickname AS nickname, " +
+    "RC.contents AS contents, " +
+    "RC.write_datetime AS writeDatetime " +
+    "FROM review_board_comment AS RC INNER JOIN user AS U " +
+    "ON RC.user_email = U.email " +
     "WHERE board_number = ?1 " +
-    "ORDER BY C.write_datetime",
+    "ORDER BY RC.write_datetime",
     nativeQuery=true
   )
   List<CommentListResultSet> getCommentList(Integer boardNumber);
