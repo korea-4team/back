@@ -9,9 +9,9 @@ import com.team.back.entity.ReviewBoardViewEntity;
 
 @Repository
 public interface ReviewBoardViewRepository extends JpaRepository<ReviewBoardViewEntity, Integer> {
-    ReviewBoardViewEntity findByReviewBoardNumber(Integer boardNumber);
+    ReviewBoardViewEntity findByBoardNumber(Integer boardNumber);
 
     List<ReviewBoardViewEntity> findByTitleContainsOrContentsContainsOrderByWriteDatetimeDesc(String title, String contents);
-    List<ReviewBoardViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String title, String contents);
+    List<ReviewBoardViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String wirterEmail);
   
 }

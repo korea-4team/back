@@ -19,10 +19,11 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, 
 			"N.contents AS contents, " +
 			"N.write_datetime AS writeDatetime, " +
 			"A.admin_id AS adminId, " +
-			"A.admin_nickname AS adminNickname, " +
+			"A.admin_nickname AS adminNickname " +
 			"FROM notice_board AS N " +
 			"INNER JOIN admin AS A " +
-			"ON N.writer_email = A.admin_id"
+			"ON N.writer_email = A.admin_id",
+		nativeQuery = true
 	)
 	List<NoticeBoardListResultSet> getNoticeBoardList();
 
