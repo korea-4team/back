@@ -8,8 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.common.response.CustomRsponse;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("api/v1/review-board")
+@RequiredArgsConstructor
 public class ReviewBoardController {
 
     // API : 기행기 게시물 리스트 최신순으로 불러오기 메서드 //
