@@ -1,7 +1,11 @@
 package com.team.back.service.implement;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.team.back.dto.ResponseDto;
 import com.team.back.dto.request.reviewBoard.PatchReviewBoardRequestDto;
 import com.team.back.dto.request.reviewBoard.PostCommentRequestDto;
 import com.team.back.dto.request.reviewBoard.PostReviewBoardRequestDto;
@@ -19,20 +23,69 @@ import com.team.back.dto.response.reviewBoard.PatchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PostCommentResponseDto;
 import com.team.back.dto.response.reviewBoard.PostReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PutFavoriteResponseDto;
+import com.team.back.dto.response.reviewBoard.ReviewBoardListResponseDto;
+import com.team.back.entity.ReviewBoardEntity;
+import com.team.back.entity.ReviewBoardViewEntity;
+import com.team.back.entity.resultSet.ReviewBoardListResultSet;
+import com.team.back.repository.ReviewBoardRepository;
+import com.team.back.repository.ReviewBoardViewRepository;
 import com.team.back.service.ReviewBoardService;
 
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
 public class ReviewBoardServiceImplement implements ReviewBoardService {
 
+    private final ReviewBoardRepository reviewBoardRepository;
+    private final ReviewBoardViewRepository reviewBoardViewRepository;
+
     @Override
-    public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardCurrentList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReviewBoardList'");
+    public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBaordList(Integer section) {
+        
+        List<ReviewBoardListResponseDto> boardList = null;
+
+        try {
+            // description: 최신 기행기 게시물 리스트 불러오기 //
+            Integer limit = (section - 1) * 50;
+            List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(limit);
+
+            // description: 검색 결과를 ReseponseDto 형태로 변환 //
+            boardList = ReviewBoardListResponseDto.copyList(resultSets);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetReviewBoardListResponseDto.success(boardList);
     }
 
     @Override
     public ResponseEntity<? super GetReviewBoardResponseDto> getReviewBoard(Integer boardNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getReviewBoard'");
+        
+        ReviewBoardViewEntity reviewBoardViewEntity = null;
+
+        try {
+            // description: 게시물 번호에 해당하는 게시물 조회 //
+            reviewBoardViewEntity = reviewBoardViewRepository.findByBoardNumber(boardNumber);
+
+            // description: 존재하는 게시물인지 확인 //
+            if (reviewBoardViewEntity == null) return GetReviewBoardResponseDto.noExistedBoard();
+
+            // description: 게시물 조회수 증가 //
+            ReviewBoardEntity reviewBoardEntity = reviewBoardRepository.findByBoardNumber(boardNumber);
+            reviewBoardEntity.increaseViewCount();
+
+            // description: 데이터베이스에 저장 //
+            reviewBoardRepository.save(reviewBoardEntity);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetReviewBoardResponseDto.success(reviewBoardViewEntity);
     }
 
     @Override

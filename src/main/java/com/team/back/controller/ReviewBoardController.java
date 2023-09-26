@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.common.response.CustomRsponse;
+import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
+import com.team.back.service.ReviewBoardService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,12 +17,15 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ReviewBoardController {
 
+    private final ReviewBoardService reviewBoardService;
+
     // API : 기행기 게시물 리스트 최신순으로 불러오기 메서드 //
     @GetMapping("/board-list/{section}")
-    public ResponseEntity<?> getReviewBoardList(
-        
+    public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        return CustomRsponse.serviceunavailable;
+        ResponseEntity<? super GetReviewBoardListResponseDto> response = reviewBoardService.getReviewBaordList(section);
+        return response;
     }
 
     // API : 기행기 게시물 지역별 리스트 불러오기 메서드 //
