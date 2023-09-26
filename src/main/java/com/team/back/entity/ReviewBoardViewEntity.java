@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="board_view")
-@Table(name="board_view")
+@Entity(name="review_board_view")
+@Table(name="review_board_view")
 public class ReviewBoardViewEntity {
   @Id
   private int boardNumber;

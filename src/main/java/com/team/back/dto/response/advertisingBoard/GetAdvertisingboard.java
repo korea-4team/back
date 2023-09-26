@@ -6,14 +6,13 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
-import com.team.back.entity.Advertising_Entity;
-import com.team.back.entity.Advertising_View_Entity;
+import com.team.back.entity.AdvertisingViewEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 @Getter
 @AllArgsConstructor
-public class Advertising_board extends ResponseDto{
+public class GetAdvertisingboard extends ResponseDto{
 
   private int boardNumber;
   private String title;
@@ -27,7 +26,7 @@ public class Advertising_board extends ResponseDto{
   private String writerNickname;
 
 
-  private Advertising_board(String code, String message, Advertising_View_Entity advertising_View_Entity){
+  private GetAdvertisingboard(String code, String message, AdvertisingViewEntity advertising_View_Entity){
     super(code,message);
     this.boardNumber = advertising_View_Entity.getBoardNumber();
     this.title = advertising_View_Entity.getTitle();
@@ -39,8 +38,8 @@ public class Advertising_board extends ResponseDto{
 
   }
 
-  public static ResponseEntity<Advertising_board> success(Advertising_View_Entity advertising_View_Entity){
-    Advertising_board result = new Advertising_board(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertising_View_Entity);
+  public static ResponseEntity<GetAdvertisingboard> success(AdvertisingViewEntity advertising_View_Entity){
+    GetAdvertisingboard result = new GetAdvertisingboard(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertising_View_Entity);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 

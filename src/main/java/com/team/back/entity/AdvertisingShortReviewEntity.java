@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 
-public class Advertising_Entity {
+public class AdvertisingShortReviewEntity {
 
   @Id
   @GeneratedValue
@@ -29,7 +29,7 @@ public class Advertising_Entity {
   private String contents;
   private String wirteDatetime;
 
-  public Advertising_Entity(Integer boardNumber, String useremail, PostAdvertisingRequestDto dto ){
+  public AdvertisingShortReviewEntity(Integer boardNumber, String useremail, PostAdvertisingRequestDto dto ){
     Date now = Date.from(Instant.now());
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
     String writeDatetime = simpleDateFormat.format(now);
