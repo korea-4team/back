@@ -30,8 +30,9 @@ public class UserEntity {
         this.password = dto.getPassword();
         this.nickname = dto.getNickname();
         this.address = dto.getAddress();
-        this.address = dto.getAddressDetail();
         this.addressDetail = dto.getAddressDetail();
+        this.role = "user";
+        this.telNumber = dto.getTelNumber();
     }
 
     public void setNickname(String nickname) {

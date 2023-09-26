@@ -23,10 +23,10 @@ public class AdvertisingBoardController {
 
   }
 
-  @GetMapping("/advertising-board/board-list")
-  public static void GetCurrentAdvertisingBoard() {
+  // @GetMapping("/advertising-board/board-list")
+  // public static void GetCurrentAdvertisingBoard() {
 
-  }
+  // }
   
   @PostMapping("/advertising-board/detail/{boardNumber}/short-review")
   public static void PostShortReviewList() {

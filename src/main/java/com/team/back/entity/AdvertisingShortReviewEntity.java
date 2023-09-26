@@ -24,7 +24,7 @@ public class AdvertisingShortReviewEntity {
   @Id
   @GeneratedValue
   private int commentNumber;
-  private int BoardNumber;
+  private int boardNumber;
   private String userEmail;
   private String contents;
   private String wirteDatetime;
@@ -34,7 +34,7 @@ public class AdvertisingShortReviewEntity {
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
     String writeDatetime = simpleDateFormat.format(now);
 
-    this.BoardNumber = boardNumber;
+    this.boardNumber = boardNumber;
     this.userEmail = useremail;
     this.contents = dto.getContents();
     this.wirteDatetime = writeDatetime;
