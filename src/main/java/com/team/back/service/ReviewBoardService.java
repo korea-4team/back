@@ -22,7 +22,7 @@ import com.team.back.dto.response.reviewBoard.PutFavoriteResponseDto;
 
 public interface ReviewBoardService {
   // method : 기행기 게시물 리스트 최신순으로 불러오기 메서드 //
-  ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList();
+  ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardCurrentList();
   // method : 기행기 게시물 불러오기 메서드 //
   ResponseEntity<? super GetReviewBoardResponseDto> getReviewBoard(Integer boardNumber);
   // method : 기행기 게시물 지역별 리스트 불러오기 메서드 //
