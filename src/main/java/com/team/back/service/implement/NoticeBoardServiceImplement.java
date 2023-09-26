@@ -28,9 +28,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeBoardServiceImplement implements NoticeBoardService {
 	
-	private AdminRepository adminRepository;
-	private NoticeBoardRepository noticeBoardRepository;
-	private NoticeBoardViewRepository noticeBoardViewRepository;
+	private final AdminRepository adminRepository;
+	private final NoticeBoardRepository noticeBoardRepository;
+	private final NoticeBoardViewRepository noticeBoardViewRepository;
 
 	@Override
 	// description : 공지사항 게시물 리스트 불러오기 메서드
@@ -78,15 +78,15 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
 	@Override
 	// description : 공지사항 게시물 작성 메서드
-	public ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(String adminId, PostNoticeBoardRequestDto dto) {
+	public ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(String writerEmail, PostNoticeBoardRequestDto dto) {
 
 		try {
 			// admin 계정이 존재하는지 확인
-			boolean hasAdmin = adminRepository.existsByAdminId(adminId);
-			if (!hasAdmin) return PostNoticeBoardResponseDto.NotAdminId();
+			boolean hasAdmin = adminRepository.existsByAdminId(writerEmail);
+			if (!hasAdmin) return PostNoticeBoardResponseDto.notAdminId();
 
 			// entity 생성
-			NoticeBoardEntity noticeBoardEntity = new NoticeBoardEntity(adminId, dto);
+			NoticeBoardEntity noticeBoardEntity = new NoticeBoardEntity(writerEmail, dto);
 
 			// 데이터베이스에 저장
 			noticeBoardRepository.save(noticeBoardEntity);
@@ -102,13 +102,13 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
 	@Override
 	// description : 공지사항 수정 메서드
-	public ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(Integer boardNumber, String adminId,
+	public ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(Integer boardNumber, String writerEmail,
 			PatchNoticeBoardRequestDto dto) {
 			
 			try {
 				
 				// admin 아이디인지 확인
-				boolean isAdmin = adminRepository.existsByAdminId(adminId);
+				boolean isAdmin = adminRepository.existsByAdminId(writerEmail);
 				if(!isAdmin) return PatchNoticeBoardResponseDto.notAdminId();
 
 				// 존재하는 게시물인지 확인
@@ -131,11 +131,11 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
 	@Override
 	// description : 공지사항 삭제 메서드
-	public ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(Integer boardNumber, String adminId) {
+	public ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(Integer boardNumber, String writerEmail) {
 	
 		try {
 			// admin 아이디인지 확인
-			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			boolean isAdmin = adminRepository.existsByAdminId(writerEmail);
 			if (!isAdmin) return DeleteNoticeBoardResponseDto.notAdminId();
 
 			// 존재하는 게시물인지 확인

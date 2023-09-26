@@ -19,11 +19,11 @@ public interface NoticeBoardService {
 	ResponseEntity<? super GetNoticeBoardResponseDto> getNoticeBoard(Integer boardNumber);
 
 	// 공지사항 게시물 작성 메서드
-	ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(String adminId, PostNoticeBoardRequestDto dto);
+	ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(String writerEmail, PostNoticeBoardRequestDto dto);
 
 	// 공지사항 게시물 수정 메서드
-	ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(Integer boardNumber, String email, PatchNoticeBoardRequestDto dto);
+	ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(Integer boardNumber, String writerEmail, PatchNoticeBoardRequestDto dto);
 
 	// 공지사항 게시물 삭제 메서드
-	ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(Integer boardNumber, String email);
+	ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(Integer boardNumber, String writerEmail);
 }

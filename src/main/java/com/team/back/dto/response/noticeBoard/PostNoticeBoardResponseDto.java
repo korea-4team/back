@@ -23,7 +23,7 @@ public class PostNoticeBoardResponseDto extends ResponseDto {
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
-	public static ResponseEntity<ResponseDto> NotAdminId() {
+	public static ResponseEntity<ResponseDto> notAdminId() {
 		PostNoticeBoardResponseDto result = new PostNoticeBoardResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 	}
