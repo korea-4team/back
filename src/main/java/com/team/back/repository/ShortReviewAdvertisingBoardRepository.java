@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team.back.entity.AdvertisingShortReviewEntity;
-import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 
 @Repository
@@ -27,9 +26,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   )
   List<AdvertisingBoardResultSet> ShortReviewList(Integer boardNumber);
   
-
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
-    
 
 }
