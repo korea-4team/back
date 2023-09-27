@@ -22,8 +22,8 @@ public interface NoticeBoardService {
 	ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(String adminId, PostNoticeBoardRequestDto dto);
 
 	// 공지사항 게시물 수정 메서드
-	ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(Integer boardNumber, String writerEmail, PatchNoticeBoardRequestDto dto);
+	ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(Integer boardNumber, String adminId, PatchNoticeBoardRequestDto dto);
 
 	// 공지사항 게시물 삭제 메서드
-	ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(Integer boardNumber, String writerEmail);
+	ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(Integer boardNumber, String adminId);
 }

@@ -20,6 +20,7 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, 
 			"N.board_number AS boardNumber, " +
 			"N.title AS title, " +
 			"N.contents AS contents, " +
+			"N.image_url AS imageUrl, " +
 			"N.write_datetime AS writeDatetime, " +
 			"A.admin_id AS writerEmail, " +
 			"A.admin_nickname AS writerNickname " +
