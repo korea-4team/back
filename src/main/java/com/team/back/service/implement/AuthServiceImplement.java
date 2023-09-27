@@ -5,13 +5,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.team.back.dto.ResponseDto;
 import com.team.back.dto.request.auth.SignInRequestDto;
 import com.team.back.dto.request.auth.SignUpRequestDto;
-import com.team.back.dto.ResponseDto;
 import com.team.back.dto.response.auth.SignInResponseDto;
 import com.team.back.dto.response.auth.SignUpResponseDto;
+import com.team.back.entity.AdminEntity;
 import com.team.back.entity.UserEntity;
 import com.team.back.provider.JwtProvider;
+import com.team.back.repository.AdminRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.AuthService;
 
@@ -22,9 +24,12 @@ import lombok.RequiredArgsConstructor;
 public class AuthServiceImplement implements AuthService {
 
     private final UserRepository userRepository;
+    private final AdminRepository adminRepository;
     private final JwtProvider jwtProvider;
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    
 
     @Override
     public ResponseEntity<? super SignInResponseDto> signIn(SignInRequestDto dto) {
@@ -34,18 +39,31 @@ public class AuthServiceImplement implements AuthService {
         String password = dto.getPassword();
 
         try {
-            UserEntity userEntity = userRepository.findByEmail(email);
 
-            if (userEntity == null) return SignInResponseDto.signInDataMismatch();
+            AdminEntity adminEntity = adminRepository.findByAdminId(email);
 
-            String encodedPassword = userEntity.getPassword();
-            boolean equalPassword = passwordEncoder.matches(password, encodedPassword);
-            if (!equalPassword) return SignInResponseDto.signInDataMismatch();
+            if(adminEntity != null) {
+                String encodedPassword = adminEntity.getAdminPassword();
+                boolean equalPassword = passwordEncoder.matches(password, encodedPassword);
+
+                if (!equalPassword) return SignInResponseDto.signInDataMismatch();
+            }
+
+            else {
+                UserEntity userEntity = userRepository.findByEmail(email);
+
+                if (userEntity == null) return SignInResponseDto.signInDataMismatch();
+
+                String encodedPassword = userEntity.getPassword();
+                boolean equalPassword = passwordEncoder.matches(password, encodedPassword);
+                if (!equalPassword) return SignInResponseDto.signInDataMismatch();
+            }
 
             token = jwtProvider.create(email);
 
         } catch(Exception exception) {
-
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
         }
 
         return SignInResponseDto.success(token);
@@ -83,4 +101,5 @@ public class AuthServiceImplement implements AuthService {
 
         return SignUpResponseDto.success();
     }
+
 }

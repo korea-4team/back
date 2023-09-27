@@ -40,6 +40,7 @@ public class WebSecurityConfig {
       .antMatchers("/", "/auth/**", "/search/**", "/file/**", "/notice-board/**").permitAll()
       .antMatchers(HttpMethod.GET, "/review-board/**", "/notice-board/**").permitAll()
       .antMatchers(HttpMethod.GET, "/user/*").permitAll()
+      .antMatchers(HttpMethod.POST, "/notice-board/**").hasRole("admin")
       .anyRequest().authenticated().and()
       .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 
