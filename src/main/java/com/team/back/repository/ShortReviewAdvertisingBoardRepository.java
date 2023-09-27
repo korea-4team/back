@@ -26,9 +26,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   )
   List<AdvertisingBoardResultSet> ShortReviewList(Integer boardNumber);
   
-
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
-    
 
 }
