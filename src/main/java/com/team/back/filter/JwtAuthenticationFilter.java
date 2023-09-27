@@ -17,7 +17,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.team.back.entity.UserEntity;
 import com.team.back.provider.JwtProvider;
+import com.team.back.repository.AdminRepository;
+import com.team.back.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +29,8 @@ import lombok.RequiredArgsConstructor;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     
     private final JwtProvider jwtProvider;
-    
+    private final AdminRepository adminRepository;
+    private final UserRepository userRepository;
     
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -49,8 +53,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         return;
       }
 
+      String role = null;
+
+      boolean isAdmin = adminRepository.existsByAdminId(email);
+      if (isAdmin) role = "admin";
+      else {
+        UserEntity userEntity = userRepository.findByEmail(email);
+        role = userEntity.getRole();
+      }
+
       AbstractAuthenticationToken authenticationToken =
-        new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.NO_AUTHORITIES);
+        new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.commaSeparatedStringToAuthorityList(role));
       authenticationToken.setDetails(new WebAuthenticationDetails(request));
 
       SecurityContext securityContext = SecurityContextHolder.createEmptyContext();

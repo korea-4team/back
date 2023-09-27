@@ -48,9 +48,9 @@ public class NoticeBoardController {
 	// 공지사항 작성 메서드
 	@PostMapping("/write")
 	public ResponseEntity<? super PostNoticeBoardResponseDto> postNoticeBoard(
-		@AuthenticationPrincipal String writerEmail, @RequestBody @Valid PostNoticeBoardRequestDto requestBody
+		@AuthenticationPrincipal String adminId, @RequestBody @Valid PostNoticeBoardRequestDto requestBody
 	) {
-		ResponseEntity<? super PostNoticeBoardResponseDto> response = noticeBoardService.postNoticeBoard(writerEmail, requestBody);
+		ResponseEntity<? super PostNoticeBoardResponseDto> response = noticeBoardService.postNoticeBoard(adminId, requestBody);
 		return response;
 	}
 	
