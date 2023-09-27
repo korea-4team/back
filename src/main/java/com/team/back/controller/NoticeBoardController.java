@@ -57,8 +57,8 @@ public class NoticeBoardController {
 	// 공지사항 수정 메서드
 	@PatchMapping("/update/{boardNumber}")
 	public ResponseEntity<? super PatchNoticeBoardResponseDto> patchNoticeBoard(
-		@AuthenticationPrincipal String writerEmail, @PathVariable(value = "boardNumber",required = true) Integer boardNumber, @RequestBody @Valid PatchNoticeBoardRequestDto requestBody) {
-		ResponseEntity<? super PatchNoticeBoardResponseDto> response = noticeBoardService.patchNoticeBoard(boardNumber, writerEmail, requestBody);
+		@AuthenticationPrincipal String adminId, @PathVariable(value = "boardNumber",required = true) Integer boardNumber, @RequestBody @Valid PatchNoticeBoardRequestDto requestBody) {
+		ResponseEntity<? super PatchNoticeBoardResponseDto> response = noticeBoardService.patchNoticeBoard(boardNumber, adminId, requestBody);
 		return response;
 	}
 
@@ -66,8 +66,8 @@ public class NoticeBoardController {
 	// 공지사항 삭제 메서드
 	@DeleteMapping("/delete/{boardNumber}")
 	public ResponseEntity<? super DeleteNoticeBoardResponseDto> deleteNoticeBoard(
-		@AuthenticationPrincipal String writerEmail, @PathVariable(value = "boardNumber", required = true) Integer boardNumber) {
-		ResponseEntity<? super DeleteNoticeBoardResponseDto> response = noticeBoardService.deleteNoticeBoard(boardNumber, writerEmail);
+		@AuthenticationPrincipal String adminId, @PathVariable(value = "boardNumber", required = true) Integer boardNumber) {
+		ResponseEntity<? super DeleteNoticeBoardResponseDto> response = noticeBoardService.deleteNoticeBoard(boardNumber, adminId);
 		return response;
 	}
 }
