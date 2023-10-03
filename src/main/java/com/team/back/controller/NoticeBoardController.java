@@ -33,7 +33,7 @@ public class NoticeBoardController {
 	
 	// 공지사항 게시물 리스트 불러오기 메서드
 	@GetMapping("/board-list")
-  public ResponseEntity<? super GetNoticeBoardListResponseDto> GetNoticeBoardList() {
+	public ResponseEntity<? super GetNoticeBoardListResponseDto> GetNoticeBoardList() {
 		ResponseEntity<? super GetNoticeBoardListResponseDto> response = noticeBoardService.getNoticeBoardList();
 		return response;
 	}
