@@ -8,23 +8,23 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.team.back.entity.AdvertisingShortReviewEntity;
-import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
+import com.team.back.entity.resultSet.ShortReviewResultSet;
 
 @Repository
 public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<AdvertisingShortReviewEntity, Integer>{
   @Query(
   value =
-    "SELECT" + 
-      "U.nickname AS nickname," +
-      "C.contents AS contents," +
-      "C.write_datetime AS writeDatetime" +
-    "From ShortReview AS C INNER JOIN user AS U" +
-    "ON C.user_email = U.email" +
-    "WHERE board_number = ?1" +
-    "ORDER BY C.write_datetime",
-    nativeQuery=true
+  "SELECT " +
+  "U.nickname AS nickname, " +
+  "RC.contents AS contents, " +
+  "RC.write_datetime AS writeDatetime " +
+  "FROM short_review_comment AS RC INNER JOIN user AS U " +
+  "ON RC.user_email = U.email " +
+  "WHERE board_number = ?1 " +
+  "ORDER BY RC.write_datetime",
+  nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> ShortReviewList(Integer boardNumber);
+  List<ShortReviewResultSet> shortReviewList(Integer boardNumber);
   
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);

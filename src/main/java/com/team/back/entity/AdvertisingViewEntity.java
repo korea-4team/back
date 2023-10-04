@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table
+@Entity(name="advertising_board")
+@Table(name="advertising_board")
 public class AdvertisingViewEntity {
 
   @Id
@@ -26,5 +26,7 @@ public class AdvertisingViewEntity {
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
+  private String location;
+  private String businessType;
   
 }

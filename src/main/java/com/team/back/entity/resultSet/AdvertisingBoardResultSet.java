@@ -11,5 +11,6 @@ public interface AdvertisingBoardResultSet {
   int getFavoriteCount();
   String getWriteDatetime();
   String getWriterNickname();
+  String getWriterEmail();
   
 }
