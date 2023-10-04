@@ -46,7 +46,7 @@ public class ReviewBoardListResponseDto  {
         return boardList;
     }
 
-    public static List<ReviewBoardListResponseDto> copyEntituList(List<ReviewBoardViewEntity> reviewBoardViewEntities) {
+    public static List<ReviewBoardListResponseDto> copyEntityList(List<ReviewBoardViewEntity> reviewBoardViewEntities) {
         List<ReviewBoardListResponseDto> boardList = new ArrayList<>();
 
         for (ReviewBoardViewEntity entity: reviewBoardViewEntities) {
