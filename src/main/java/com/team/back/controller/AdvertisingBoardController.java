@@ -18,7 +18,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AdvertisingBoardController {
 
-  private final AdvertisingService advertisingService;
 
   // 게시물 불러오기
   @GetMapping("/board-list")
