@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="advertising_board")
-@Table(name="advertising_board")
+@Entity(name="advertising_board_view")
+@Table(name="advertising_board_view")
 public class AdvertisingViewEntity {
 
   @Id
