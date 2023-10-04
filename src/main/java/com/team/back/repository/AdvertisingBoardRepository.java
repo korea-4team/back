@@ -14,16 +14,23 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingVie
   
   @Query(
     value =
-      "SELECT" +
-        "U.nickname AS nickname," +
-        "C.contents AS contents," +
-        "C.write_datetime AS writeDatetime" +
-      "From contents AS C INNER JOIN user AS U" +
-      "ON C.user_email = U.email" +
-      "WHERE board_number =?1" +
-      "ORDER BY C.write_datetime",
-      nativeQuery=true
+    "SELECT " +
+    "RB.board_number AS boardNumber, " +
+    "RB.title AS title, " +
+    "RB.contents AS contents, " + 
+    "RB.image_url AS iamgeUrl, " +
+    "RB.view_count AS viewCount, " +
+    "RB.comment_count AS commentCount, " +
+    "RB.favorite_count AS favoriteCount, " +
+    "RB.write_datetime AS writeDatetime, " +
+    "U.nickname AS writerNickname " +
+    "FROM short_review AS RB " +
+    "INNER JOIN user AS U " +
+    "ON RB.writer_email = U.email " +
+    "ORDER BY RB.write_datetime DESC " +
+    "LIMIT ?1, 50",
+    nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> CurrentAdvertisingBoard(Integer boardNumber);
+  List<AdvertisingBoardResultSet> getCurrentAdvertisingBoard(Integer boardNumber);
 
 }
