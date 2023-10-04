@@ -48,6 +48,8 @@ public class ReviewBoardEntity {
     this.imageUrl = dto.getImageUrl();
     this.writeDatetime = writeDatetime;
     this.writerEmail = writerEmail;
+    this.location = dto.getLocation();
+    this.businessType = dto.getBusinessType();
   }
 
   public void patch(PatchReviewBoardRequestDto dto) {

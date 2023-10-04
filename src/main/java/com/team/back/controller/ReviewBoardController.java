@@ -56,9 +56,9 @@ public class ReviewBoardController {
     // API : 기행기 게시물 지역별 리스트 불러오기 메서드 //
     @GetMapping("/board-list/{location}")
     public ResponseEntity<? super GetReviewBoardLocationListResponseDto> getReviewBoardLocationList(
-        @PathVariable(value = "location", required = true) String loaction
+        @PathVariable(value = "location", required = true) String location
     ) {
-        ResponseEntity<? super GetReviewBoardLocationListResponseDto> response = reviewBoardService.getReviewBoardLocationList(loaction);
+        ResponseEntity<? super GetReviewBoardLocationListResponseDto> response = reviewBoardService.getReviewBoardLocationList(location);
         return response;
     }
 

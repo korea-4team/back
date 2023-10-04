@@ -26,7 +26,7 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoardEntity, 
         "RB.comment_count AS commentCount, " +
         "RB.favorite_count AS favoriteCount, " +
         "RB.write_datetime AS writeDatetime, " +
-        "RB.location AS loaction, " +
+        "RB.location AS location, " +
         "RB.business_type AS businessType, " +
         "U.nickname AS writerNickname " +
         "FROM review_board AS RB " +

@@ -172,7 +172,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
 
         try {
             // description: 검색어가 제목과 지역, 업종에 포함되어있는 게시물 조회 //
-            List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrLoactionOrBusinessTypeOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
+            List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrLocationOrBusinessTypeOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
 
             // description: entity를 dto 형태로 전환 //
             reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
