@@ -19,7 +19,7 @@ public class AdvertisingBoardController {
   // private final AdvertisingService advertisingService;
 
   @GetMapping("/advertising-board/board-list")
-  public static void GetAdvertisingBoard() {
+  public void GetAdvertisingBoard() {
 
   }
 

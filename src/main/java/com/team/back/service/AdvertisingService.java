@@ -17,12 +17,12 @@ import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoard;
 public interface AdvertisingService {
 
   // method : 최신 광고 게시물 리스트 불러오기 메서드 //
-  ResponseEntity<? super GetCurrentAdvertisingBoard> getCurrentAdvertisingBoard();  
+  ResponseEntity<? super GetCurrentAdvertisingBoard> getCurrentAdvertisingBoard();
   // method : 광고 게시물 불러오기 메서드 //
   ResponseEntity<? super GetAdvertisingboard> getAdvertisingBoard(Integer boardNumber);
   // method : 광고 게시물 검색 리스트 불러오기
   ResponseEntity<? super GetSearchAdvertisingBoard> getSearchAdvertisingBoard(String searchWord);
-  // method : 광고 게시물 한줄 리뷰 리스트 불러오기 
+  // method : 광고 게시물 한줄 리뷰 리스트 불러오기
   ResponseEntity<? super GetShortReviewList> getShortReviewList(Integer boardNumber);
   // method : 특정 유저 게시물 리스트 불러오기 //
   ResponseEntity<? super GetUserListAdvertising> getUserListAdvertising(Integer boardNumber);
