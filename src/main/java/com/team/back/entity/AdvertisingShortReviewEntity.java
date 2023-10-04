@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 
@@ -17,8 +18,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-
+@Entity(name="advertising_board")
+@Table(name="advertising_board")
 public class AdvertisingShortReviewEntity {
 
   @Id

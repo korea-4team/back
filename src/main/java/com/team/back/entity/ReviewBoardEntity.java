@@ -35,6 +35,8 @@ public class ReviewBoardEntity {
   private int favoriteCount;
   private String writeDatetime;
   private String writerEmail;
+  private String location;
+  private String businessType;
 
   public ReviewBoardEntity(String writerEmail, PostReviewBoardRequestDto dto) {
     Date now = Date.from(Instant.now());

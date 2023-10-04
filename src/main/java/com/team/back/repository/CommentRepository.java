@@ -11,6 +11,8 @@ import com.team.back.entity.CommentEntity;
 import com.team.back.entity.resultSet.CommentListResultSet;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer>{
+
+  CommentEntity findByCommentNumber(Integer commentNumber);
   
    @Query(
     value=
@@ -21,11 +23,14 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     "FROM review_board_comment AS RC INNER JOIN user AS U " +
     "ON RC.user_email = U.email " +
     "WHERE board_number = ?1 " +
-    "ORDER BY RC.write_datetime",
+    "ORDER BY RC.write_datetime DESC",
     nativeQuery=true
   )
   List<CommentListResultSet> getCommentList(Integer boardNumber);
 
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
+
+  @Transactional
+  void deleteByCommentNumber(Integer commmentNumber);
 }
