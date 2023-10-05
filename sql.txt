@@ -142,3 +142,7 @@ CREATE VIEW notice_board_view AS
 SELECT N.board_number, N.title, N.contents, N.image_url, N.write_datetime, A.admin_id AS writer_email, A.admin_nickname AS writer_nickname
 FROM notice_board AS N INNER JOIN admin AS A
 ON N.writer_email = A.admin_id;
+
+CREATE VIEW user_view AS
+SELECT email as user_email, password as user_password, nickname as user_nickname, tel_number as user_tel_number, address as user_address, address_detail as user_address_detail, role as user_role
+FROM user;
