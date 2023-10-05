@@ -16,30 +16,16 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetShortReviewListResponseDto extends ResponseDto{
 
-<<<<<<< HEAD
-  private List<PostShortReviewResponseDto> shortReviewList;
+  private List<ShortReviewResponseDto> shortReviewList;
 
-  private GetShortReviewListResponseDto(String code, String message, List<PostShortReviewResponseDto> shortReviewList) {
+  private GetShortReviewListResponseDto(String code, String message, List<ShortReviewResponseDto> shortReviewList) {
     super(code, message);
     this.shortReviewList = shortReviewList;
   }
 
-  public static ResponseEntity<GetShortReviewListResponseDto> success(List<PostShortReviewResponseDto> shortReviewList){
+  public static ResponseEntity<GetShortReviewListResponseDto> success(List<ShortReviewResponseDto> shortReviewList){
     GetShortReviewListResponseDto result = new GetShortReviewListResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS,shortReviewList);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
-=======
-  // private List<ShortReviewResponseDto> shortReviewList;
-
-  // private GetShortReviewListResponseDto(String code, String message, List<ShortReviewResponseDto> shortReviewList) {
-  //   super(code, message);
-  //   this.shortReviewList = shortReviewList;
-  // }
-
-  // public static ResponseEntity<GetShortReviewListResponseDto> success(List<ShortReviewResponseDto> shortReviewList){
-  //   GetShortReviewListResponseDto result = new GetShortReviewListResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS,shortReviewList);
-  //   return ResponseEntity.status(HttpStatus.OK).body(result);
-  // }
->>>>>>> b721338856a9082176bb5dfa221e92116b798f0e
   
 }
