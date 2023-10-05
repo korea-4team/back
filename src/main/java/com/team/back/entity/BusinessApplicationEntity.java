@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.team.back.dto.request.myPage.RegistrationRequestDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +29,16 @@ public class BusinessApplicationEntity {
     private String storeStartHours;
     private String storeFinishHours;
     private String storeTelNumber;
+
+    public BusinessApplicationEntity(RegistrationRequestDto dto, String email) {
+        this.userEmail = email;
+        this.storeNumber = dto.getStoreNumber();
+        this.storeName = dto.getStoreName();
+        this.address = dto.getAddress();
+        this.addressDetail = dto.getAddressDetail();
+        this.businessType = dto.getBusinessType();
+        this.storeStartHours = dto.getStoreStartHours();
+        this.storeFinishHours = dto.getStoreFinishHours();
+        this.storeTelNumber = dto.getStoreTelNumber();
+    }
 }

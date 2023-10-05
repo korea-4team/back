@@ -9,6 +9,7 @@ public interface ResponseCode {
   String EXISTED_EMAIL = "EE";
   String EXISTED_NICKNAME = "EN";
   String EXISTED_TEL_NUMBER = "ET";
+  String EXISTED_STORE_NUMBER = "ESN";
 
   String NO_EXISTED_USER = "NU";
   String NO_EXISTED_BOARD = "NB";
