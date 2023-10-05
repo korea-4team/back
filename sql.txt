@@ -142,3 +142,20 @@ CREATE VIEW notice_board_view AS
 SELECT N.board_number, N.title, N.contents, N.image_url, N.write_datetime, A.admin_id AS writer_email, A.admin_nickname AS writer_nickname
 FROM notice_board AS N INNER JOIN admin AS A
 ON N.writer_email = A.admin_id;
+
+
+----- 사업자 신청 테이블 추가 2023-10-05 서지훈 -----
+
+CREATE TABLE business_application (
+	sequence INT AUTO_INCREMENT PRIMARY KEY,
+	user_email VARCHAR(100) NOT NULL,
+	store_number VARCHAR(12) NOT NULL,
+	store_name TEXT NOT NULL,
+	address TEXT NOT NULL,
+	address_detail TEXT,
+	business_type VARCHAR(10) NOT NULL,
+	store_start_hours TIME NOT NULL,
+	store_finish_hours TIME NOT NULL,
+	store_tel_number VARCHAR(20) NOT NULL,
+	FOREIGN KEY (user_email) REFERENCES user (email)
+);
