@@ -16,14 +16,14 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetShortReviewListResponseDto extends ResponseDto{
 
-  private List<ShortReviewResponseDto> shortReviewList;
+  private List<PostShortReviewResponseDto> shortReviewList;
 
-  private GetShortReviewListResponseDto(String code, String message, List<ShortReviewResponseDto> shortReviewList) {
+  private GetShortReviewListResponseDto(String code, String message, List<PostShortReviewResponseDto> shortReviewList) {
     super(code, message);
     this.shortReviewList = shortReviewList;
   }
 
-  public static ResponseEntity<GetShortReviewListResponseDto> success(List<ShortReviewResponseDto> shortReviewList){
+  public static ResponseEntity<GetShortReviewListResponseDto> success(List<PostShortReviewResponseDto> shortReviewList){
     GetShortReviewListResponseDto result = new GetShortReviewListResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS,shortReviewList);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
