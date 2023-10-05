@@ -9,13 +9,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PatchAdvertisingRequestDto {
-
-  @NotBlank
-  private String title;
+public class PostShortReviewRequestDto {
 
   @NotBlank
   private String contents;
-  
   
 }

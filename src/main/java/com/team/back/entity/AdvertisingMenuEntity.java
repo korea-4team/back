@@ -11,22 +11,17 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="review_board_view")
-@Table(name="review_board_view")
-public class ReviewBoardViewEntity {
+@Entity(name="advertising_board_Menu")
+@Table(name = "advertising_board_Menu")
+public class AdvertisingMenuEntity {
+
   @Id
   private int boardNumber;
   private String title;
   private String contents;
   private String imageUrl;
-  private int viewCount;
-  private int commentCount;
-  private int favoriteCount;
-  private String writeDatetime;
-  private String writerEmail;
-  private String writerNickname;
-  private String location;
-  private String businessType;
-  
+  private String price;
+
+
   
 }
