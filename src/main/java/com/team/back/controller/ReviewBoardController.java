@@ -2,7 +2,6 @@ package com.team.back.controller;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.team.back.common.response.CustomRsponse;
 import com.team.back.dto.request.reviewBoard.PatchReviewBoardRequestDto;
 import com.team.back.dto.request.reviewBoard.PostCommentRequestDto;
 import com.team.back.dto.request.reviewBoard.PostReviewBoardRequestDto;
