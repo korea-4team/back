@@ -33,7 +33,7 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoardEntity, 
         "INNER JOIN user AS U " +
         "ON RB.writer_email = U.email " +
         "ORDER BY RB.write_datetime DESC " +
-        "LIMIT ?1, 50",
+        "LIMIT ?1, 30",
         nativeQuery=true
     )
     
