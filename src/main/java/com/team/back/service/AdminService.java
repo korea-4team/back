@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
-import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 
