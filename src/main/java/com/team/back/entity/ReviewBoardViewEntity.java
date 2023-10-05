@@ -25,5 +25,7 @@ public class ReviewBoardViewEntity {
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
+  private String location;
+  private String businessType;
   
 }

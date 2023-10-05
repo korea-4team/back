@@ -13,10 +13,10 @@ public interface AdvertisingBoardViewRespository extends JpaRepository<Advertisi
 
   AdvertisingViewEntity findByBoardNumber(Integer boardNumber);
 
-  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrderByWriteDateTimeDesc(String title, String Contents);
+  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrderByWriteDatetimeDesc(String title, String Contents);
   List<AdvertisingViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String writerEmail);
-  List<AdvertisingViewEntity> findByLocationOrderByWirteDatetimeDesc(String location);
+  List<AdvertisingViewEntity> findByLocationOrderByWriteDatetimeDesc(String location);
   List<AdvertisingViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);
-  List<AdvertisingViewEntity> findByLocationBusinessTypeOrderByWriteDatetimeDesc(String location, String businessType);
+  List<AdvertisingViewEntity> findByLocationOrBusinessTypeOrderByWriteDatetimeDesc(String location, String businessType);
   
 }

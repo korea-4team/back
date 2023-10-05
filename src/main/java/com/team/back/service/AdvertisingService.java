@@ -15,6 +15,7 @@ import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseD
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 
 
+
 public interface AdvertisingService {
   // 게시글 삭제
   ResponseEntity<? super DeleteAdvertisingBoardResponseDto> deleteAdvertisingBoard(Integer boardNumber, String email);
