@@ -13,6 +13,16 @@ import lombok.Setter;
 public class PostAdvertisingRequestDto {
 
   @NotBlank
+  private String title;
+
+  @NotBlank
   private String contents;
   
+  private String imageUrl;
+
+  @NotBlank
+  private String location;
+
+  @NotBlank
+  private String businessType;
 }

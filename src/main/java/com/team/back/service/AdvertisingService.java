@@ -33,8 +33,6 @@ public interface AdvertisingService {
   ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(Integer boardNumber);
   // 최근 게시물 불러오기
   ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getCurrentAdvertisingBoard(Integer section);
-  // 검색 게시물 리스트 불러오기
-  ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> getSearchAdvertisingBoard(String searchWord);
   // 한줄리뷰 리스트 불러오기
   ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(Integer boardNumber);
   // 유저리스트 불러오기

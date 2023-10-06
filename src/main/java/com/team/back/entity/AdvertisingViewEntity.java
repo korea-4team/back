@@ -21,7 +21,7 @@ public class AdvertisingViewEntity {
   private String contents;
   private String imageUrl;
   private int viewCount;
-  private int commentCount;
+  private int short_review_count;
   private int favorite;
   private String writeDatetime;
   private String writerEmail;

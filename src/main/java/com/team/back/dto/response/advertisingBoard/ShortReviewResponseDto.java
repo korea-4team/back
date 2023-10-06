@@ -16,7 +16,7 @@ public class ShortReviewResponseDto {
   private int boardNumber;
   private String title;
   private String contents;
-  private int favoriteCount;
+  private int score;
   private String writeDatetime;
   private String writerNickname;
 
