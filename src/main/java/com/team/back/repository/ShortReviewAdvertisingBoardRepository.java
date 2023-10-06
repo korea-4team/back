@@ -24,7 +24,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   "ORDER BY RC.write_datetime",
   nativeQuery=true
   )
-  List<ShortReviewResultSet> shortReviewList(Integer boardNumber);
+  List<ShortReviewResultSet> getShortReviewList(Integer boardNumber);
   
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
