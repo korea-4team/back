@@ -11,6 +11,8 @@ import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
 import com.team.back.dto.response.admin.UserListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
+import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.dto.response.reviewBoard.CommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
@@ -86,10 +88,12 @@ public class AdminServiceImplement implements AdminService {
 	}
 
 
+	// description : 전체 한 줄 리뷰 리스트 불러오기
 	@Override
-	public ResponseEntity<?> getShortReviewList(String adminId) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getShortReviewList'");
+	public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId) {
+		
+		List<ShortReviewResponseDto>
+
 	}
 
 	// description : 유저 리스트 불러오기

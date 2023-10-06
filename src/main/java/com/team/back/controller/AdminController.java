@@ -11,6 +11,7 @@ import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.service.AdminService;
@@ -44,10 +45,11 @@ public class AdminController {
 
     // 전체 한 줄 리뷰 목록
     @GetMapping("/{adminId}/short-review-list")
-    public static void getShortReviewList(
+    public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(
         @PathVariable(value = "adminId", required = true) String adminId
     ) {
-        
+        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getShortReviewList(adminId);
+        return response;
     }
 
     // description : 유저 목록
