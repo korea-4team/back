@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 public class AdvertisingShortReviewEntity {
 
   @Id
-  private int commentNumber;
+  private int shortReviewNumber;
   private int boardNumber;
   private String userEmail;
   private String contents;

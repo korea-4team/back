@@ -10,7 +10,7 @@ import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 
 @Repository
-public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingViewEntity, Integer>{ 
+public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingViewEntity, Integer>{
   
   @Query(
     value =

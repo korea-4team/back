@@ -10,25 +10,27 @@ import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
 import com.team.back.dto.response.admin.UserListResponseDto;
-import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.dto.response.reviewBoard.CommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.ReviewBoardListResponseDto;
+import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
+import com.team.back.entity.CommentViewEntity;
 import com.team.back.entity.ReviewBoardViewEntity;
 import com.team.back.entity.UserViewEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
-import com.team.back.entity.resultSet.CommentListResultSet;
 import com.team.back.entity.resultSet.ReviewBoardListResultSet;
+import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.entity.resultSet.UserListResultSet;
 import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.AdvertisingBoardViewRespository;
-import com.team.back.repository.CommentRepository;
+import com.team.back.repository.CommentViewRepository;
 import com.team.back.repository.ReviewBoardRepository;
 import com.team.back.repository.ReviewBoardViewRepository;
+import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.repository.UserViewRepository;
 import com.team.back.service.AdminService;
@@ -45,7 +47,8 @@ public class AdminServiceImplement implements AdminService {
 	private final ReviewBoardViewRepository reviewBoardViewRepository;
 	private final AdvertisingBoardRepository advertisingBoardRepository;
 	private final AdvertisingBoardViewRespository advertisingBoardViewRepository;
-	private final CommentRepository commentRepository;
+	private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
+	private final CommentViewRepository commentViewRepository;
 
 	// description : 전체 광고 게시글 리스트 불러오기
 	@Override
@@ -92,7 +95,21 @@ public class AdminServiceImplement implements AdminService {
 	@Override
 	public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId) {
 		
-		List<ShortReviewResponseDto>
+		List<ShortReviewResponseDto> shortReviewList = null;
+
+		try {
+			// 댓글 리스트 불러오기
+			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList();
+
+			// 검색 결과를 Dto 형태로 변환
+			shortReviewList = ShortReviewResponseDto.copyList(resultSets);
+
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			return GetShortReviewListResponseDto.databaseError();
+		}
+
+		return GetShortReviewListResponseDto.success(shortReviewList);
 
 	}
 
@@ -140,7 +157,7 @@ public class AdminServiceImplement implements AdminService {
 		return GetUserDetailResponseDto.success(userViewEntity);
 	}
 
-	// description : 해당 유저 작성 광고 게시글
+	// 해당 유저 작성 광고 게시글
 	@Override
 	public ResponseEntity<? super GetAdvertisingBoardListResponseDto> getUserAdvertisingBoardList(String adminId, String userEmail) {
 		
@@ -187,9 +204,25 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 해당 유저 한 줄 리뷰 리스트
 	@Override
-	public ResponseEntity<?> getUserShortReviewList(String adminId, String userEmail) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getUserShortReviewList'");
+	public ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(String adminId, String userEmail) {
+	
+		List<ShortReviewResponseDto> shortReviewList = null;
+
+		try {
+			
+			// 특정 이메일에 해당하는 한 줄 리뷰 리스트 조회
+			List<AdvertisingShortReviewEntity> shortReviewEntities = shortReviewAdvertisingBoardRepository.findByUserEmail(userEmail);
+
+			// 검색 결과를 Dto 형태로 반환
+			shortReviewList = ShortReviewResponseDto.copyEntityList(shortReviewEntities);
+
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			return GetShortReviewListResponseDto.databaseError();
+		}
+
+		return GetShortReviewListResponseDto.success(shortReviewList);
+
 	}
 
 	// description : 해당 유저 댓글 리스트
@@ -200,10 +233,10 @@ public class AdminServiceImplement implements AdminService {
 		try {
 			
 			// 특정 이메일에 해당하는 댓글 리스트 조회
-			List<CommentListResultSet> resultSets = commentRepository.getUserCommentList(userEmail);
+			List<CommentViewEntity> commentViewEntities = commentViewRepository.findByUserEmail(userEmail);
 
 			// 검색 결과를 Dto 형태로 반환
-			commentList = CommentListResponseDto.copyList(resultSets);
+			commentList = CommentListResponseDto.copyEntityList(commentViewEntities);
 
 		} catch (Exception exception) {
 			exception.printStackTrace();

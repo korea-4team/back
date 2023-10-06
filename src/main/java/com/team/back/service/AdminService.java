@@ -33,7 +33,7 @@ public interface AdminService {
 	ResponseEntity<? super GetReviewBoardListResponseDto> getUserReviewBoardList(String adminId, String userEmail);
 
 	// 관리자 페이지 해당 유저 작성 한 줄 리뷰 리스트
-	ResponseEntity<?> getUserShortReviewList(String adminId, String userEmail);
+	ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(String adminId, String userEmail);
 
 	// description : 관리자 페이지 해당 유저 작성 댓글 리스트
 	ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(String adminId, String userEmail);
