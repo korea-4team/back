@@ -11,6 +11,7 @@ import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.service.AdminService;
@@ -42,12 +43,13 @@ public class AdminController {
         return response;
     }
 
-    // 전체 한 줄 리뷰 목록
+    // description : 전체 한 줄 리뷰 목록
     @GetMapping("/{adminId}/short-review-list")
-    public static void getShortReviewList(
+    public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(
         @PathVariable(value = "adminId", required = true) String adminId
     ) {
-        
+        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getShortReviewList(adminId);
+        return response;
     }
 
     // description : 유저 목록
@@ -91,11 +93,11 @@ public class AdminController {
     
     // 해당 유저 작성 한 줄 리뷰 리스트
     @GetMapping("/{adminId}/user-list/{userEmail}/short-review-list")
-    public ResponseEntity<?> getUserShortReviewList(
+    public ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(
         @PathVariable(value = "adminId", required = true) String adminId,
         @PathVariable(value = "userEmail", required = true) String userEmail
     ) {
-        ResponseEntity<?> response = adminService.getUserShortReviewList(adminId, userEmail);
+        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getUserShortReviewList(adminId, userEmail);
         return response;
     }
 
@@ -109,9 +111,15 @@ public class AdminController {
         return response;
     }
 
+    // 메인 페이지 배너 작성 기능
+    
+
     // 메인 페이지 배너 수정 기능
     @PatchMapping("/{adminId}/main-banner")
     public static void patchMainBanner() {
 
     }
+
+    // 메인 페이지 배너 삭제 기능
+
 }

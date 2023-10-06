@@ -29,4 +29,18 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
 
+  @Query(
+    value =
+    "SELECT " +
+    "S.contents, " +
+    "S.write_datetime, "+
+    "U.nickname " +
+    "FROM advertising_board_short_review AS S INNER JOIN user AS U " +
+    "ON S.user_email = U.email",
+    nativeQuery = true
+  )
+  List<ShortReviewResultSet> getShortReviewList();
+
+  List<AdvertisingShortReviewEntity> findByUserEmail(String userEmail);
+
 }
