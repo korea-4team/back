@@ -23,6 +23,10 @@ public class BusinessNumberEntity {
     private String businessType;
     private String ownerName;
     private String userEmail;
+    // description: 추가
+    private String startHours;
+    private String finishHours;
+    private String telNumber;
     // ! not null 로 지정하면 안됨 null 이 들어올 수 있어야 함
     private int boardNumber;
 

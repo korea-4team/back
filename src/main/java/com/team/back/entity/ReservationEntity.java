@@ -1,8 +1,8 @@
 package com.team.back.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,13 +15,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name="reservation")
 @Table(name="reservation")
-public class ReservationEntity implements Serializable {
+public class ReservationEntity {
   
-  @Id
-  private int boardNumber;
-  @Id
-  private String writerNickname;
-  
+  @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
+  private int reservationNumber;
+  private String date;
+  private String reservationDate;
   private int people;
-  private String time;
+  private int accompanyInfant;
+  private int boardNumber;
+  private String userEmail;
+
 }
