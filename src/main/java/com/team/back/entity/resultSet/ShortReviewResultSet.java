@@ -3,7 +3,7 @@ package com.team.back.entity.resultSet;
 public interface ShortReviewResultSet {
 
   int getBoardNumber();
-  int getFavoriteCount();
+  int score();
   String getWriterNickname();
   String getWriteDatetime();
   String getContnts();

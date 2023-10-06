@@ -26,9 +26,12 @@ import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseD
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
+import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
+import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
+import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.AdvertisingBoardViewRespository;
 import com.team.back.repository.FavoriteRepository;
@@ -139,6 +142,7 @@ public class AdvertisingServiceImplement implements AdvertisingService{
         return GetAdvertisingboardResponseDto.success(advertisingViewEntity);
     }
 
+    //최근 게시물 불러오기
     @Override
     public ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getCurrentAdvertisingBoard(Integer section) {
 
@@ -158,17 +162,22 @@ public class AdvertisingServiceImplement implements AdvertisingService{
         return GetCurrentAdvertisingBoardResponseDto.success(advertisingBoardList);
         
     }
-
-    @Override
-    public ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> getSearchAdvertisingBoard(String searchWord) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSearchAdvertisingBoard'");
-    }
-
+    //한줄리뷰 리스트 불러오기
     @Override
     public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(Integer boardNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getShortReviewList'");
+      List<ShortReviewResponseDto> shortList = null;
+
+      try{
+
+        List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList(boardNumber);
+
+        shortList = ShortReviewResponseDto.copyList(resultSets);
+      } catch (Exception exception){
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+      }
+      return GetShortReviewListResponseDto.success(shortList);
+
     }
 
     @Override
