@@ -16,5 +16,6 @@ public interface ReviewBoardViewRepository extends JpaRepository<ReviewBoardView
     List<ReviewBoardViewEntity> findByLocationOrderByWriteDatetimeDesc(String location);
     List<ReviewBoardViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);
     List<ReviewBoardViewEntity> findByLocationAndBusinessTypeOrderByWriteDatetimeDesc(String loaction, String businessType);
+    List<ReviewBoardViewEntity> findByWriterEmail(String writerEmail);
   
 }

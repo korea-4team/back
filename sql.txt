@@ -159,3 +159,6 @@ CREATE TABLE business_application (
 	store_tel_number VARCHAR(20) NOT NULL,
 	FOREIGN KEY (user_email) REFERENCES user (email)
 );
+CREATE VIEW user_view AS
+SELECT email as user_email, password as user_password, nickname as user_nickname, tel_number as user_tel_number, address as user_address, address_detail as user_address_detail, role as user_role
+FROM user;

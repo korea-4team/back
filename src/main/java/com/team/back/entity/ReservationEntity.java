@@ -1,7 +1,6 @@
 package com.team.back.entity;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,17 +11,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="advertising_board_short_review")
-@Table(name="advertising_board_short_review")
-public class AdvertisingShortReviewEntity {
-
-  @Id
-  private int commentNumber;
-  private int boardNumber;
-  private String userEmail;
-  private String contents;
-  private String writeDatetime;
-  private int favoriteCount;
-
+@Entity(name="reservation")
+@Table(name="reservation")
+public class ReservationEntity {
   
+  @Id
+  private int boardNumber;
+  @Id
+  private String writerNickname;
+  
+  private int people;
+  private String time;
 }

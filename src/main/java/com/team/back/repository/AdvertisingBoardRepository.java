@@ -33,4 +33,23 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingVie
   )
   List<AdvertisingBoardResultSet> getCurrentAdvertisingBoard(Integer boardNumber);
 
+  @Query(
+    value =
+    "SELECT " +
+    "AB.board_number AS boardNumber, " +
+    "AB.title, " +
+    "AB.contents, " +
+    "AB.image_url AS imageUrl, " +
+    "AB.view_count AS viewCount, " +
+    "AB.short_review_count AS shortReviewCount, " +
+    "AB.favorite_count AS favoriteCount, " +
+    "AB.write_datetime AS writeDatetime, " +
+    "AB.writer_email AS writerEmail, " +
+    "U.nickname AS writerNickname " +
+    "FROM advertising_board AS AB " +
+    "INNER JOIN user AS U " +
+    "ON AB.writer_email = U.email",
+    nativeQuery=true
+  )
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList();
 }

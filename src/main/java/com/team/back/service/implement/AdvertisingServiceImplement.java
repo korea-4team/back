@@ -1,19 +1,28 @@
 package com.team.back.service.implement;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.team.back.dto.request.advertisingBoard.PatchAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
+import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardBusinessTypeListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationListResponsedto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetSearchAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetUserListAdvertisingResponseDto;
 import com.team.back.dto.response.advertisingBoard.PatchAdvertisingBoardResponseDto;
+import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardMenuListResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseDto;
+import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
+import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
 import com.team.back.service.AdvertisingService;
 
 import lombok.RequiredArgsConstructor;
@@ -66,7 +75,7 @@ public class AdvertisingServiceImplement implements AdvertisingService{@Override
 
     @Override
     public ResponseEntity<? super PatchAdvertisingBoardResponseDto> patchAdvertisingBoard(Integer boardNumber,
-            String email, PatchAdvertisingBoardResponseDto dto) {
+            String email, PatchAdvertisingRequestDto requestDto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'patchAdvertisingBoard'");
     }
@@ -80,9 +89,44 @@ public class AdvertisingServiceImplement implements AdvertisingService{@Override
 
     @Override
     public ResponseEntity<? super PostShortReviewResponseDto> postShortReview(Integer boardNumber, String email,
-            PostAdvertisingRequestDto dto) {
+            PostShortReviewRequestDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'postShortReview'");
     }
-    
+
+    @Override
+    public ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> putAdvertisingFavoriteList(
+            Integer boardNumber) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'putAdvertisingFavoriteList'");
+    }
+
+    @Override
+    public ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(
+            String location) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAdvertisingBoardLocationList'");
+    }
+
+    @Override
+    public ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(
+            String businessType) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAdvertisingBoardBusinessTypeList'");
+    }
+
+    @Override
+    public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
+            Integer boardNumber, String email) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'postAdvertisingBoardMenuList'");
+    }
+
+    @Override
+    public ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email,
+            String time, int people) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'postReservation'");
+    }
+
 }
