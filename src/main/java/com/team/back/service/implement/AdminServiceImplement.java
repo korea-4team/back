@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.team.back.dto.request.noticeBoard.PatchNoticeBoardRequestDto;
+import com.team.back.dto.request.noticeBoard.PostNoticeBoardRequestDto;
 import com.team.back.dto.response.admin.AdvertisingListResponseDto;
 import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
@@ -246,11 +248,22 @@ public class AdminServiceImplement implements AdminService {
 		return GetCommentListResponseDto.success(commentList);
 	}
 
-	// description : 배너 수정
 	@Override
-	public ResponseEntity<?> PatchMainBanner(String adminId) {
+	public ResponseEntity<?> postNoticeBoard(String adminId, PostNoticeBoardRequestDto dto) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'PatchMainBanner'");
+		throw new UnsupportedOperationException("Unimplemented method 'postNoticeBoard'");
+	}
+
+	@Override
+	public ResponseEntity<?> patchNoticeBoard(Integer boardNumber, String adminId, PatchNoticeBoardRequestDto dto) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'patchNoticeBoard'");
+	}
+
+	@Override
+	public ResponseEntity<?> deleteNoticeBoard(Integer boardNumber, String adminId) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'deleteNoticeBoard'");
 	}
 
 
