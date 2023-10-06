@@ -19,5 +19,8 @@ public interface AdvertisingBoardViewRespository extends JpaRepository<Advertisi
   List<AdvertisingViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);
   List<AdvertisingViewEntity> findByLocationOrBusinessTypeOrderByWriteDatetimeDesc(String location, String businessType);
   List<AdvertisingViewEntity> findByWriterEmail(String writerEmail);
+  List<AdvertisingViewEntity> findByTitleContainsOrBusinessTypeOrderByWriteDatetimeDesc(String title, String businessType);
+  List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
+  List<AdvertisingViewEntity> findByTitleContainsOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String businessType, String tagWord);
   
 }
