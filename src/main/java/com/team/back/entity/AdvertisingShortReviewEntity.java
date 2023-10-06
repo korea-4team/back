@@ -23,7 +23,6 @@ public class AdvertisingShortReviewEntity {
   private String contents;
   private String write_datetime;
   private double score;
-  private String user_email;
 
   
 }
