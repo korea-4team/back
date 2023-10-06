@@ -25,12 +25,13 @@ public class ReservationResponseDto {
     this.people = resultSet.getpeople();
   }
 
-  public ReservationResponseDto (ReservationEntity reservationEntity){
-    this.boardNumber = reservationEntity.getBoardNumber();
-    this.writerNickname = reservationEntity.getWriterNickname();
-    this.time = reservationEntity.getTime();
-    this.people = reservationEntity.getPeople();
-  }
+
+  // public ReservationResponseDto (ReservationEntity reservationEntity){
+  //   this.boardNumber = reservationEntity.getBoardNumber();
+  //   this.writerNickname = reservationEntity.getWriterNickname();
+  //   this.time = reservationEntity.getTime();
+  //   this.people = reservationEntity.getPeople();
+  // }
   
   public static List<ReservationResponseDto> copyList(List<ReservationResultSet> resultSets){
     List<ReservationResponseDto> reservationList = new ArrayList<>();
@@ -42,17 +43,14 @@ public class ReservationResponseDto {
     return reservationList;
   }
 
-  public static List<ReservationResponseDto> copyEntityList(List<ReservationEntity> reservationEntities){
-    List<ReservationResponseDto> reservationList = new ArrayList<>();
+  // public static List<ReservationResponseDto> copyEntityList(List<ReservationEntity> reservationEntities){
+  //   List<ReservationResponseDto> reservationList = new ArrayList<>();
 
-    for (ReservationEntity entity: reservationEntities){
-      ReservationResponseDto reservation = new ReservationResponseDto(entity);
-      reservationList.add(reservation);
-    }
-    return reservationList;
-  }
-
-
-
+  //   for (ReservationEntity entity: reservationEntities){
+  //     ReservationResponseDto reservation = new ReservationResponseDto(entity);
+  //     reservationList.add(reservation);
+  //   }
+  //   return reservationList;
+  // }
   
 }

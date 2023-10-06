@@ -6,4 +6,6 @@ import com.team.back.entity.BusinessNumberEntity;
 
 public interface BusinessNumberRepository extends JpaRepository<BusinessNumberEntity, String> {
     boolean existsByStoreNumber(String storeNumber);
+
+    BusinessNumberEntity findByUserEmail(String userEmail);
 }
