@@ -2,6 +2,8 @@ package com.team.back.service;
 
 import org.springframework.http.ResponseEntity;
 
+import com.team.back.dto.request.noticeBoard.PatchNoticeBoardRequestDto;
+import com.team.back.dto.request.noticeBoard.PostNoticeBoardRequestDto;
 import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
@@ -38,6 +40,12 @@ public interface AdminService {
 	// description : 관리자 페이지 해당 유저 작성 댓글 리스트
 	ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(String adminId, String userEmail);
 
-	// 관리자 페이지 메인 페이지 배너 수정 기능
-	ResponseEntity<?> PatchMainBanner(String adminId);
+	// 관리자 페이지 메인 페이지 배너 작성
+	ResponseEntity<?> postNoticeBoard(String adminId, PostNoticeBoardRequestDto dto);
+
+	// 관리자 페이지 메인 페이지 배너 수정
+	ResponseEntity<?> patchNoticeBoard(Integer boardNumber, String adminId, PatchNoticeBoardRequestDto dto);
+
+	// 관리자 페이지 메인 페이지 배너 삭제
+	ResponseEntity<?> deleteNoticeBoard(Integer boardNumber, String adminId);
 }
