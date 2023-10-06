@@ -12,7 +12,7 @@ import com.team.back.entity.AdvertisingViewEntity;
 public interface AdvertisingBoardViewRespository extends JpaRepository<AdvertisingViewEntity, Integer>{
 
   AdvertisingViewEntity findByBoardNumber(Integer boardNumber);
-  List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
+  // List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
   List<AdvertisingViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String writerEmail);
   List<AdvertisingViewEntity> findByLocationOrderByWriteDatetimeDesc(String location);
   List<AdvertisingViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);

@@ -18,23 +18,70 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
   @Query(
     value =
     "SELECT " +
-    "RB.board_number AS boardNumber, " +
-    "RB.title AS title, " +
-    "RB.contents AS contents, " + 
-    "RB.image_url AS iamgeUrl, " +
-    "RB.view_count AS viewCount, " +
-    "RB.comment_count AS commentCount, " +
-    "RB.favorite_count AS favoriteCount, " +
-    "RB.write_datetime AS writeDatetime, " +
+    "AB.board_number AS boardNumber, " +
+    "AB.title AS title, " +
+    "AB.contents AS contents, " + 
+    "AB.image_url AS iamgeUrl, " +
+    "AB.view_count AS viewCount, " +
+    "AB.comment_count AS commentCount, " +
+    "AB.favorite_count AS favoriteCount, " +
+    "AB.write_datetime AS writeDatetime, " +
     "U.nickname AS writerNickname " +
-    "FROM advertising_board_short_review AS RB " +
+    "FROM advertising_board_short_review AS AB " +
     "INNER JOIN user AS U " +
-    "ON RB.writer_email = U.email " +
-    "ORDER BY RB.write_datetime DESC " +
-    "LIMIT ?1, 50",
+    "ON AB.writer_email = U.email " +
+    "ORDER BY AB.write_datetime DESC " +
+    "LIMIT ?1, 30",
     nativeQuery=true
   )
   List<AdvertisingBoardResultSet> getAdvertisingBoardList(Integer section);
+
+    @Query(
+    value =
+    "SELECT " +
+    "AB.board_number AS boardNumber, " +
+    "AB.title AS title, " +
+    "AB.contents AS contents, " + 
+    "AB.image_url AS iamgeUrl, " +
+    "AB.view_count AS viewCount, " +
+    "AB.comment_count AS commentCount, " +
+    "AB.favorite_count AS favoriteCount, " +
+    "AB.write_datetime AS writeDatetime, " +
+    "U.nickname AS writerNickname " +
+    "FROM advertising_board_short_review AS AB " +
+    "INNER JOIN user AS U " +
+    "ON AB.writer_email = U.email " +
+    "WHERE AB.title LIKE %?1% " +
+    // "OR AB.business_type LIKE %?1% " + 
+    "ORDER BY AB.write_datetime DESC " +
+    "LIMIT ?2, 30",
+    nativeQuery=true
+  )
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, Integer section);
+
+    @Query(
+    value =
+    "SELECT " +
+    "AB.board_number AS boardNumber, " +
+    "AB.title AS title, " +
+    "AB.contents AS contents, " + 
+    "AB.image_url AS iamgeUrl, " +
+    "AB.view_count AS viewCount, " +
+    "AB.comment_count AS commentCount, " +
+    "AB.favorite_count AS favoriteCount, " +
+    "AB.write_datetime AS writeDatetime, " +
+    "U.nickname AS writerNickname " +
+    "FROM advertising_board_short_review AS AB " +
+    "INNER JOIN user AS U " +
+    "ON AB.writer_email = U.email " +
+    "WHERE AB.title LIKE %?1% " +
+    "OR AB.location LIKE %?1% " +
+    // "OR AB.business_type LIKE %?1% " + 
+    "ORDER BY AB.write_datetime DESC " +
+    "LIMIT ?3, 30",
+    nativeQuery=true
+  )
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, String location, Integer section);
 
   @Query(
     value =
