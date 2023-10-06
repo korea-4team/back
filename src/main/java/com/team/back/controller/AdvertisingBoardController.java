@@ -58,15 +58,6 @@ public class AdvertisingBoardController {
     return response;
   }
 
-  // 검색 게시물 리스트 불러오기 
-  @GetMapping("/search/{searchWord}")
-  public ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> getSearchAdvertisingBoard(
-    @PathVariable(value = "searchWord", required = true) String searchWord
-  ) {
-    ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> response = advertisingService.getSearchAdvertisingBoard(searchWord);
-    return response;
-
-  }
 
   // 특정 게시물의 좋아요 리스트 불러오기
   @GetMapping("/detail/{board-number}/favorite")
