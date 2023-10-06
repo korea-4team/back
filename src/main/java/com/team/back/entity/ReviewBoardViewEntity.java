@@ -28,4 +28,5 @@ public class ReviewBoardViewEntity {
   private String location;
   private String businessType;
   
+  
 }

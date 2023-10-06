@@ -3,6 +3,7 @@ package com.team.back.dto.response.reviewBoard;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team.back.entity.CommentViewEntity;
 import com.team.back.entity.resultSet.CommentListResultSet;
 
 import lombok.AllArgsConstructor;
@@ -30,5 +31,23 @@ public class CommentListResponseDto {
         }
 
         return commentList;
+    }
+
+    public CommentListResponseDto (CommentViewEntity commentViewEntity) {
+        this.contents = commentViewEntity.getContents();
+        this.nickname = commentViewEntity.getUserNickname();
+        this.writeDatetime = commentViewEntity.getWriteDatetime();
+    }
+
+    public static List<CommentListResponseDto> copyEntityList(List<CommentViewEntity> commentViewEntities) {
+        List<CommentListResponseDto> commentList = new ArrayList<>();
+
+        for (CommentViewEntity entity : commentViewEntities) {
+            CommentListResponseDto comment = new CommentListResponseDto(entity);
+            commentList.add(comment);
+        }
+
+        return commentList;
+
     }
 }

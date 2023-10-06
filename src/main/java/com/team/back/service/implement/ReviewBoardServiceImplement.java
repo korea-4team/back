@@ -18,7 +18,6 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardResponseDto;
-import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetUserReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.PatchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PostCommentResponseDto;
@@ -58,7 +57,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
 
         try {
             // description: 최신 기행기 게시물 리스트 불러오기 //
-            Integer limit = (section - 1) * 50;
+            Integer limit = (section - 1) * 30;
             List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(limit);
 
             // description: 검색 결과를 ReseponseDto 형태로 변환 //
@@ -68,7 +67,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetReviewBoardListResponseDto.success(reviewBoardList);
     }
 
@@ -96,7 +94,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetReviewBoardResponseDto.success(reviewBoardViewEntity);
     }
 
@@ -116,9 +113,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
-        return GetReviewBoardLocationListResponseDto.success(reviewBoardList);
-        
+        return GetReviewBoardLocationListResponseDto.success(reviewBoardList);      
     }
 
     // 기행기 게시물 업종별 리스트 불러오기 //
@@ -140,7 +135,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
         }
 
         return GetReviewBoardBusinessTypeListResponseDto.success(reviewBoardList);
-
     }
 
     // 기행기 게시물 지역 및 업종별 리스트 불러오기 //
@@ -160,29 +154,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetReviewBoardLocationBusinessTypeListResponseDto.success(reviewBoardList);
-    }
-
-    // 기행기 게시물 검색 //
-    @Override
-    public ResponseEntity<? super GetSearchReviewBoardResponseDto> getSearchReviewBoard(String searchWord) {
-        
-        List<ReviewBoardListResponseDto> reviewBoardList = null;
-
-        try {
-            // description: 검색어가 제목과 지역, 업종에 포함되어있는 게시물 조회 //
-            List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrLocationOrBusinessTypeOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
-
-            // description: entity를 dto 형태로 전환 //
-            reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
-            
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-
-        return GetSearchReviewBoardResponseDto.success(reviewBoardList);
     }
 
     // 기행기 게시물 댓글리스트 조회 //
@@ -202,7 +174,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetCommentListResponseDto.success(commentList);
     }
 
@@ -223,7 +194,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return GetUserReviewBoardListResponseDto.success(reviewBoardList);
     }
 
@@ -245,7 +215,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return PostReviewBoardResponseDto.success();
     }
 
@@ -277,7 +246,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return PostCommentResponseDto.success();
     }
 
@@ -318,7 +286,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return PutFavoriteResponseDto.success();
     }
 
@@ -350,7 +317,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return PatchReviewBoardResponseDto.success();
     }
 
@@ -384,7 +350,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return DeleteReviewBoardResponseDto.success();
     }
 
@@ -412,7 +377,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-
         return DeleteCommentResponseDto.success();
     }
     

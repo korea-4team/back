@@ -11,10 +11,12 @@ import com.team.back.entity.ReviewBoardViewEntity;
 public interface ReviewBoardViewRepository extends JpaRepository<ReviewBoardViewEntity, Integer> {
     ReviewBoardViewEntity findByBoardNumber(Integer boardNumber);
 
+    List<ReviewBoardViewEntity> findByTitleContainsOrBusinessTypeOrderByWriteDatetimeDesc(String title, String businessType);
     List<ReviewBoardViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrderByWriteDatetimeDesc(String title, String location, String businessType);
     List<ReviewBoardViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String wirterEmail);
     List<ReviewBoardViewEntity> findByLocationOrderByWriteDatetimeDesc(String location);
     List<ReviewBoardViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);
-    List<ReviewBoardViewEntity> findByLocationAndBusinessTypeOrderByWriteDatetimeDesc(String loaction, String businessType);
+    List<ReviewBoardViewEntity> findByLocationAndBusinessTypeOrderByWriteDatetimeDesc(String location, String businessType);
+    List<ReviewBoardViewEntity> findByWriterEmail(String writerEmail);
   
 }

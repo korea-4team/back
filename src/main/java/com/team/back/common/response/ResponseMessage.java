@@ -9,10 +9,12 @@ public interface ResponseMessage {
   String EXISTED_EMAIL = "Existed Email";
   String EXISTED_NICKNAME = "Existed Nickname";
   String EXISTED_TEL_NUMBER = "Existed Tel Number";
+  String EXISTED_STORE_NUMBER = "Existed Store Number";
 
   String NO_EXISTED_USER = "No Existed User";
   String NO_EXISTED_BOARD = "No Existed Board";
   String NO_EXISTED_COMMENT = "No Existed Comment";
+  String NO_EXISTED_STORE = "No Existed Store";
 
   String NO_PERMISSION = "No Permission";
 

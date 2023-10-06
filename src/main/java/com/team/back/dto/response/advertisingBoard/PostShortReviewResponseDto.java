@@ -1,35 +1,34 @@
 package com.team.back.dto.response.advertisingBoard;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import com.team.back.entity.resultSet.ShortReviewResultSet;
+import com.team.back.common.response.ResponseCode;
+import com.team.back.common.response.ResponseMessage;
+import com.team.back.dto.ResponseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class PostShortReviewResponseDto {
-    private String nickname;
-    private String writeDatetime;
-    private String contents;
-  
+public class PostShortReviewResponseDto extends ResponseDto {
+   
+  private PostShortReviewResponseDto (String code, String message){
+    super(code, message);
+  }
 
-    public PostShortReviewResponseDto(ShortReviewResultSet resultSet){
-      this.nickname = resultSet.getNickname();
-      this.writeDatetime = resultSet.getWriteDatetime();
-      this.contents = resultSet.getContnts();
-    }
+  public static ResponseEntity<PostShortReviewResponseDto> success(){
+    PostShortReviewResponseDto result = new PostShortReviewResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS);
+    return ResponseEntity.status(HttpStatus.OK).body(result);
+  }
 
-    public static List<PostShortReviewResponseDto> copyList(List<ShortReviewResultSet> resultSets) {
-      
-      List<PostShortReviewResponseDto> shortreviewList = new ArrayList<>();
-
-      for (ShortReviewResultSet resultSet: resultSets){
-        PostShortReviewResponseDto commentItem = new PostShortReviewResponseDto(resultSet);
-        shortreviewList.add(commentItem);
-      }
-      return shortreviewList;
-    }
+  public static ResponseEntity<ResponseDto> noExistedUser(){
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_USER,ResponseMessage.NO_EXISTED_USER);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+  }
+  public static ResponseEntity<ResponseDto> noExistedBoard(){
+    ResponseDto result = new ResponseDto(ResponseCode.NO_EXISTED_BOARD,ResponseMessage.NO_EXISTED_BOARD);
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+  }
 }

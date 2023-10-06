@@ -24,9 +24,23 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   "ORDER BY RC.write_datetime",
   nativeQuery=true
   )
-  List<ShortReviewResultSet> shortReviewList(Integer boardNumber);
+  List<ShortReviewResultSet> getShortReviewList(Integer boardNumber);
   
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
+
+  @Query(
+    value =
+    "SELECT " +
+    "S.contents, " +
+    "S.write_datetime, "+
+    "U.nickname " +
+    "FROM advertising_board_short_review AS S INNER JOIN user AS U " +
+    "ON S.user_email = U.email",
+    nativeQuery = true
+  )
+  List<ShortReviewResultSet> getShortReviewList();
+
+  List<AdvertisingShortReviewEntity> findByUserEmail(String userEmail);
 
 }

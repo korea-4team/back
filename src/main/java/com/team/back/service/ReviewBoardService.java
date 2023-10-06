@@ -13,7 +13,6 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardResponseDto;
-import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetUserReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.PatchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PostCommentResponseDto;
@@ -31,8 +30,6 @@ public interface ReviewBoardService {
   ResponseEntity<? super GetReviewBoardBusinessTypeListResponseDto> getReviewBoardBusinessTypeList(String businessType);
   // method : 기행기 게시물 지역 및 업종별 리스트 불러오기 메서드 //
   ResponseEntity<? super GetReviewBoardLocationBusinessTypeListResponseDto> getReviewBoardLocationBusinessTypeList(String location, String businessType);
-  // method : 기행기 게시물 검색 리스트 불러오기 //
-  ResponseEntity<? super GetSearchReviewBoardResponseDto> getSearchReviewBoard(String searchWord);
   // method : 특정 게시물의 댓글 리스트 불러오기 //
   ResponseEntity<? super GetCommentListResponseDto> getCommentList(Integer boardNumber);
   // method : 특정 유저의 기행기 게시물 리스트 불러오기 //
