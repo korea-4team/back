@@ -1,5 +1,7 @@
 package com.team.back.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity(name="reservation")
 @Table(name="reservation")
-public class ReservationEntity {
+public class ReservationEntity implements Serializable {
   
   @Id
   private int boardNumber;
