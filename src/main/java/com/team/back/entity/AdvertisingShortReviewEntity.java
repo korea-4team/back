@@ -17,12 +17,13 @@ import lombok.NoArgsConstructor;
 public class AdvertisingShortReviewEntity {
 
   @Id
-  private int commentNumber;
+  private int short_review_count;
   private int boardNumber;
   private String userEmail;
   private String contents;
-  private String writeDatetime;
-  private int favoriteCount;
+  private String write_datetime;
+  private double score;
+  private String user_email;
 
   
 }

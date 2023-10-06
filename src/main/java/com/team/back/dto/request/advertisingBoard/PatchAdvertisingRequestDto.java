@@ -16,6 +16,8 @@ public class PatchAdvertisingRequestDto {
 
   @NotBlank
   private String contents;
+
+  private String imageUrl;
   
   
 }
