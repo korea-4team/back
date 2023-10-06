@@ -53,7 +53,7 @@ public class ShortReviewResponseDto {
   public ShortReviewResponseDto (AdvertisingShortReviewEntity advertisingShortReviewEntity){
     this.boardNumber = advertisingShortReviewEntity.getBoardNumber();
     this.contents = advertisingShortReviewEntity.getContents();
-    this.writeDatetime = advertisingShortReviewEntity.getWrite_datetime();
+    this.writeDatetime = advertisingShortReviewEntity.getWriteDatetime();
     this.writerNickname = advertisingShortReviewEntity.getUserEmail();
   }
 
