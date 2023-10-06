@@ -3,7 +3,6 @@ package com.team.back.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import com.team.back.dto.request.auth.SignUpRequestDto;
 import com.team.back.dto.request.myPage.PatchUserRequestDto;

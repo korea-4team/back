@@ -3,7 +3,6 @@ package com.team.back.dto.response.advertisingBoard;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.team.back.entity.ReservationEntity;
 import com.team.back.entity.resultSet.ReservationResultSet;
 
 import lombok.AllArgsConstructor;

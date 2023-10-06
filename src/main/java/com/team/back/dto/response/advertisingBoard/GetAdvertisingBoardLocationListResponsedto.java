@@ -18,7 +18,7 @@ public class GetAdvertisingBoardLocationListResponsedto extends ResponseDto{
   
   private List<GetAdvertisingboardResponseDto> advertisingBoardList;
 
-  private GetAdvertisingBoardLocationListResponsedto(String code, String message, List<GetAdvertisingboardResponseDto> getAdvertisingboardResponseDtos){
+  private GetAdvertisingBoardLocationListResponsedto(String code, String message, List<GetAdvertisingboardResponseDto> advertisingBoardList){
     super(code, message);
     this.advertisingBoardList = advertisingBoardList;
   }
