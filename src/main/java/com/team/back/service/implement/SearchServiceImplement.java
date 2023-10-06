@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.team.back.dto.ResponseDto;
 import com.team.back.dto.response.admin.AdvertisingListResponseDto;
 import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseDto;
-import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetSearchAdvertisingBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.ReviewBoardListResponseDto;
