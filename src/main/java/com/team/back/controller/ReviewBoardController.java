@@ -25,7 +25,6 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardResponseDto;
-import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetUserReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.PatchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PostCommentResponseDto;
@@ -85,15 +84,6 @@ public class ReviewBoardController {
         @PathVariable(value = "boardNumber", required = true) Integer boardNumber
     ) {
         ResponseEntity<? super GetReviewBoardResponseDto> response = reviewBoardService.getReviewBoard(boardNumber);
-        return response;
-    }
-
-    // API : 기행기 게시물 검색 리스트 불러오기 메서드 //
-    @GetMapping("/{searchWord}")
-    public ResponseEntity<? super GetSearchReviewBoardResponseDto> getSearchReviewBoard(
-        @PathVariable(value = "searchWord", required = true) String searchWord
-    ) {
-        ResponseEntity<? super GetSearchReviewBoardResponseDto> response = reviewBoardService.getSearchReviewBoard(searchWord);
         return response;
     }
 

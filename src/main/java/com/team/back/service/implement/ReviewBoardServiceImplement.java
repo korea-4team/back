@@ -18,7 +18,6 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardResponseDto;
-import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetUserReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.PatchReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PostCommentResponseDto;
@@ -156,26 +155,6 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             return ResponseDto.databaseError();
         }
         return GetReviewBoardLocationBusinessTypeListResponseDto.success(reviewBoardList);
-    }
-
-    // 기행기 게시물 검색 //
-    @Override
-    public ResponseEntity<? super GetSearchReviewBoardResponseDto> getSearchReviewBoard(String searchWord) {
-        
-        List<ReviewBoardListResponseDto> reviewBoardList = null;
-
-        try {
-            // description: 검색어가 제목과 지역, 업종에 포함되어있는 게시물 조회 //
-            List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrLocationOrBusinessTypeOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
-
-            // description: entity를 dto 형태로 전환 //
-            reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
-            
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-        return GetSearchReviewBoardResponseDto.success(reviewBoardList);
     }
 
     // 기행기 게시물 댓글리스트 조회 //
