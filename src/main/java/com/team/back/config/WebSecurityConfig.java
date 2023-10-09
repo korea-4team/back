@@ -37,10 +37,10 @@ public class WebSecurityConfig {
       .httpBasic().disable()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests()
-      .antMatchers("/", "/auth/**", "/search/**", "/file/**", "/notice-board/**").permitAll()
+      .antMatchers("/", "/auth/**", "/search/**", "/file/**", "/notice-board/**","/admin/**").permitAll()
       .antMatchers(HttpMethod.GET, "/review-board/**", "/notice-board/**").permitAll()
       .antMatchers(HttpMethod.GET, "/user/*", "/admin/**").permitAll()
-      .antMatchers(HttpMethod.POST, "/notice-board/**").hasRole("admin")
+      .antMatchers(HttpMethod.POST, "/notice-board/**","/admin/**").hasRole("admin")
       .anyRequest().authenticated().and()
       .exceptionHandling().authenticationEntryPoint(new FailedAuthenticationEntryPoint());
 
