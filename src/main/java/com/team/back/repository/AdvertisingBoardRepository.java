@@ -52,7 +52,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "INNER JOIN user AS U " +
     "ON AB.writer_email = U.email " +
     "WHERE AB.title LIKE %?1% " +
-    // "OR AB.business_type LIKE %?1% " + 
+    "OR AB.business_type LIKE %?1% " + 
     "ORDER BY AB.write_datetime DESC " +
     "LIMIT ?2, 30",
     nativeQuery=true
@@ -76,7 +76,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "ON AB.writer_email = U.email " +
     "WHERE AB.title LIKE %?1% " +
     "OR AB.location LIKE %?1% " +
-    // "OR AB.business_type LIKE %?1% " + 
+    "OR AB.business_type LIKE %?1% " + 
     "ORDER BY AB.write_datetime DESC " +
     "LIMIT ?3, 30",
     nativeQuery=true
