@@ -143,15 +143,18 @@ public class AdminController {
         return response;
     }
 
-    // 메인 페이지 배너 작성 기능
-    @PostMapping("/write/main-banner")
+    // description : 메인 페이지 배너 작성 기능
+    @PostMapping("/write/{eventBoardNumber}/main-banner")
     public ResponseEntity<? super PostMainBannerResponseDto> postMainBanner(
-        @AuthenticationPrincipal String adminId, @RequestBody @Valid PostBannerRequestDto requestBody
+        @AuthenticationPrincipal String adminId,
+        @PathVariable(value = "eventBoardNumber", required = true) int eventBoardNumber,
+        @RequestBody @Valid PostBannerRequestDto requestBody
     ) {
-        ResponseEntity<? super PostMainBannerResponseDto> response = adminService.postBanner(adminId, requestBody);
+        ResponseEntity<? super PostMainBannerResponseDto> response = adminService.postBanner(adminId, eventBoardNumber, requestBody);
         return response;
     }
-    // 메인 페이지 배너 수정 기능
+
+    // description : 메인 페이지 배너 수정 기능
     @PatchMapping("/update/{bannerNumber}/main-banner")
     public ResponseEntity<? super PatchMainBannerResponseDto> patchMainBanner(
         @AuthenticationPrincipal String adminId, @PathVariable(value = "bannerNumber", required = true) Integer bannerNumber, @RequestBody @Valid PatchBannerRequestDto requestBody
@@ -160,7 +163,7 @@ public class AdminController {
         return response;
     }
 
-    // 메인 페이지 배너 삭제 기능
+    // description : 메인 페이지 배너 삭제 기능
     @DeleteMapping("/delete/{bannerNumber}/main-banner")
     public ResponseEntity<? super DeleteBannerResponseDto> deleteMainBanner(
         @AuthenticationPrincipal String adminId, @PathVariable(value = "bannerNumber", required = true) Integer bannerNumber
