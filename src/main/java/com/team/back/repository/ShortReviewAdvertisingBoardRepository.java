@@ -41,6 +41,8 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   )
   List<ShortReviewResultSet> getShortReviewList();
 
+  
+
   List<AdvertisingShortReviewEntity> findByUserEmail(String userEmail);
 
 }

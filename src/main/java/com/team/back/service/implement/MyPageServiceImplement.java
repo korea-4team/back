@@ -12,6 +12,8 @@ import com.team.back.dto.ResponseDto;
 import com.team.back.dto.request.myPage.PatchUserRequestDto;
 import com.team.back.dto.request.myPage.RegistrationRequestDto;
 import com.team.back.dto.response.myPage.GetBoardListResponseDto;
+import com.team.back.dto.response.myPage.GetMyCommentListResponseDto;
+import com.team.back.dto.response.myPage.GetMyShortReviewListResponseDto;
 import com.team.back.dto.response.myPage.GetStoreInfoResponseDto;
 import com.team.back.dto.response.myPage.PatchUserResponseDto;
 import com.team.back.dto.response.myPage.PostRegistrationResponseDto;
@@ -20,8 +22,10 @@ import com.team.back.entity.BusinessApplicationEntity;
 import com.team.back.entity.BusinessNumberEntity;
 import com.team.back.entity.ReviewBoardViewEntity;
 import com.team.back.entity.UserEntity;
+import com.team.back.entity.resultSet.UserCommentListResultSet;
 import com.team.back.repository.BusinessApplicationRepository;
 import com.team.back.repository.BusinessNumberRepository;
+import com.team.back.repository.CommentRepository;
 import com.team.back.repository.ReviewBoardViewRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.MyPageService;
@@ -33,6 +37,7 @@ import lombok.RequiredArgsConstructor;
 public class MyPageServiceImplement implements MyPageService {
     
     private final UserRepository userRepository;
+    private final CommentRepository commentRepository;
     private final BusinessNumberRepository businessNumberRepository;
     private final ReviewBoardViewRepository reviewBoardViewRepository;
     private final BusinessApplicationRepository businessApplicationRepository;
@@ -103,6 +108,33 @@ public class MyPageServiceImplement implements MyPageService {
 
         return GetStoreInfoResponseDto.success(businessNumberEntity);
 
+    }
+
+    @Override
+    public ResponseEntity<? super GetMyCommentListResponseDto> GetMyCommentList(String email) {
+
+        List<UserCommentListResultSet> resultSets = new ArrayList<>();
+
+        try {
+
+            boolean existedUser = userRepository.existsByEmail(email);
+            if (!existedUser) return GetMyCommentListResponseDto.notExistUser();
+
+            resultSets = commentRepository.getMyCommentList(email);
+
+        } catch(Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetMyCommentListResponseDto.success(resultSets);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetMyShortReviewListResponseDto> GetMyShortReviewList(String email) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'GetMyShortReviewList'");
     }
 
     @Override

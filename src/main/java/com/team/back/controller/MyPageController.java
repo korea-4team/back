@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.team.back.dto.request.myPage.PatchUserRequestDto;
 import com.team.back.dto.request.myPage.RegistrationRequestDto;
 import com.team.back.dto.response.myPage.GetBoardListResponseDto;
+import com.team.back.dto.response.myPage.GetMyCommentListResponseDto;
 import com.team.back.dto.response.myPage.GetStoreInfoResponseDto;
 import com.team.back.dto.response.myPage.PatchUserResponseDto;
 import com.team.back.dto.response.myPage.PostRegistrationResponseDto;
@@ -42,6 +43,14 @@ public class MyPageController {
         @AuthenticationPrincipal String email
     ) {
         ResponseEntity<? super GetBoardListResponseDto> response = myPageService.getBoardList(email);
+        return response;
+    }
+
+    @GetMapping("/comment-list")
+    public ResponseEntity<? super GetMyCommentListResponseDto> GetMyCommentList(
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseEntity<? super GetMyCommentListResponseDto> response = myPageService.GetMyCommentList(email);
         return response;
     }
 
