@@ -11,7 +11,7 @@ import com.team.back.entity.pk.FavoritePk;
 @Repository
 public interface FavoriteRepository extends JpaRepository<FavoriteEntity, FavoritePk> {
   
-  boolean existsByUserEmailAndBoardNumber(String userEmail, Integer boardNumber);
+  boolean existsByUserEmailAndBoardNumber(String writerEmail, Integer boardNumber);
 
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);

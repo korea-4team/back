@@ -45,7 +45,7 @@ public class AdvertisingListResponseDto {
 		this.contents = advertisingViewEntity.getContents();
 		this.imageUrl = advertisingViewEntity.getImageUrl();
 		this.viewCount = advertisingViewEntity.getViewCount();
-		this.shortReviewCount = advertisingViewEntity.getShort_review_count();
+		this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
 		this.favoriteCount = advertisingViewEntity.getFavorite();
 		this.writeDatetime = advertisingViewEntity.getWriteDatetime();
 		this.writerEmail = advertisingViewEntity.getWriterEmail();

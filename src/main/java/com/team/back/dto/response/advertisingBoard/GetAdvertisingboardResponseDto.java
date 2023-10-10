@@ -18,10 +18,10 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private int boardNumber;
   private String title;
   private String contents;
-  private String image_url;
-  private int view_count;
-  private int short_review_count;
-  private int favorite_count;
+  private String imageUrl;
+  private int viewCount;
+  private int shortReviewCount;
+  private int favoriteCount;
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
@@ -32,13 +32,13 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
     this.boardNumber = advertisingViewEntity.getBoardNumber();
     this.title = advertisingViewEntity.getTitle();
     this.contents = advertisingViewEntity.getContents();
-    this.image_url = advertisingViewEntity.getImageUrl();
+    this.imageUrl = advertisingViewEntity.getImageUrl();
     this.writeDatetime = advertisingViewEntity.getWriteDatetime();
     this.writerEmail = advertisingViewEntity.getWriterEmail();
     this.writerNickname = advertisingViewEntity.getWriterNickname();
-    this.view_count = advertisingViewEntity.getViewCount();
-    this.short_review_count = advertisingViewEntity.getShort_review_count();
-    this.favorite_count = advertisingViewEntity.getFavorite();  
+    this.viewCount = advertisingViewEntity.getViewCount();
+    this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
+    this.favoriteCount = advertisingViewEntity.getFavorite();  
   }
 
   public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity){

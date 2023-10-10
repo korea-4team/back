@@ -30,50 +30,52 @@ public class AdvertisingBoardEntity {
   private int boardNumber;
   private String title;
   private String contents;
-  private String image_Url;
-  private int view_Count;
-  private int short_review_count;
-  private int favorite_Count;
-  private String write_datetime;
-  private String writer_email;
+  private String imageUrl;
+  private int viewCount;
+  private int shortReviewCount;
+  private int favoriteCount;
+  private String writeDatetime;
+  private String writerEmail;
   private String location;
   private String businessType;
 
 
-  public AdvertisingBoardEntity(String writerEmail, PostAdvertisingRequestDto dto){
+  public AdvertisingBoardEntity(Integer boardNumber,String writerEmail, PostAdvertisingRequestDto dto){
     Date now = Date.from(Instant.now());
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String writeDatetime = simpleDateFormat.format(now);
 
     this.title = dto.getTitle();
     this.contents = dto.getContents();
-    this.image_Url = dto.getImageUrl();
-    this.write_datetime = writeDatetime;
-    this.writer_email = writerEmail;
+    this.imageUrl = dto.getImageUrl();
+    this.writeDatetime = writeDatetime;
+    this.writerEmail = writerEmail;
     this.location = dto.getLocation();
     this.businessType = dto.getBusinessType();
   }
 
+
+
   public void patch(PatchAdvertisingRequestDto dto){
     this.title = dto.getTitle();
     this.contents = dto.getContents();
-    this.image_Url = dto.getImageUrl();
+    this.imageUrl = dto.getImageUrl();
   }
 
   public void increaseViewCount() {
-    this.view_Count++;
+    this.viewCount++;
   }
 
   public void increaseCommentCount() {
-    this.short_review_count++;
+    this.shortReviewCount++;
   }
 
   public void increaseFavoriteCount() {
-    this.favorite_Count++;
+    this.favoriteCount++;
   }
   
   public void decreaseFavoriteCount() {
-    this.favorite_Count--;
+    this.favoriteCount--;
   }
   
 }

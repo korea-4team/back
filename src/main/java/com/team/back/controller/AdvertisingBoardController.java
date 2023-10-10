@@ -61,9 +61,10 @@ public class AdvertisingBoardController {
   // 특정 게시물의 좋아요 리스트 불러오기
   @GetMapping("/detail/{board-number}/favorite")
   public ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> advertisingFavoriteList(
+    @AuthenticationPrincipal String writerEmail,
     @PathVariable(value = "boardNumber", required = true) Integer boardNumber
   ) {
-    ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> response = advertisingService.putAdvertisingFavoriteList(boardNumber);
+    ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> response = advertisingService.putAdvertisingFavoriteList(boardNumber,writerEmail);
     return response;
   }
   // 특정 게시물 지역별 리스트 불러오기
