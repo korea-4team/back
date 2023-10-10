@@ -27,4 +27,9 @@ public class GetCommentListResponseDto extends ResponseDto {
         GetCommentListResponseDto result = new GetCommentListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, commentList);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    public static ResponseEntity<ResponseDto> notAdminId() {
+		ResponseDto result = new ResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+	}
 }
