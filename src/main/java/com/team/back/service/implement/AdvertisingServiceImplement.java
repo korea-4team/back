@@ -121,6 +121,8 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     @Override
     public ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(Integer boardNumber) {
 
+        System.out.println(boardNumber);
+
         AdvertisingViewEntity advertisingViewEntity = null;
 
         try {
@@ -234,8 +236,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     }
 
     @Override
-    public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(Integer boardNumber,
-            String writerEmail, PostAdvertisingRequestDto dto) {
+    public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(String writerEmail, PostAdvertisingRequestDto dto) {
         try {
             // 존재하는 이메일인지 확인
             boolean hasUser = userRepository.existsByEmail(writerEmail);
@@ -243,7 +244,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
                 return PostAdvertisingBoardResponseDto.noExistUser();
 
             // entity 생성
-            AdvertisingBoardEntity advertisingBoardEntity = new AdvertisingBoardEntity(boardNumber, writerEmail, dto);
+            AdvertisingBoardEntity advertisingBoardEntity = new AdvertisingBoardEntity(writerEmail, dto);
 
             // 데이터베이스 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
