@@ -27,4 +27,10 @@ public class GetReviewBoardListResponseDto extends ResponseDto {
         GetReviewBoardListResponseDto result = new GetReviewBoardListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, boardList);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
+
+    public static ResponseEntity<ResponseDto> notAdminId() {
+		ResponseDto result = new ResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+	}
+
 }
