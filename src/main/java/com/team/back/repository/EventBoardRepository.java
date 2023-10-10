@@ -17,8 +17,8 @@ public interface EventBoardRepository extends JpaRepository<EventBoardEntity, In
     EventBoardEntity findByBoardNumber(Integer boardNumber);
 
     @Query(
-        value = 
-            "SELETE " +
+        value =
+            "SELECT " +
             "E.board_number AS boardNumber, " +
             "E.title AS title, "+
             "E.contents AS contents, " +

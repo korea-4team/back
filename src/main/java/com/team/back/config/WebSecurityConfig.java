@@ -37,7 +37,7 @@ public class WebSecurityConfig {
       .httpBasic().disable()
       .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
       .authorizeRequests()
-      .antMatchers("/", "/auth/**", "/search/**", "/file/**", "/notice-board/**","/admin/**").permitAll()
+      .antMatchers("/", "/auth/**", "/search/**", "/file/**", "/notice-board/**","/admin/**", "/event-board/**").permitAll()
       .antMatchers(HttpMethod.GET, "/review-board/**", "/notice-board/**").permitAll()
       .antMatchers(HttpMethod.GET, "/user/*", "/admin/**").permitAll()
       .antMatchers(HttpMethod.POST, "/notice-board/**","/admin/**").hasRole("admin")
