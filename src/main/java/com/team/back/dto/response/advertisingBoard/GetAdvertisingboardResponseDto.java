@@ -38,7 +38,7 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
     this.writerNickname = advertisingViewEntity.getWriterNickname();
     this.viewCount = advertisingViewEntity.getViewCount();
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
-    this.favoriteCount = advertisingViewEntity.getFavorite();  
+    this.favoriteCount = advertisingViewEntity.getFavoriteCount();  
   }
 
   public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity){

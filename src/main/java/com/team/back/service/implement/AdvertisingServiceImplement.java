@@ -121,6 +121,8 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     @Override
     public ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(Integer boardNumber) {
 
+        System.out.println(boardNumber);
+
         AdvertisingViewEntity advertisingViewEntity = null;
 
         try {

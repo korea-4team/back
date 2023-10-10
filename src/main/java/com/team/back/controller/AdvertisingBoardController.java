@@ -40,7 +40,7 @@ public class AdvertisingBoardController {
   private final AdvertisingService advertisingService;
 
   // 게시물 불러오기
-  @GetMapping("/board-list")
+  @GetMapping("/board-list/{boardNumber}")
   public ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(
     @PathVariable(value="boardNumber", required = true) Integer boardNumber
   ) {
@@ -68,7 +68,7 @@ public class AdvertisingBoardController {
     return response;
   }
   // 특정 게시물 지역별 리스트 불러오기
-  @GetMapping("/board-list/{location}")
+  @GetMapping("/board-list/location/{location}")
   public ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(
     @PathVariable(value = "location", required = true) String location
   ) {

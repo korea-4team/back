@@ -42,7 +42,7 @@ public class AdvertisingBoardListResponseDto {
     this.imageUrl = advertisingViewEntity.getImageUrl();
     this.viewCount = advertisingViewEntity.getViewCount();
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
-    this.favoriteCount = advertisingViewEntity.getFavorite();
+    this.favoriteCount = advertisingViewEntity.getFavoriteCount();
     this.writeDatetime = advertisingViewEntity.getWriteDatetime();
     this.writerNickname = advertisingViewEntity.getWriterNickname();
   }
