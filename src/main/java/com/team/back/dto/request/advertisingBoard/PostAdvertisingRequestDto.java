@@ -12,6 +12,13 @@ import lombok.Setter;
 
 public class PostAdvertisingRequestDto {
 
+
+  @NotBlank
+  private String writerEmail;
+
+  @NotBlank
+  private int boardNumber;
+
   @NotBlank
   private String title;
 

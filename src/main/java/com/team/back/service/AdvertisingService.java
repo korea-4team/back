@@ -43,7 +43,7 @@ public interface AdvertisingService {
   // 한줄 리뷰 작성
   ResponseEntity<? super PostShortReviewResponseDto> postShortReview(Integer boardNumber, String email, PostShortReviewRequestDto dto);
   // 좋아요
-  ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> putAdvertisingFavoriteList(Integer boardNumber);
+  ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> putAdvertisingFavoriteList(Integer boardNumber, String writerEmail);
   // 지역별
   ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(String location);
   // 업종별

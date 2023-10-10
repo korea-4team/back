@@ -18,7 +18,7 @@ public class AdvertisingBoardListResponseDto {
   private String contents;
   private String imageUrl;
   private int viewCount;
-  private int short_review_count;
+  private int shortReviewCount;
   private int favoriteCount;
   private String writeDatetime;
   private String writerNickname;
@@ -29,7 +29,7 @@ public class AdvertisingBoardListResponseDto {
     this.contents = resultSet.getContents();
     this.imageUrl = resultSet.getImageUrl();
     this.viewCount = resultSet.getViewCount();
-    this.short_review_count = resultSet.getShortCommentCount();
+    this.shortReviewCount = resultSet.getShortCommentCount();
     this.favoriteCount = resultSet.getFavoriteCount();
     this.writeDatetime = resultSet.getWriteDatetime();
     this.writerNickname = resultSet.getWriterNickname();
@@ -41,7 +41,7 @@ public class AdvertisingBoardListResponseDto {
     this.contents = advertisingViewEntity.getContents();
     this.imageUrl = advertisingViewEntity.getImageUrl();
     this.viewCount = advertisingViewEntity.getViewCount();
-    this.short_review_count = advertisingViewEntity.getShort_review_count();
+    this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
     this.favoriteCount = advertisingViewEntity.getFavorite();
     this.writeDatetime = advertisingViewEntity.getWriteDatetime();
     this.writerNickname = advertisingViewEntity.getWriterNickname();

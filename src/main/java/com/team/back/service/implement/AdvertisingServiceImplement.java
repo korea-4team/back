@@ -1,6 +1,5 @@
 package com.team.back.service.implement;
 
-
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,7 @@ import com.team.back.dto.ResponseDto;
 import com.team.back.dto.request.advertisingBoard.PatchAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
+import com.team.back.dto.response.admin.AdvertisingListResponseDto;
 import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
@@ -27,7 +27,9 @@ import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
 import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
+import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
+import com.team.back.entity.FavoriteEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardRepository;
@@ -41,49 +43,47 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class AdvertisingServiceImplement implements AdvertisingService{
-    
+public class AdvertisingServiceImplement implements AdvertisingService {
+
     private final UserRepository userRepository;
     private final AdvertisingBoardRepository advertisingBoardRepository;
     private final FavoriteRepository favoriteRepository;
     private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
     private final AdvertisingBoardViewRespository advertisingBoardViewRespository;
-    
-    
-    
-    //게시글 삭제
+
+    // 게시글 삭제
     @Override
     public ResponseEntity<? super DeleteAdvertisingBoardResponseDto> deleteAdvertisingBoard(Integer boardNumber,
             String email) {
-       try{
-            //유저가 아닐때
+        try {
+            // 유저가 아닐때
             boolean hasUser = userRepository.existsByEmail(email);
-            if (!hasUser) return DeleteAdvertisingBoardResponseDto.noExistedBoard();
+            if (!hasUser)
+                return DeleteAdvertisingBoardResponseDto.noExistedBoard();
 
-            //게시물이 없을때
+            // 게시물이 없을때
             AdvertisingBoardEntity advertisingViewEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
-            if (advertisingViewEntity == null) return DeleteAdvertisingBoardResponseDto.noExistedBoard();
+            if (advertisingViewEntity == null)
+                return DeleteAdvertisingBoardResponseDto.noExistedBoard();
 
-            //작성자 이메일과 입력받은 이메일이 같은가
-            boolean equalWriter = advertisingViewEntity.getWriter_email().equals(email);
-            if (!equalWriter) return DeleteAdvertisingBoardResponseDto.noPerMission();
+            // 작성자 이메일과 입력받은 이메일이 같은가
+            boolean equalWriter = advertisingViewEntity.getWriterEmail().equals(email);
+            if (!equalWriter)
+                return DeleteAdvertisingBoardResponseDto.noPerMission();
 
-            //댓글 데이터 삭제
+            // 댓글 데이터 삭제
             shortReviewAdvertisingBoardRepository.deleteByBoardNumber(boardNumber);
-            //좋아요 데이터 삭제
+            // 좋아요 데이터 삭제
             favoriteRepository.deleteByBoardNumber(boardNumber);
-            //게시물 삭제
+            // 게시물 삭제
             advertisingBoardRepository.delete(advertisingViewEntity);
 
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
 
-       } catch (Exception exception){
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-       }
-
-       return DeleteAdvertisingBoardResponseDto.success();
-
-
+        return DeleteAdvertisingBoardResponseDto.success();
 
     }
 
@@ -91,154 +91,316 @@ public class AdvertisingServiceImplement implements AdvertisingService{
     @Override
     public ResponseEntity<? super DeleteShortCommentAdvertisingBoardResponseDto> deleteShortCommentAdvertsingBoard(
             Integer boardNumber, String email) {
-       try{
-            //유저가 아닐때
+        try {
+            // 유저가 아닐때
             boolean hasUser = userRepository.existsByEmail(email);
-            if (!hasUser) return DeleteShortCommentAdvertisingBoardResponseDto.noExistedBoard();
+            if (!hasUser)
+                return DeleteShortCommentAdvertisingBoardResponseDto.noExistedBoard();
 
-            //게시물이 없을때
+            // 게시물이 없을때
             AdvertisingBoardEntity advertisingViewEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
-            if (advertisingViewEntity == null) return DeleteShortCommentAdvertisingBoardResponseDto.noExistedBoard();
+            if (advertisingViewEntity == null)
+                return DeleteShortCommentAdvertisingBoardResponseDto.noExistedBoard();
 
-            //작성자 이메일과 입력받은 이메일이 같은가
-            boolean equalWriter = advertisingViewEntity.getWriter_email().equals(email);
-            if (!equalWriter) return DeleteShortCommentAdvertisingBoardResponseDto.noPerMission();
+            // 작성자 이메일과 입력받은 이메일이 같은가
+            boolean equalWriter = advertisingViewEntity.getWriterEmail().equals(email);
+            if (!equalWriter)
+                return DeleteShortCommentAdvertisingBoardResponseDto.noPerMission();
 
-            //댓글 데이터 삭제
+            // 댓글 데이터 삭제
             shortReviewAdvertisingBoardRepository.deleteByBoardNumber(boardNumber);
 
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
 
-       } catch (Exception exception){
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-       }
-
-       return DeleteShortCommentAdvertisingBoardResponseDto.success();
+        return DeleteShortCommentAdvertisingBoardResponseDto.success();
     }
 
     @Override
     public ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(Integer boardNumber) {
-        
+
         AdvertisingViewEntity advertisingViewEntity = null;
 
-        try{
-            // 게시물 번호에 해당하는  게시물 조회
+        try {
+            // 게시물 번호에 해당하는 게시물 조회
             advertisingViewEntity = advertisingBoardViewRespository.findByBoardNumber(boardNumber);
             // 존재하는 게시물인지 확인
-            if(advertisingViewEntity == null) return GetAdvertisingboardResponseDto.noExistedBoard();
-            //게시물 조회수 증가
+            if (advertisingViewEntity == null)
+                return GetAdvertisingboardResponseDto.noExistedBoard();
+            // 게시물 조회수 증가
             AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
             advertisingBoardEntity.increaseCommentCount();
-            //데이터 베이스에 저장
+            // 데이터 베이스에 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
 
-        } catch(Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
-        
+
         return GetAdvertisingboardResponseDto.success(advertisingViewEntity);
     }
 
-    //최근 게시물 불러오기
+    // 최근 게시물 불러오기
     @Override
     public ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getCurrentAdvertisingBoard(Integer section) {
 
         List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
 
-        try{
-            //리스트 불러오기
-            Integer limit = (section - 1 ) * 30;
+        try {
+            // 리스트 불러오기
+            Integer limit = (section - 1) * 30;
             List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(limit);
 
             // 검색결과 responsedto로 변환
             advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);
-        } catch (Exception exception){
+        } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();
         }
         return GetCurrentAdvertisingBoardResponseDto.success(advertisingBoardList);
-        
+
     }
-    //한줄리뷰 리스트 불러오기
+
+    // 한줄리뷰 리스트 불러오기
     @Override
     public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(Integer boardNumber) {
-      List<ShortReviewResponseDto> shortList = null;
+        List<ShortReviewResponseDto> shortList = null;
 
-      try{
+        try {
 
-        List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList(boardNumber);
+            List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository
+                    .getShortReviewList(boardNumber);
 
-        shortList = ShortReviewResponseDto.copyList(resultSets);
-      } catch (Exception exception){
-        exception.printStackTrace();
-        return ResponseDto.databaseError();
-      }
-      return GetShortReviewListResponseDto.success(shortList);
+            shortList = ShortReviewResponseDto.copyList(resultSets);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return GetShortReviewListResponseDto.success(shortList);
 
     }
 
     @Override
-    public ResponseEntity<? super GetUserListAdvertisingResponseDto> getUserListAdvertising(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserListAdvertising'");
-    }
+    public ResponseEntity<? super GetUserListAdvertisingResponseDto> getUserListAdvertising(String writerEmail) {
+        List<AdvertisingListResponseDto> advertisingBoardList = null;
+
+
+        try{
+
+            List<AdvertisingViewEntity> advertisingBoardEntities = advertisingBoardViewRespository.findByWriterEmailOrderByWriteDatetimeDesc(writerEmail);
+
+            advertisingBoardList = AdvertisingListResponseDto.copyEntityList(advertisingBoardEntities);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+      return GetUserListAdvertisingResponseDto.success(advertisingBoardList);
+        }
 
     @Override
+
     public ResponseEntity<? super PatchAdvertisingBoardResponseDto> patchAdvertisingBoard(Integer boardNumber,
-            String email, PatchAdvertisingRequestDto requestDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'patchAdvertisingBoard'");
+            String email, PatchAdvertisingRequestDto dto) {
+        try {
+
+            // 존재하는 유저인지 확인
+            boolean hasUser = userRepository.existsByEmail(email);
+            if (!hasUser)
+                return PatchAdvertisingBoardResponseDto.noExistedUser();
+
+            // 존재하는 게시물인지 확인
+            AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+            if (advertisingBoardEntity == null)
+                return PatchAdvertisingBoardResponseDto.noExistedBoard();
+
+            // 작성자 이메일과 일치하는지 확인
+            boolean equalWriter = advertisingBoardEntity.getWriterEmail().equals(email);
+            if (!equalWriter)
+                return PatchAdvertisingBoardResponseDto.noPermission();
+
+            // 수정
+            advertisingBoardEntity.patch(dto);
+            // 저장
+            advertisingBoardRepository.save(advertisingBoardEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PatchAdvertisingBoardResponseDto.success();
     }
 
     @Override
     public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(Integer boardNumber,
-            String email, PostAdvertisingRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postAdvertisingBoard'");
+            String writerEmail, PostAdvertisingRequestDto dto) {
+        try {
+            // 존재하는 이메일인지 확인
+            boolean hasUser = userRepository.existsByEmail(writerEmail);
+            if (!hasUser)
+                return PostAdvertisingBoardResponseDto.noExistUser();
+
+            // entity 생성
+            AdvertisingBoardEntity advertisingBoardEntity = new AdvertisingBoardEntity(boardNumber, writerEmail, dto);
+
+            // 데이터베이스 저장
+            advertisingBoardRepository.save(advertisingBoardEntity);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+
+        }
+        return PostAdvertisingBoardResponseDto.success();
     }
 
     @Override
-    public ResponseEntity<? super PostShortReviewResponseDto> postShortReview(Integer boardNumber, String email,
+    public ResponseEntity<? super PostShortReviewResponseDto> postShortReview(Integer boardNumber, String writerEmail,
             PostShortReviewRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postShortReview'");
+        try {
+
+            boolean hasUser = userRepository.existsByEmail(writerEmail);
+            if (!hasUser)
+                return PostShortReviewResponseDto.noExistedUser();
+
+            AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+            if (advertisingBoardEntity == null)
+                return PostShortReviewResponseDto.noExistedBoard();
+
+            AdvertisingShortReviewEntity advertisingShortReviewEntity = new AdvertisingShortReviewEntity(boardNumber,writerEmail,dto);
+
+            shortReviewAdvertisingBoardRepository.save(advertisingShortReviewEntity);
+
+            advertisingBoardEntity.increaseCommentCount();
+
+            advertisingBoardRepository.save(advertisingBoardEntity);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PostShortReviewResponseDto.success();
     }
 
     @Override
     public ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> putAdvertisingFavoriteList(
-            Integer boardNumber) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'putAdvertisingFavoriteList'");
+            Integer boardNumber, String writerEmail) {
+        try {
+
+            boolean hasUser = userRepository.existsByEmail(writerEmail);
+            if(! hasUser) return PutAdvertisingFavoriteListResponseDto.noExistedUser();
+
+            AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+            if(advertisingBoardEntity == null) return PutAdvertisingFavoriteListResponseDto.noExistedBoard();
+
+            boolean isFavorite = favoriteRepository.existsByUserEmailAndBoardNumber(writerEmail,boardNumber);
+
+            FavoriteEntity favoriteEntity = new FavoriteEntity(boardNumber,writerEmail);
+
+            if (isFavorite){
+                favoriteRepository.delete(favoriteEntity);
+                advertisingBoardEntity.decreaseFavoriteCount();
+            }
+
+            else{
+                favoriteRepository.save(favoriteEntity);
+                advertisingBoardEntity.increaseFavoriteCount();
+            }
+
+            advertisingBoardRepository.save(advertisingBoardEntity);
+           
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PutAdvertisingFavoriteListResponseDto.success();
+        
     }
 
     @Override
     public ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(
             String location) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAdvertisingBoardLocationList'");
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
+
+        try {
+
+            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByLocationOrderByWriteDatetimeDesc(location);
+
+            advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetAdvertisingBoardLocationListResponsedto.success(advertisingBoardList);
     }
 
     @Override
     public ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(
             String businessType) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAdvertisingBoardBusinessTypeList'");
+
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
+
+        try {
+            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByLocationOrderByWriteDatetimeDesc(businessType);
+
+            advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetAdvertisingBoardBusinessTypeListResponseDto.success(advertisingBoardList);
+
     }
 
     @Override
     public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
-        
-            Integer boardNumber, String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postAdvertisingBoardMenuList'");
+            Integer boardNumber, String writerEmail) {
+
+        try {
+            boolean hasUser = userRepository.existsByEmail(writerEmail);
+            if (!hasUser)
+                return PostAdvertisingBoardMenuListResponseDto.noExistedUser();
+
+            AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+            if (advertisingBoardEntity == null)
+                return PostAdvertisingBoardMenuListResponseDto.noExistedBoard();
+
+
+            advertisingBoardRepository.save(advertisingBoardEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PostAdvertisingBoardMenuListResponseDto.success();
     }
 
     @Override
     public ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email,
             String time, int people) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postReservation'");
+
+        try {
+            boolean hasUser = userRepository.existsByEmail(email);
+            if (!hasUser)
+                return PostReservationResponseDto.noExistedUser();
+
+            AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+            if (advertisingBoardEntity == null)
+                return PostReservationResponseDto.noExistedBoard();
+
+            advertisingBoardRepository.save(advertisingBoardEntity);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+        return PostReservationResponseDto.success();
+
     }
 
 }

@@ -103,5 +103,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
   )
   List<AdvertisingBoardResultSet> getAdvertisingBoardList();
 
+  List<AdvertisingBoardEntity> findByLocationOrderByWriteDatetimeDesc(String location);
+
 
 }
