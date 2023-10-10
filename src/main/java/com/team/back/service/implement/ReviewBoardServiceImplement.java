@@ -31,7 +31,7 @@ import com.team.back.entity.ReviewBoardViewEntity;
 import com.team.back.entity.resultSet.CommentListResultSet;
 import com.team.back.entity.resultSet.ReviewBoardListResultSet;
 import com.team.back.repository.CommentRepository;
-import com.team.back.repository.FavoriteRepository;
+import com.team.back.repository.ReviewBoardFavoriteRepository;
 import com.team.back.repository.ReviewBoardRepository;
 import com.team.back.repository.ReviewBoardViewRepository;
 import com.team.back.repository.UserRepository;
@@ -45,7 +45,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
 
     private final ReviewBoardRepository reviewBoardRepository;
     private final ReviewBoardViewRepository reviewBoardViewRepository;
-    private final FavoriteRepository favoriteRepository;
+    private final ReviewBoardFavoriteRepository favoriteRepository;
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
 

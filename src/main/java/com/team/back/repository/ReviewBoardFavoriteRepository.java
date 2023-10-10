@@ -9,7 +9,7 @@ import com.team.back.entity.ReviewBoardFavoriteEntity;
 import com.team.back.entity.pk.FavoritePk;
 
 @Repository
-public interface FavoriteRepository extends JpaRepository<ReviewBoardFavoriteEntity, FavoritePk> {
+public interface ReviewBoardFavoriteRepository extends JpaRepository<ReviewBoardFavoriteEntity, FavoritePk> {
   
   boolean existsByUserEmailAndBoardNumber(String writerEmail, Integer boardNumber);
 
