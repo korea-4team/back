@@ -58,7 +58,7 @@ public class AdvertisingBoardController {
   }
 
 
-  // 특정 게시물의 좋아요 리스트 불러오기
+  // 특정 게시물의 좋아요 기능 메서드
   @GetMapping("/detail/{board-number}/favorite")
   public ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> advertisingFavoriteList(
     @AuthenticationPrincipal String writerEmail,
