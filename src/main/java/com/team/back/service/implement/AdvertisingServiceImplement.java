@@ -27,14 +27,14 @@ import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
 import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
+import com.team.back.entity.AdvertisingBoardFavoriteEntity;
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
-import com.team.back.entity.FavoriteEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
+import com.team.back.repository.AdvertisingBoardFavoriteRepository;
 import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.AdvertisingBoardViewRespository;
-import com.team.back.repository.FavoriteRepository;
 import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.AdvertisingService;
@@ -47,7 +47,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
     private final UserRepository userRepository;
     private final AdvertisingBoardRepository advertisingBoardRepository;
-    private final FavoriteRepository favoriteRepository;
+    private final AdvertisingBoardFavoriteRepository advertisingBoardFavoriteRepository;
     private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
     private final AdvertisingBoardViewRespository advertisingBoardViewRespository;
 
@@ -74,7 +74,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             // 댓글 데이터 삭제
             shortReviewAdvertisingBoardRepository.deleteByBoardNumber(boardNumber);
             // 좋아요 데이터 삭제
-            favoriteRepository.deleteByBoardNumber(boardNumber);
+            advertisingBoardFavoriteRepository.deleteByBoardNumber(boardNumber);
             // 게시물 삭제
             advertisingBoardRepository.delete(advertisingViewEntity);
 
@@ -296,17 +296,17 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
             if(advertisingBoardEntity == null) return PutAdvertisingFavoriteListResponseDto.noExistedBoard();
 
-            boolean isFavorite = favoriteRepository.existsByUserEmailAndBoardNumber(writerEmail,boardNumber);
+            boolean isFavorite = advertisingBoardFavoriteRepository.existsByUserEmailAndBoardNumber(writerEmail,boardNumber);
 
-            FavoriteEntity favoriteEntity = new FavoriteEntity(boardNumber,writerEmail);
+            AdvertisingBoardFavoriteEntity favoriteEntity = new AdvertisingBoardFavoriteEntity(boardNumber,writerEmail);
 
             if (isFavorite){
-                favoriteRepository.delete(favoriteEntity);
+                advertisingBoardFavoriteRepository.delete(favoriteEntity);
                 advertisingBoardEntity.decreaseFavoriteCount();
             }
 
             else{
-                favoriteRepository.save(favoriteEntity);
+                advertisingBoardFavoriteRepository.save(favoriteEntity);
                 advertisingBoardEntity.increaseFavoriteCount();
             }
 
