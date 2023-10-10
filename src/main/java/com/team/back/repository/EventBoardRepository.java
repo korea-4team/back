@@ -12,6 +12,8 @@ import com.team.back.entity.resultSet.EventBoardListResultSet;
 @Repository
 public interface EventBoardRepository extends JpaRepository<EventBoardEntity, Integer> {
     
+    boolean existsByBoardNumber(Integer boardNumber);
+
     EventBoardEntity findByBoardNumber(Integer boardNumber);
 
     @Query(

@@ -1,6 +1,7 @@
 package com.team.back.dto.request.banner;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ public class PatchBannerRequestDto {
     @NotBlank
     private String imageUrl;
 
-    @NotBlank
-    private int sequence;
+    @NotNull
+    private Integer sequence;
 
 }
