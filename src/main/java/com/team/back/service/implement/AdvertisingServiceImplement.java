@@ -29,7 +29,7 @@ import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
-import com.team.back.entity.FavoriteEntity;
+import com.team.back.entity.ReviewBoardFavoriteEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardRepository;
@@ -297,7 +297,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
             boolean isFavorite = favoriteRepository.existsByUserEmailAndBoardNumber(writerEmail,boardNumber);
 
-            FavoriteEntity favoriteEntity = new FavoriteEntity(boardNumber,writerEmail);
+            ReviewBoardFavoriteEntity favoriteEntity = new ReviewBoardFavoriteEntity(boardNumber,writerEmail);
 
             if (isFavorite){
                 favoriteRepository.delete(favoriteEntity);

@@ -25,7 +25,7 @@ import com.team.back.dto.response.reviewBoard.PostReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.PutFavoriteResponseDto;
 import com.team.back.dto.response.reviewBoard.ReviewBoardListResponseDto;
 import com.team.back.entity.CommentEntity;
-import com.team.back.entity.FavoriteEntity;
+import com.team.back.entity.ReviewBoardFavoriteEntity;
 import com.team.back.entity.ReviewBoardEntity;
 import com.team.back.entity.ReviewBoardViewEntity;
 import com.team.back.entity.resultSet.CommentListResultSet;
@@ -266,7 +266,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             boolean isFavorite = favoriteRepository.existsByUserEmailAndBoardNumber(userEmail, boardNumber);
 
             // description: Entity 생성 //
-            FavoriteEntity favoriteEntity = new FavoriteEntity(boardNumber, userEmail);
+            ReviewBoardFavoriteEntity favoriteEntity = new ReviewBoardFavoriteEntity(boardNumber, userEmail);
 
             // description: 이미 추천 했을 때 //
             if (isFavorite) {

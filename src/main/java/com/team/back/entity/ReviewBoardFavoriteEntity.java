@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="favorite")
-@Table(name="favorite")
+@Entity(name="review_board_favorite")
+@Table(name="review_board_favorite")
 @IdClass(FavoritePk.class)
-public class FavoriteEntity {
+public class ReviewBoardFavoriteEntity {
   @Id
   private int boardNumber;
   @Id
