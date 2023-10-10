@@ -151,7 +151,7 @@ public class AuthServiceImplement implements AuthService {
             userRepository.save(userEntity);
 
             // description: 임시 비밀번호 전송 //
-            emailProvider.sendMail(email, encodedTemporaryPassword);
+            emailProvider.sendMail(email, temporaryPassword);
 
         } catch (Exception exception) {
             exception.printStackTrace();

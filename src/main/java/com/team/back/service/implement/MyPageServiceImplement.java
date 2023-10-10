@@ -121,7 +121,7 @@ public class MyPageServiceImplement implements MyPageService {
             if (!myTelNumber.equals(telNumber) && existedTelNumber) return PatchUserResponseDto.existTelNumber();
 
             String myNickname = userEntity.getNickname();
-            boolean existedNickname = userRepository.existsByNickname(myNickname);
+            boolean existedNickname = userRepository.existsByNickname(nickname);
             if (!myNickname.equals(nickname) && existedNickname) return PatchUserResponseDto.existNickname();
 
             String password = dto.getPassword();
