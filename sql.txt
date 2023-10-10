@@ -162,3 +162,22 @@ CREATE TABLE business_application (
 CREATE VIEW user_view AS
 SELECT email as user_email, password as user_password, nickname as user_nickname, tel_number as user_tel_number, address as user_address, address_detail as user_address_detail, role as user_role
 FROM user;
+
+
+CREATE VIEW review_board_view AS
+SELECT 
+    RB.board_number AS board_number,
+    RB.title AS title,
+    RB.contents AS contents,
+    RB.image_url AS image_url,
+    RB.view_count AS view_count,
+    RB.comment_count AS comment_count,
+    RB.favorite_count AS favorite_count,
+    RB.write_datetime AS write_datetime,
+    RB.location AS location,
+    RB.business_type AS business_type,
+    U.email AS writer_email,
+    U.nickname AS writer_nickname
+FROM review_board AS RB
+INNER JOIN user AS U
+ON RB.writer_email = U.email;
