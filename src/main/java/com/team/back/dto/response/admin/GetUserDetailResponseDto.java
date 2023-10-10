@@ -6,8 +6,7 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
-import com.team.back.entity.UserViewEntity;
-
+import com.team.back.entity.UserEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -23,19 +22,19 @@ public class GetUserDetailResponseDto extends ResponseDto {
 	private String role;
 	private String telNumber;
 
-	private GetUserDetailResponseDto(String code, String message, UserViewEntity userViewEntity) {
+	private GetUserDetailResponseDto(String code, String message, UserEntity userEntity) {
 		super(code, message);
-		this.email = userViewEntity.getUserEmail();
-		this.password = userViewEntity.getUserPassword();
-		this.nickname = userViewEntity.getUserNickname();
-		this.address = userViewEntity.getUserAddress();
-		this.addressDetail = userViewEntity.getUserAddressDetail();
-		this.role = userViewEntity.getUserRole();
-		this.telNumber = userViewEntity.getUserTelNumber();
+		this.email = userEntity.getEmail();
+		this.password = userEntity.getPassword();
+		this.nickname = userEntity.getNickname();
+		this.address = userEntity.getAddress();
+		this.addressDetail = userEntity.getAddressDetail();
+		this.role = userEntity.getRole();
+		this.telNumber = userEntity.getTelNumber();
 	}
 
-	public static ResponseEntity<GetUserDetailResponseDto> success(UserViewEntity userViewEntity) {
-		GetUserDetailResponseDto result = new GetUserDetailResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userViewEntity);
+	public static ResponseEntity<GetUserDetailResponseDto> success(UserEntity userEntity) {
+		GetUserDetailResponseDto result = new GetUserDetailResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, userEntity);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 

@@ -14,6 +14,7 @@ public interface ResponseMessage {
   String NO_EXISTED_USER = "No Existed User";
   String NO_EXISTED_BOARD = "No Existed Board";
   String NO_EXISTED_COMMENT = "No Existed Comment";
+  String NO_EXISTED_STORE = "No Existed Store";
 
   String NO_PERMISSION = "No Permission";
 

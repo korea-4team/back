@@ -5,6 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.team.back.dto.request.auth.SignUpRequestDto;
+import com.team.back.dto.request.myPage.PatchUserRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -42,4 +43,12 @@ public class UserEntity {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
+    public void patchUser(PatchUserRequestDto dto) {
+        this.password = dto.getPassword();
+        this.nickname = dto.getNickname();
+        this.address = dto.getAddress();
+        this.addressDetail = dto.getAddressDetail();
+        this.telNumber = dto.getTelNumber();
+    } 
 }

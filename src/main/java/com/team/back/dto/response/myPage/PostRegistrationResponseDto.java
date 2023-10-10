@@ -10,14 +10,14 @@ import com.team.back.dto.ResponseDto;
 import lombok.Getter;
 
 @Getter
-public class RegistrationResponseDto extends ResponseDto {
+public class PostRegistrationResponseDto extends ResponseDto {
     
-    private RegistrationResponseDto() {
+    private PostRegistrationResponseDto() {
         super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
     }
 
-    public static ResponseEntity<RegistrationResponseDto> success() {
-        RegistrationResponseDto result = new RegistrationResponseDto();
+    public static ResponseEntity<PostRegistrationResponseDto> success() {
+        PostRegistrationResponseDto result = new PostRegistrationResponseDto();
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
