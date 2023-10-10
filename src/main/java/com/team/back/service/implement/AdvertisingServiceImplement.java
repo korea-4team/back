@@ -230,6 +230,7 @@ public class AdvertisingServiceImplement implements AdvertisingService{
 
     @Override
     public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
+        
             Integer boardNumber, String email) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'postAdvertisingBoardMenuList'");
