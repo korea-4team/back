@@ -40,7 +40,7 @@ public class AdvertisingBoardEntity {
   private String businessType;
 
 
-  public AdvertisingBoardEntity(Integer boardNumber,String writerEmail, PostAdvertisingRequestDto dto){
+  public AdvertisingBoardEntity(String writerEmail, PostAdvertisingRequestDto dto){
     Date now = Date.from(Instant.now());
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     String writeDatetime = simpleDateFormat.format(now);

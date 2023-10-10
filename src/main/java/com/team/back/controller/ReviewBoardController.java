@@ -42,7 +42,7 @@ public class ReviewBoardController {
     private final ReviewBoardService reviewBoardService;
 
     // API : 기행기 게시물 리스트 최신순으로 불러오기 메서드 //
-    @GetMapping("/board-list/{section}")
+    @GetMapping("/board-list/section/{section}")
     public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(
         @PathVariable(value = "section", required = true) Integer section
     ) {
@@ -51,7 +51,7 @@ public class ReviewBoardController {
     }
 
     // API : 기행기 게시물 지역별 리스트 불러오기 메서드 //
-    @GetMapping("/board-list/{location}")
+    @GetMapping("/board-list/location/{location}")
     public ResponseEntity<? super GetReviewBoardLocationListResponseDto> getReviewBoardLocationList(
         @PathVariable(value = "location", required = true) String location
     ) {
@@ -60,7 +60,7 @@ public class ReviewBoardController {
     }
 
     // API : 기행기 게시물 업종별 리스트 불러오기 메서드 //
-    @GetMapping("/board-list/{businessType}")
+    @GetMapping("/board-list/businesstype/{businessType}")
     public ResponseEntity<? super GetReviewBoardBusinessTypeListResponseDto> getReviewBoardBusinessTypeList(
        @PathVariable(value = "businessType", required = true) String businessType
     ) {
@@ -71,7 +71,7 @@ public class ReviewBoardController {
     // API : 기행기 게시물 지역 및 업종별 리스트 불러오기 메서드 //
     @GetMapping("board-list/{location}/{businessType}")
     public ResponseEntity<? super GetReviewBoardLocationBusinessTypeListResponseDto> getReviewBoardLocationBusinessTypeList(
-        @PathVariable(value = "loaction", required = true) String location,
+        @PathVariable(value = "location", required = true) String location,
         @PathVariable(value = "businessType", required = true) String businessType
     ) {
         ResponseEntity<? super GetReviewBoardLocationBusinessTypeListResponseDto> response = reviewBoardService.getReviewBoardLocationBusinessTypeList(location, businessType);
