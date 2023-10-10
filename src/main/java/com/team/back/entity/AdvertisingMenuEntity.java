@@ -11,11 +11,12 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name="advertising_board_Menu")
-@Table(name = "advertising_board_Menu")
+@Entity(name="advertising_board_menu")
+@Table(name = "advertising_board_menu")
 public class AdvertisingMenuEntity {
 
   @Id
+  private int menuNumber;
   private int boardNumber;
   private String title;
   private String contents;
