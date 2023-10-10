@@ -181,3 +181,21 @@ CREATE TABLE banner (
     FOREIGN KEY (event_board_number) REFERENCES event_board (board_number),
     FOREIGN KEY (writer_email) REFERENCES admin (admin_id)
 )
+
+CREATE VIEW review_board_view AS
+SELECT 
+    RB.board_number AS board_number,
+    RB.title AS title,
+    RB.contents AS contents,
+    RB.image_url AS image_url,
+    RB.view_count AS view_count,
+    RB.comment_count AS comment_count,
+    RB.favorite_count AS favorite_count,
+    RB.write_datetime AS write_datetime,
+    RB.location AS location,
+    RB.business_type AS business_type,
+    U.email AS writer_email,
+    U.nickname AS writer_nickname
+FROM review_board AS RB
+INNER JOIN user AS U
+ON RB.writer_email = U.email;
