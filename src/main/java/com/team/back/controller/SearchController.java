@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.team.back.dto.response.advertisingBoard.GetSearchAdvertisingBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
 import com.team.back.dto.response.search.GetSearchResponseDto;
 import com.team.back.service.SearchService;
@@ -36,6 +37,16 @@ public class SearchController {
         @PathVariable(value = "section", required = true) Integer section
     ) {
         ResponseEntity<? super GetSearchReviewBoardResponseDto> response = searchService.getSearchReviewBoard(searchWord, location, section);
+        return response;
+    }
+
+    @GetMapping(value = {"/advertising-board/{searchWord}/{section}", "/advertising-board/{location}/{searchWord}/{section}"})
+    public ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> getSearchAdvertisingBoard(
+        @PathVariable(value = "searchWord", required = true) String searchWord,
+        @PathVariable(value = "location", required = false) String location,
+        @PathVariable(value = "section", required = true) Integer section
+    ) {
+        ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> response = searchService.getSearchAdvertisingBoard(searchWord, location, section);
         return response;
     }
 

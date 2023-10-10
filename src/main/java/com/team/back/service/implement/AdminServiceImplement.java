@@ -42,6 +42,7 @@ import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.BannerRepository;
 import com.team.back.repository.BusinessNumberRepository;
 import com.team.back.repository.CommentViewRepository;
+import com.team.back.repository.EventBoardRepository;
 import com.team.back.repository.ReviewBoardRepository;
 import com.team.back.repository.ReviewBoardViewRepository;
 import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
@@ -63,6 +64,7 @@ public class AdminServiceImplement implements AdminService {
 	private final AdminRepository adminRepository;
 	private final BannerRepository bannerRepository;
 	private final BusinessNumberRepository businessNumberRepository;
+	private final EventBoardRepository eventBoardRepository;
 
 	// description : 전체 광고 게시글 리스트 불러오기
 	@Override
@@ -310,9 +312,9 @@ public class AdminServiceImplement implements AdminService {
 		return GetMainBannerDetailResponseDto.success(bannerEntity);
 	}
 
-	// 베너 작성
+	// description : 베너 작성
 	@Override
-	public ResponseEntity<? super PostMainBannerResponseDto> postBanner(String adminId, PostBannerRequestDto dto) {
+	public ResponseEntity<? super PostMainBannerResponseDto> postBanner(String adminId, int eventBoardNumber, PostBannerRequestDto dto) {
 		
 		try {
 		
@@ -320,8 +322,12 @@ public class AdminServiceImplement implements AdminService {
 			boolean hasAdmin = adminRepository.existsByAdminId(adminId);
 			if(!hasAdmin) return PostMainBannerResponseDto.notAdminId();
 
+			// 존재하는 eventBoardNumber 인지 확인
+			boolean hasEventBoard = eventBoardRepository.existsByBoardNumber(eventBoardNumber);
+			if(!hasEventBoard) return PostMainBannerResponseDto.noExistedBoard();
+
 			// entity 생성
-			BannerEntity bannerEntity = new BannerEntity(adminId, dto);
+			BannerEntity bannerEntity = new BannerEntity(adminId, eventBoardNumber, dto);
 
 			// 데이터에베이스에 저장
 			bannerRepository.save(bannerEntity);
@@ -334,7 +340,7 @@ public class AdminServiceImplement implements AdminService {
 		return PostMainBannerResponseDto.success();
 	}
 
-	// 베너 수정
+	// description : 베너 수정
 	@Override
 	public ResponseEntity<? super PatchMainBannerResponseDto> patchBanner(Integer bannerNumber, String adminId,
 			PatchBannerRequestDto dto) {
@@ -362,7 +368,7 @@ public class AdminServiceImplement implements AdminService {
 		return PatchMainBannerResponseDto.success();
 	}
 
-	// 베너 삭제
+	// description : 베너 삭제
 	@Override
 	public ResponseEntity<? super DeleteBannerResponseDto> deleteBanner(Integer bannerNumber, String adminId) {
 		try {

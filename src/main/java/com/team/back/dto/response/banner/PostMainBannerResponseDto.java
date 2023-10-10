@@ -26,4 +26,9 @@ public class PostMainBannerResponseDto extends ResponseDto {
 		PostMainBannerResponseDto result = new PostMainBannerResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 	}
+
+    public static ResponseEntity<ResponseDto> noExistedBoard() {
+        PostMainBannerResponseDto result = new PostMainBannerResponseDto(ResponseCode.NO_EXISTED_BOARD,ResponseMessage.NO_EXISTED_BOARD);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+    }
 }

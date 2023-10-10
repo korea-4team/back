@@ -34,13 +34,14 @@ public class BannerEntity {
 
     private String writeDatetime;
 
-    public BannerEntity(String writerEmail, PostBannerRequestDto dto) {
+    public BannerEntity(String writerEmail, int eventBoardNumber, PostBannerRequestDto dto) {
         Date now = Date.from(Instant.now());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String writeDatetime = simpleDateFormat.format(now);
 
         this.imageUrl = dto.getImageUrl();
         this.sequence = dto.getSequence();
+        this.eventBoardNumber = eventBoardNumber;
         this.writeDatetime = writeDatetime;
         this.writerEmail = writerEmail;
     }

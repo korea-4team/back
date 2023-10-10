@@ -52,12 +52,12 @@ public interface AdminService {
 	// description : 메인 페이지 배너 상세보기
 	ResponseEntity<? super GetMainBannerDetailResponseDto> getMainBannerDetail(String adminId, int bannerNumber);
 
-	// 관리자 페이지 메인 페이지 배너 작성
-	ResponseEntity<? super PostMainBannerResponseDto> postBanner(String adminId, PostBannerRequestDto dto);
+	// description : 관리자 페이지 메인 페이지 배너 작성
+	ResponseEntity<? super PostMainBannerResponseDto> postBanner(String adminId, int eventBoardNumber, PostBannerRequestDto dto);
 
-	// 관리자 페이지 메인 페이지 배너 수정
+	// description : 관리자 페이지 메인 페이지 배너 수정
 	ResponseEntity<? super PatchMainBannerResponseDto> patchBanner(Integer bannerNumber, String adminId, PatchBannerRequestDto dto);
 
-	// 관리자 페이지 메인 페이지 배너 삭제
+	// description : 관리자 페이지 메인 페이지 배너 삭제
 	ResponseEntity<? super DeleteBannerResponseDto> deleteBanner(Integer bannerNumber, String adminId);
 }
