@@ -101,10 +101,9 @@ public class AdvertisingBoardController {
   @PostMapping("/write")
   public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(
     @AuthenticationPrincipal String email,
-    @PathVariable(value = "bordNumber",required = true) Integer boardNumber,
     @RequestBody @Valid PostAdvertisingRequestDto requestDto
   ){
-    ResponseEntity<? super PostAdvertisingBoardResponseDto> response = advertisingService.postAdvertisingBoard(boardNumber, email, requestDto);
+    ResponseEntity<? super PostAdvertisingBoardResponseDto> response = advertisingService.postAdvertisingBoard(email, requestDto);
     return response;
   }
 

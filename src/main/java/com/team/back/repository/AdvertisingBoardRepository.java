@@ -49,7 +49,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "AB.write_datetime AS writeDatetime, " +
     "U.nickname AS writerNickname " +
     "FROM advertising_board_short_review AS AB " +
-    "INNER JOIN user AS U " +
+    "INNER JOIN owner AS U " +
     "ON AB.writer_email = U.email " +
     "WHERE AB.title LIKE %?1% " +
     "OR AB.business_type LIKE %?1% " + 
@@ -72,7 +72,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "AB.write_datetime AS writeDatetime, " +
     "U.nickname AS writerNickname " +
     "FROM advertising_board_short_review AS AB " +
-    "INNER JOIN user AS U " +
+    "INNER JOIN owner AS U " +
     "ON AB.writer_email = U.email " +
     "WHERE AB.title LIKE %?1% " +
     "OR AB.location LIKE %?1% " +
@@ -97,7 +97,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "AB.writer_email AS writerEmail, " +
     "U.nickname AS writerNickname " +
     "FROM advertising_board AS AB " +
-    "INNER JOIN user AS U " +
+    "INNER JOIN owner AS U " +
     "ON AB.writer_email = U.email",
     nativeQuery=true
   )
