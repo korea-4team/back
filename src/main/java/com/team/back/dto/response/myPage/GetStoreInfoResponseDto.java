@@ -51,4 +51,9 @@ public class GetStoreInfoResponseDto extends ResponseDto {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
     }
 
+    public static ResponseEntity<ResponseDto> notAdminId() {
+		ResponseDto result = new ResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+	}
+
 }
