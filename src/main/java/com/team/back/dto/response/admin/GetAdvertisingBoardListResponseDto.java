@@ -16,11 +16,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetAdvertisingBoardListResponseDto extends ResponseDto {
 	
-	private List<AdvertisingListResponseDto> advertigingBoardList;
+	private List<AdvertisingListResponseDto> advertisingBoardList;
 
 	private GetAdvertisingBoardListResponseDto(String code, String message, List<AdvertisingListResponseDto> advertisingBoardList) {
 		super(code, message);
-		this.advertigingBoardList = advertisingBoardList;
+		this.advertisingBoardList = advertisingBoardList;
 	}
 
 	public static ResponseEntity<? super GetAdvertisingBoardListResponseDto> success(List<AdvertisingListResponseDto> advertisingBoardList) {

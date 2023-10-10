@@ -29,7 +29,7 @@ public class AdvertisingBoardListResponseDto {
     this.contents = resultSet.getContents();
     this.imageUrl = resultSet.getImageUrl();
     this.viewCount = resultSet.getViewCount();
-    this.shortReviewCount = resultSet.getShortCommentCount();
+    this.shortReviewCount = resultSet.getShortReviewCount();
     this.favoriteCount = resultSet.getFavoriteCount();
     this.writeDatetime = resultSet.getWriteDatetime();
     this.writerNickname = resultSet.getWriterNickname();
