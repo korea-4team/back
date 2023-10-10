@@ -23,7 +23,7 @@ public class AdvertisingListResponseDto {
 	private String writeDatetime;
 	private String writerEmail;
 	private String writerNickname;
-	private String besinessType;
+	private String businessType;
 	private String location;
 
 	public AdvertisingListResponseDto (AdvertisingBoardResultSet resultSet) {
@@ -32,11 +32,13 @@ public class AdvertisingListResponseDto {
 		this.contents = resultSet.getContents();
 		this.imageUrl = resultSet.getImageUrl();
 		this.viewCount = resultSet.getViewCount();
-		this.shortReviewCount = resultSet.getShortCommentCount();
+		this.shortReviewCount = resultSet.getShortReviewCount();
 		this.favoriteCount = resultSet.getFavoriteCount();
 		this.writeDatetime = resultSet.getWriteDatetime();
 		this.writerEmail = resultSet.getWriterEmail();
 		this.writerNickname = resultSet.getWriterNickname();
+		this.businessType = resultSet.getBusinessType();
+		this.location = resultSet.getLocation();
 	}
 
 	public AdvertisingListResponseDto(AdvertisingViewEntity advertisingViewEntity) {
@@ -50,7 +52,7 @@ public class AdvertisingListResponseDto {
 		this.writeDatetime = advertisingViewEntity.getWriteDatetime();
 		this.writerEmail = advertisingViewEntity.getWriterEmail();
 		this.writerNickname = advertisingViewEntity.getWriterNickname();
-		this.besinessType = advertisingViewEntity.getBusinessType();
+		this.businessType = advertisingViewEntity.getBusinessType();
 		this.location = advertisingViewEntity.getLocation();
 	}
 

@@ -22,6 +22,8 @@ public class ReviewBoardListResponseDto  {
     private int favoriteCount;
     private String writeDatetime;
     private String writerNickname;
+    private String location;
+    private String businessType;
 
     public ReviewBoardListResponseDto (ReviewBoardListResultSet resultSet) {
         this.boardNumber = resultSet.getBoardNumber();
@@ -33,6 +35,8 @@ public class ReviewBoardListResponseDto  {
         this.favoriteCount = resultSet.getFavoriteCount();
         this.writeDatetime = resultSet.getWriteDatetime();
         this.writerNickname = resultSet.getWriterNickname();
+        this.location = resultSet.getLocation();
+        this.businessType = resultSet.getBusinessType();
     }
 
     public static List<ReviewBoardListResponseDto> copyList(List<ReviewBoardListResultSet> resultSets) {
@@ -67,6 +71,8 @@ public class ReviewBoardListResponseDto  {
         this.favoriteCount = reviewBoardViewEntity.getFavoriteCount();
         this.writeDatetime = reviewBoardViewEntity.getWriteDatetime();
         this.writerNickname = reviewBoardViewEntity.getWriterNickname();
+        this.location = reviewBoardViewEntity.getLocation();
+        this.businessType = reviewBoardViewEntity.getBusinessType();
     }
     
 }
