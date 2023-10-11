@@ -15,7 +15,6 @@ import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardRes
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetUserListAdvertisingResponseDto;
 import com.team.back.dto.response.advertisingBoard.PatchAdvertisingBoardResponseDto;
-import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardMenuListResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
@@ -49,7 +48,7 @@ public interface AdvertisingService {
   // 업종별
   ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(String businessType);
   // 메뉴
-  ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(Integer boardNumber, String email);
+  // ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(Integer boardNumber, String email);
   //예약
   ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email, String time, int people);
 }

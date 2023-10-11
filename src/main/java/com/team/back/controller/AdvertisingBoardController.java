@@ -22,7 +22,6 @@ import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationLi
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.PatchAdvertisingBoardResponseDto;
-import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardMenuListResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
@@ -139,15 +138,15 @@ public class AdvertisingBoardController {
     return response;
   }
 
-  //메뉴 등록
-  @PostMapping("/write/{boardNumber}/menu-list")
-  public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
-    @AuthenticationPrincipal String email,
-    @PathVariable(value = "boardNumber",required = true) Integer boardNumber
-  ) {
-    ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> response = advertisingService.postAdvertisingBoardMenuList(boardNumber, email);
-    return response;
-  }
+  // //메뉴 등록
+  // @PostMapping("/write/{boardNumber}/menu-list")
+  // public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
+  //   @AuthenticationPrincipal String email,
+  //   @PathVariable(value = "boardNumber",required = true) Integer boardNumber
+  // ) {
+  //   ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> response = advertisingService.postAdvertisingBoardMenuList(boardNumber, email);
+  //   return response;
+  // }
 
   //예약
   @PostMapping("/detail/{board_number}/reservation")
