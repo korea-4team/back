@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.back.dto.ResponseDto;
 import com.team.back.dto.request.advertisingBoard.PatchAdvertisingRequestDto;
+import com.team.back.dto.request.advertisingBoard.PostAdvertisingMenuRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
 import com.team.back.dto.response.admin.AdvertisingListResponseDto;
@@ -23,7 +24,6 @@ import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardRes
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetUserListAdvertisingResponseDto;
 import com.team.back.dto.response.advertisingBoard.PatchAdvertisingBoardResponseDto;
-import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardMenuListResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
@@ -31,6 +31,7 @@ import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListRes
 import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
 import com.team.back.entity.AdvertisingBoardFavoriteEntity;
+import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
@@ -38,6 +39,7 @@ import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardFavoriteRepository;
 import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.AdvertisingBoardViewRespository;
+import com.team.back.repository.AdvertisingMenuRepository;
 import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.AdvertisingService;
@@ -53,6 +55,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     private final AdvertisingBoardFavoriteRepository advertisingBoardFavoriteRepository;
     private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
     private final AdvertisingBoardViewRespository advertisingBoardViewRespository;
+    private final AdvertisingMenuRepository advertisingMenuRepository;
 
     // 게시글 삭제
     @Override
@@ -251,7 +254,25 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             // 데이터베이스 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
 
+<<<<<<< HEAD
             
+=======
+            List<PostAdvertisingMenuRequestDto> menuList = dto.getMenuList();
+
+            // 글 번호 불러오기
+            int boardNumber = advertisingBoardEntity.getBoardNumber();
+
+            // 메뉴 작성한 것 불러오기
+            List<AdvertisingMenuEntity> advertisingMenuEntities = new ArrayList<>();
+            for (PostAdvertisingMenuRequestDto menuDto: menuList) {
+                AdvertisingMenuEntity advertisingMenuEntity = new AdvertisingMenuEntity(boardNumber, menuDto);
+                advertisingMenuEntities.add(advertisingMenuEntity);
+            }
+
+            // 저장
+            advertisingMenuRepository.saveAll(advertisingMenuEntities);
+
+>>>>>>> 70da78ef5d0bdcba47b53d33075c637451c482dc
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -364,27 +385,27 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
     }
 
-    @Override
-    public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
-            Integer boardNumber, String writerEmail) {
+    // @Override
+    // public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
+    //         Integer boardNumber, String writerEmail) {
 
-        try {
-            boolean hasUser = userRepository.existsByEmail(writerEmail);
-            if (!hasUser)
-                return PostAdvertisingBoardMenuListResponseDto.noExistedUser();
+    //     try {
+    //         boolean hasUser = userRepository.existsByEmail(writerEmail);
+    //         if (!hasUser)
+    //             return PostAdvertisingBoardMenuListResponseDto.noExistedUser();
 
-            AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
-            if (advertisingBoardEntity == null)
-                return PostAdvertisingBoardMenuListResponseDto.noExistedBoard();
+    //         AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+    //         if (advertisingBoardEntity == null)
+    //             return PostAdvertisingBoardMenuListResponseDto.noExistedBoard();
 
 
-            advertisingBoardRepository.save(advertisingBoardEntity);
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.databaseError();
-        }
-        return PostAdvertisingBoardMenuListResponseDto.success();
-    }
+    //         advertisingBoardRepository.save(advertisingBoardEntity);
+    //     } catch (Exception exception) {
+    //         exception.printStackTrace();
+    //         return ResponseDto.databaseError();
+    //     }
+    //     return PostAdvertisingBoardMenuListResponseDto.success();
+    // }
 
     @Override
     public ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email,

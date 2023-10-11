@@ -61,8 +61,8 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoardEntity, 
         "ON RB.writer_email = U.email " +
         "WHERE RB.title LIKE %?1% " +
         "OR RB.contents LIKE %?1% " +
-        "OR RB.location LIKE %?2% " +
         "OR RB.business_type LIKE %?1% " +
+        "OR RB.location LIKE %?1% " +
         "ORDER BY RB.write_datetime DESC " +
         "LIMIT ?3, 30",
         nativeQuery=true
