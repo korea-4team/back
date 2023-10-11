@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
+import com.team.back.entity.resultSet.UserShortReviewListResultSet;
 
 @Repository
 public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<AdvertisingShortReviewEntity, Integer>{
@@ -41,6 +42,29 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
     nativeQuery = true
   )
   List<ShortReviewResultSet> getShortReviewList();
+
+  @Query(
+    value=
+    "SELECT " +
+      "S.board_number AS shortReviewNumber, " +
+      "S.write_datetime AS writeDatetime, " + 
+      "S.contents AS contents, " +
+      "S.image_url AS imageUrl, " +
+      "S.score AS score, " +
+      "A.board_number AS boardNumber, " +
+      "A.title AS boardTitle, " +
+      "A.contents AS boardContents, " + 
+      "A.image_url AS boardImageUrl " +
+    "FROM short_review S " + 
+    "LEFT JOIN advertising_board A " +
+    "ON S.board_number = A.board_number " +
+    "WHERE S.user_email = ?1 " +
+    "ORDER BY S.write_datetime DESC ",
+    nativeQuery=true
+  )
+  List<UserShortReviewListResultSet> getUserShortReviewList(String email);
+
+  
 
   List<AdvertisingShortReviewEntity> findByUserEmail(String userEmail);
 
