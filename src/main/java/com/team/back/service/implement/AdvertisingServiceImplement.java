@@ -254,9 +254,6 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             // 데이터베이스 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
 
-<<<<<<< HEAD
-            
-=======
             List<PostAdvertisingMenuRequestDto> menuList = dto.getMenuList();
 
             // 글 번호 불러오기
@@ -272,7 +269,6 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             // 저장
             advertisingMenuRepository.saveAll(advertisingMenuEntities);
 
->>>>>>> 70da78ef5d0bdcba47b53d33075c637451c482dc
 
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -384,28 +380,6 @@ public class AdvertisingServiceImplement implements AdvertisingService {
         return GetAdvertisingBoardBusinessTypeListResponseDto.success(advertisingBoardList);
 
     }
-
-    // @Override
-    // public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
-    //         Integer boardNumber, String writerEmail) {
-
-    //     try {
-    //         boolean hasUser = userRepository.existsByEmail(writerEmail);
-    //         if (!hasUser)
-    //             return PostAdvertisingBoardMenuListResponseDto.noExistedUser();
-
-    //         AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
-    //         if (advertisingBoardEntity == null)
-    //             return PostAdvertisingBoardMenuListResponseDto.noExistedBoard();
-
-
-    //         advertisingBoardRepository.save(advertisingBoardEntity);
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //         return ResponseDto.databaseError();
-    //     }
-    //     return PostAdvertisingBoardMenuListResponseDto.success();
-    // }
 
     @Override
     public ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email,
