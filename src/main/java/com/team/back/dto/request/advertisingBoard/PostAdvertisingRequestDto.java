@@ -1,5 +1,6 @@
 package com.team.back.dto.request.advertisingBoard;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.NotBlank;

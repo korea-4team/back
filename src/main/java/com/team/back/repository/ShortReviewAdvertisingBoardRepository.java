@@ -32,10 +32,11 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   @Query(
     value =
     "SELECT " +
+    "S.board_number AS boardNumber, " +
     "S.contents, " +
-    "S.write_datetime, "+
-    "U.nickname " +
-    "FROM advertising_board_short_review AS S INNER JOIN user AS U " +
+    "S.write_datetime AS writeDatetime, "+
+    "U.nickname AS writerNickname " +
+    "FROM short_review AS S INNER JOIN user AS U " +
     "ON S.user_email = U.email",
     nativeQuery = true
   )
