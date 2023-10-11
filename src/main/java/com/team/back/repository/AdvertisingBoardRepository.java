@@ -112,11 +112,11 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "AB.business_type AS businessType, "+
     "U.email AS writerEmail, "+
     "U.nickname AS writerNickname, "+
-    "T.tag_word AS tagWord "+
+    "AB.tag_word AS tagWord "+
     "FROM advertising_board AS AB "+
     "INNER JOIN user AS U "+
     "ON AB.writer_email = U.email "+
-    "INNER JOIN tag AS T "+
+    "LEFT OUTER JOIN tag AS T "+
     "ON AB.tag_word = T.tag_word ",
     nativeQuery=true
   )
