@@ -21,15 +21,6 @@ public class SearchController {
     private final SearchService searchService;
     
 
-    @GetMapping(value = {"/{searchWord}", "/{location}/{searchWord}"})
-    public ResponseEntity<? super GetSearchResponseDto> getSearchBoard(
-        @PathVariable(value = "searchWord", required = true) String searchWord,
-        @PathVariable(value = "location", required = false) String location
-    ) {
-        ResponseEntity<? super GetSearchResponseDto> response = searchService.getSearchBoard(searchWord, location);
-        return response;
-    }
-
     @GetMapping(value = {"/review-board/{searchWord}/{section}", "/review-board/{location}/{searchWord}/{section}"})
     public ResponseEntity<? super GetSearchReviewBoardResponseDto> getSearchReviewBoard(
         @PathVariable(value = "searchWord", required = true) String searchWord,
@@ -47,6 +38,15 @@ public class SearchController {
         @PathVariable(value = "section", required = true) Integer section
     ) {
         ResponseEntity<? super GetSearchAdvertisingBoardResponseDto> response = searchService.getSearchAdvertisingBoard(searchWord, location, section);
+        return response;
+    }
+
+    @GetMapping(value = {"/{searchWord}", "/{location}/{searchWord}"})
+    public ResponseEntity<? super GetSearchResponseDto> getSearchBoard(
+        @PathVariable(value = "searchWord", required = true) String searchWord,
+        @PathVariable(value = "location", required = false) String location
+    ) {
+        ResponseEntity<? super GetSearchResponseDto> response = searchService.getSearchBoard(searchWord, location);
         return response;
     }
 
