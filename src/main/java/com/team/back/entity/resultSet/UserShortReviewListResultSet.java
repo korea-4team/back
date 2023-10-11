@@ -5,7 +5,7 @@ public interface UserShortReviewListResultSet {
     String getWriteDatetime();
     String getContents();
     String getImageUrl();
-    String getSocore();
+    String getScore();
     int getBoardNumber();
     String getBoardTitle();
     String getBoardContents();

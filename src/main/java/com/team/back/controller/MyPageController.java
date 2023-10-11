@@ -15,6 +15,8 @@ import com.team.back.dto.request.myPage.PatchUserRequestDto;
 import com.team.back.dto.request.myPage.RegistrationRequestDto;
 import com.team.back.dto.response.myPage.GetBoardListResponseDto;
 import com.team.back.dto.response.myPage.GetMyCommentListResponseDto;
+import com.team.back.dto.response.myPage.GetMyShortReviewListResponseDto;
+import com.team.back.dto.response.myPage.GetMyStoreReservationListResponseDto;
 import com.team.back.dto.response.myPage.GetStoreInfoResponseDto;
 import com.team.back.dto.response.myPage.PatchUserResponseDto;
 import com.team.back.dto.response.myPage.PostRegistrationResponseDto;
@@ -50,7 +52,15 @@ public class MyPageController {
     public ResponseEntity<? super GetMyCommentListResponseDto> GetMyCommentList(
         @AuthenticationPrincipal String email
     ) {
-        ResponseEntity<? super GetMyCommentListResponseDto> response = myPageService.GetMyCommentList(email);
+        ResponseEntity<? super GetMyCommentListResponseDto> response = myPageService.getMyCommentList(email);
+        return response;
+    }
+
+    @GetMapping("/short-review")
+    public ResponseEntity<? super GetMyShortReviewListResponseDto> GetMyShortReviewList(
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseEntity<? super GetMyShortReviewListResponseDto> response = myPageService.getMyShortReviewList(email);
         return response;
     }
 
@@ -59,6 +69,14 @@ public class MyPageController {
         @AuthenticationPrincipal String email
     ) {
         ResponseEntity<? super GetStoreInfoResponseDto> response = myPageService.getStoreInfo(email);
+        return response;
+    }
+
+    @GetMapping("/store-reservation-list")
+    public ResponseEntity<? super GetMyStoreReservationListResponseDto> getMyStoreReservationList(
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseEntity<? super GetMyStoreReservationListResponseDto> response = myPageService.getMyStoreReservationList(email);
         return response;
     }
 

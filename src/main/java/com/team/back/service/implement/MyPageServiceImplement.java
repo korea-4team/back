@@ -13,7 +13,9 @@ import com.team.back.dto.request.myPage.PatchUserRequestDto;
 import com.team.back.dto.request.myPage.RegistrationRequestDto;
 import com.team.back.dto.response.myPage.GetBoardListResponseDto;
 import com.team.back.dto.response.myPage.GetMyCommentListResponseDto;
+import com.team.back.dto.response.myPage.GetMyReservationListResponseDto;
 import com.team.back.dto.response.myPage.GetMyShortReviewListResponseDto;
+import com.team.back.dto.response.myPage.GetMyStoreReservationListResponseDto;
 import com.team.back.dto.response.myPage.GetStoreInfoResponseDto;
 import com.team.back.dto.response.myPage.PatchUserResponseDto;
 import com.team.back.dto.response.myPage.PostRegistrationResponseDto;
@@ -23,10 +25,16 @@ import com.team.back.entity.BusinessNumberEntity;
 import com.team.back.entity.ReviewBoardViewEntity;
 import com.team.back.entity.UserEntity;
 import com.team.back.entity.resultSet.UserCommentListResultSet;
+import com.team.back.entity.resultSet.UserReservationListResultSet;
+import com.team.back.entity.resultSet.UserShortReviewListResultSet;
+import com.team.back.entity.resultSet.UserStoreReservationListResultSet;
+import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.BusinessApplicationRepository;
 import com.team.back.repository.BusinessNumberRepository;
 import com.team.back.repository.CommentRepository;
+import com.team.back.repository.ReservationRepository;
 import com.team.back.repository.ReviewBoardViewRepository;
+import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.MyPageService;
 
@@ -38,9 +46,12 @@ public class MyPageServiceImplement implements MyPageService {
     
     private final UserRepository userRepository;
     private final CommentRepository commentRepository;
+    private final ReservationRepository reservationRepository;
     private final BusinessNumberRepository businessNumberRepository;
     private final ReviewBoardViewRepository reviewBoardViewRepository;
+    private final AdvertisingBoardRepository advertisingBoardRepository;
     private final BusinessApplicationRepository businessApplicationRepository;
+    private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
@@ -111,7 +122,7 @@ public class MyPageServiceImplement implements MyPageService {
     }
 
     @Override
-    public ResponseEntity<? super GetMyCommentListResponseDto> GetMyCommentList(String email) {
+    public ResponseEntity<? super GetMyCommentListResponseDto> getMyCommentList(String email) {
 
         List<UserCommentListResultSet> resultSets = new ArrayList<>();
 
@@ -130,11 +141,71 @@ public class MyPageServiceImplement implements MyPageService {
         return GetMyCommentListResponseDto.success(resultSets);
 
     }
+    
+    @Override
+    public ResponseEntity<? super GetMyReservationListResponseDto> getMyReservationList(String email) {
+        
+        List<UserReservationListResultSet> resultSets = new ArrayList<>();
+
+        try {
+
+            boolean existedUser = userRepository.existsByEmail(email);
+            if (!existedUser) return GetMyCommentListResponseDto.notExistUser();
+
+            resultSets = reservationRepository.getUserReservationList(email);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetMyReservationListResponseDto.success(resultSets);
+
+    }
 
     @Override
-    public ResponseEntity<? super GetMyShortReviewListResponseDto> GetMyShortReviewList(String email) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'GetMyShortReviewList'");
+    public ResponseEntity<? super GetMyShortReviewListResponseDto> getMyShortReviewList(String email) {
+        
+        List<UserShortReviewListResultSet> resultSets = new ArrayList<>();
+
+        try {
+
+            boolean existedUser = userRepository.existsByEmail(email);
+            if (!existedUser) return GetMyCommentListResponseDto.notExistUser();
+
+            resultSets = shortReviewAdvertisingBoardRepository.getUserShortReviewList(email);
+
+        } catch(Exception exceptiopn) {
+             exceptiopn.printStackTrace();
+             return ResponseDto.databaseError();
+        }
+
+        return GetMyShortReviewListResponseDto.success(resultSets);
+
+    }
+
+    @Override
+    public ResponseEntity<? super GetMyStoreReservationListResponseDto> getMyStoreReservationList(String email) {
+        
+        List<UserStoreReservationListResultSet> resultSets = new ArrayList<>();
+
+        try {
+
+            boolean existedUser = userRepository.existsByEmail(email);
+            if (!existedUser) return GetMyStoreReservationListResponseDto.notExistUser();
+
+            boolean existedBoard = advertisingBoardRepository.existsByWriterEmail(email);
+            if (!existedBoard) return GetMyStoreReservationListResponseDto.notExistUser();
+
+            resultSets = reservationRepository.getUserStoreReservationList(email);
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.databaseError();
+        }
+
+        return GetMyStoreReservationListResponseDto.success(resultSets);
+
     }
 
     @Override

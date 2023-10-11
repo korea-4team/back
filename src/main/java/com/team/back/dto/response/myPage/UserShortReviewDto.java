@@ -13,7 +13,7 @@ public class UserShortReviewDto {
     private String writeDatetime;
     private String contents;
     private String imageUrl;
-    private String socore;
+    private String score;
     private int boardNumber;
     private String boardTitle;
     private String boardContents;
@@ -24,7 +24,7 @@ public class UserShortReviewDto {
         this.writeDatetime = resultSet.getWriteDatetime();
         this.contents = resultSet.getContents();
         this.imageUrl = resultSet.getImageUrl();
-        this.socore = resultSet.getSocore();
+        this.score = resultSet.getScore();
         this.boardNumber = resultSet.getBoardNumber();
         this.boardTitle = resultSet.getBoardTitle();
         this.boardContents = resultSet.getBoardContents();

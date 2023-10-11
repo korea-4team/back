@@ -57,8 +57,8 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
         "WHERE C.user_email = 1? " +
         "ORDER BY C.write_datetime DESC",
         nativeQuery=true
-    )
-    List<UserCommentListResultSet> getMyCommentList(String email);
+  )
+  List<UserCommentListResultSet> getMyCommentList(String email);
 
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
