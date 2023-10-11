@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.team.back.entity.CommentEntity;
 import com.team.back.entity.resultSet.CommentListResultSet;
+import com.team.back.entity.resultSet.UserCommentListResultSet;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer>{
 
@@ -41,7 +42,23 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
   )
   List<CommentListResultSet> getUserCommentList();
 
-
+  @Query(
+        value = 
+        "SELECT " + 
+	        "C.comment_number as commentNumber, " +
+	        "C.contents as contents, " + 
+	        "C.write_datetime as writeDatetime, " +
+	        "R.board_number as boardNumber, " +
+	        "R.title as title, " +
+	        "R.image_url as imageUrl " +
+        "FROM review_board_comment C " +
+        "LEFT JOIN review_board R " +
+        "ON C.board_number = R.board_number " +
+        "WHERE C.user_email = 1? " +
+        "ORDER BY C.write_datetime DESC",
+        nativeQuery=true
+  )
+  List<UserCommentListResultSet> getMyCommentList(String email);
 
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);

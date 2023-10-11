@@ -12,15 +12,13 @@ import com.team.back.entity.AdvertisingViewEntity;
 public interface AdvertisingBoardViewRespository extends JpaRepository<AdvertisingViewEntity, Integer>{
 
   AdvertisingViewEntity findByBoardNumber(Integer boardNumber);
-  // List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
   List<AdvertisingViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String writerEmail);
   List<AdvertisingViewEntity> findByLocationOrderByWriteDatetimeDesc(String location);
   List<AdvertisingViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);
   List<AdvertisingViewEntity> findByLocationOrBusinessTypeOrderByWriteDatetimeDesc(String location, String businessType);
  
   List<AdvertisingViewEntity> findByWriterEmail(String writerEmail);
-  List<AdvertisingViewEntity> findByTitleContainsOrBusinessTypeOrderByWriteDatetimeDesc(String title, String businessType);
-  List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
-  List<AdvertisingViewEntity> findByTitleContainsOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String businessType, String tagWord);
+  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrLocationOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(String title, String contents, String location, String businessType, String tagWord);
+  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(String title, String contents, String businessType, String tagWord);
   
 }
