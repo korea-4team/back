@@ -27,8 +27,7 @@ public class PostAdvertisingRequestDto {
   @NotBlank
   private String businessType;
 
-  @NotBlank
-  private String tagWord;
+  List<PostTagRequestDto> tagWord;
   
   List<PostAdvertisingMenuRequestDto> menuList;
 
