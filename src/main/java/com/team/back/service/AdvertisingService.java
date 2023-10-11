@@ -15,7 +15,6 @@ import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardRes
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetUserListAdvertisingResponseDto;
 import com.team.back.dto.response.advertisingBoard.PatchAdvertisingBoardResponseDto;
-import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardMenuListResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;

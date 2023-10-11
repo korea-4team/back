@@ -53,6 +53,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     private final AdvertisingBoardFavoriteRepository advertisingBoardFavoriteRepository;
     private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
     private final AdvertisingBoardViewRespository advertisingBoardViewRespository;
+    private final AdvertisingMenuRepository advertisingMenuRepository;
 
     // 게시글 삭제
     @Override
@@ -265,7 +266,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             }
 
             // 저장
-            AdvertisingMenuRepository.saveAll(advertisingMenuEntities);
+            advertisingMenuRepository.saveAll(advertisingMenuEntities);
 
 
         } catch (Exception exception) {

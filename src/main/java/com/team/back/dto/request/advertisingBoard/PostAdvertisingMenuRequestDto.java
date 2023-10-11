@@ -9,8 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PostAdvertisingMenuRequestDto {
 
-	private Integer menuNumber;
-
 	private String title;
 	
 	private String contents;
@@ -18,6 +16,4 @@ public class PostAdvertisingMenuRequestDto {
 	private String imageUrl;
 	
 	private String price;
-
-	private Integer boardNumber;
 }
