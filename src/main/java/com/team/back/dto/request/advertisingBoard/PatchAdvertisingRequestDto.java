@@ -18,6 +18,8 @@ public class PatchAdvertisingRequestDto {
   private String contents;
 
   private String imageUrl;
+
+  private String tagWord;
   
   
 }

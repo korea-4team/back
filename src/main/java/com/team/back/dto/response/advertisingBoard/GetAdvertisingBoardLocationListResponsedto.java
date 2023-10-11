@@ -8,8 +8,6 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
-import com.team.back.dto.response.admin.AdvertisingListResponseDto;
-import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,11 +16,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetAdvertisingBoardLocationListResponsedto extends ResponseDto{
   
-  private List<AdvertisingListResponseDto> advertisingboardList;
+  private List<AdvertisingBoardListResponseDto> advertisingboardList;
 
   private GetAdvertisingBoardLocationListResponsedto(String code, String message, List<AdvertisingBoardListResponseDto> advertisingBoardList){
     super(code, message);
-    this.advertisingboardList = advertisingboardList;
+    this.advertisingboardList = advertisingBoardList;
   }
 
   public static ResponseEntity<GetAdvertisingBoardLocationListResponsedto> success(List<AdvertisingBoardListResponseDto> advertisingboardList) {

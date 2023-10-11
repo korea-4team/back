@@ -22,7 +22,7 @@ public class ShortReviewResponseDto {
 
 
   public ShortReviewResponseDto (ShortReviewResultSet resultSet){
-    this.boardNumber = resultSet.getBoardNumber();
+    this.boardNumber = resultSet.getboardNumber();
     this.contents = resultSet.getContents();
     this.writeDatetime = resultSet.getWriteDatetime();
     this.writerNickname = resultSet.getWriterNickname();

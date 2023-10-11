@@ -3,6 +3,8 @@ package com.team.back.service.implement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.tree.AbstractLayoutCache;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -153,7 +155,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     @Override
     public ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getCurrentAdvertisingBoard(Integer section) {
 
-        List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = new ArrayList<>();
 
         try {
             // 리스트 불러오기
@@ -173,12 +175,11 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     // 한줄리뷰 리스트 불러오기
     @Override
     public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(Integer boardNumber) {
-        List<ShortReviewResponseDto> shortList = null;
+        List<ShortReviewResponseDto> shortList = new ArrayList<>();
 
         try {
 
-            List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository
-                    .getShortReviewList(boardNumber);
+            List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList(boardNumber);
 
             shortList = ShortReviewResponseDto.copyList(resultSets);
         } catch (Exception exception) {
@@ -191,7 +192,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
     @Override
     public ResponseEntity<? super GetUserListAdvertisingResponseDto> getUserListAdvertising(String writerEmail) {
-        List<AdvertisingListResponseDto> advertisingBoardList = null;
+        List<AdvertisingListResponseDto> advertisingBoardList = new ArrayList<>();
 
 
         try{
@@ -344,7 +345,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     @Override
     public ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(
             String location) {
-        List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = new ArrayList<>();
 
         try {
 
@@ -364,10 +365,10 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     public ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(
             String businessType) {
 
-        List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = new ArrayList<>();
 
         try {
-            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByLocationOrderByWriteDatetimeDesc(businessType);
+            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByBusinessTypeOrderByWriteDatetimeDesc(businessType);
 
             advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
 
@@ -379,28 +380,6 @@ public class AdvertisingServiceImplement implements AdvertisingService {
         return GetAdvertisingBoardBusinessTypeListResponseDto.success(advertisingBoardList);
 
     }
-
-    // @Override
-    // public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
-    //         Integer boardNumber, String writerEmail) {
-
-    //     try {
-    //         boolean hasUser = userRepository.existsByEmail(writerEmail);
-    //         if (!hasUser)
-    //             return PostAdvertisingBoardMenuListResponseDto.noExistedUser();
-
-    //         AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
-    //         if (advertisingBoardEntity == null)
-    //             return PostAdvertisingBoardMenuListResponseDto.noExistedBoard();
-
-
-    //         advertisingBoardRepository.save(advertisingBoardEntity);
-    //     } catch (Exception exception) {
-    //         exception.printStackTrace();
-    //         return ResponseDto.databaseError();
-    //     }
-    //     return PostAdvertisingBoardMenuListResponseDto.success();
-    // }
 
     @Override
     public ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email,

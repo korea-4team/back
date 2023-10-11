@@ -28,7 +28,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "AB.favorite_count AS favoriteCount, " +
     "AB.write_datetime AS writeDatetime, " +
     "U.nickname AS writerNickname " +
-    "FROM advertising_board_short_review AS AB " +
+    "FROM advertising_board AS AB " +
     "INNER JOIN user AS U " +
     "ON AB.writer_email = U.email " +
     "ORDER BY AB.write_datetime DESC " +
