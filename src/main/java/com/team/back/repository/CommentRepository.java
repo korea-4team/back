@@ -40,7 +40,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     "ORDER BY RC.write_datetime DESC",
     nativeQuery=true
   )
-  List<CommentListResultSet> getUserCommentList(String userEmail);
+  List<CommentListResultSet> getUserCommentList();
 
   @Query(
         value = 

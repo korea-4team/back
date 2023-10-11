@@ -7,10 +7,13 @@ public interface AdvertisingBoardResultSet {
   String getContents();
   String getImageUrl();
   int getViewCount();
-  int getShortCommentCount();
+  int getShortReviewCount();
   int getFavoriteCount();
   String getWriteDatetime();
   String getWriterNickname();
   String getWriterEmail();
+  String getLocation();
+  String getBusinessType();
+  String getTagWord();
   
 }

@@ -74,6 +74,10 @@ public class AdminServiceImplement implements AdminService {
 
 		try {
 			
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 광고 게시글 리스트 불러오기
 			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList();
 			
@@ -94,6 +98,11 @@ public class AdminServiceImplement implements AdminService {
 		List<ReviewBoardListResponseDto> reviewBoardList = null;
 
 		try {
+
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 기행기 게시글 리스트 불러오기
 			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList();
 			// 검색 결과를 Dto 형태로 변환
@@ -115,6 +124,11 @@ public class AdminServiceImplement implements AdminService {
 		List<ShortReviewResponseDto> shortReviewList = null;
 
 		try {
+
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 댓글 리스트 불러오기
 			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList();
 
@@ -138,6 +152,10 @@ public class AdminServiceImplement implements AdminService {
 
 		try {
 			
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 유저 리스트 불러오기
 			List<UserListResultSet> resultSets = userRepository.getUserList();
 
@@ -160,6 +178,10 @@ public class AdminServiceImplement implements AdminService {
 
 		try {
 			
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 유저 이메일에 해당하는 유저 정보 조회
 			userEntity = userRepository.findByEmail(userEmail);
 
@@ -181,6 +203,10 @@ public class AdminServiceImplement implements AdminService {
 		BusinessNumberEntity businessNumberEntity = null;
 
 		try {
+
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 
 			// 존재하는 유저인지 확인
 			boolean existedUser = userRepository.existsByEmail(userEmail);
@@ -206,6 +232,10 @@ public class AdminServiceImplement implements AdminService {
 
 		try {
 
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 특정 이메일에 해당하는 기행기 리스트 조회
 			List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByWriterEmail(userEmail);
 
@@ -227,7 +257,11 @@ public class AdminServiceImplement implements AdminService {
 		List<ShortReviewResponseDto> shortReviewList = null;
 
 		try {
-			
+
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+
 			// 특정 이메일에 해당하는 한 줄 리뷰 리스트 조회
 			List<AdvertisingShortReviewEntity> shortReviewEntities = shortReviewAdvertisingBoardRepository.findByUserEmail(userEmail);
 
@@ -249,6 +283,10 @@ public class AdminServiceImplement implements AdminService {
 		List<CommentListResponseDto> commentList = null;
 
 		try {
+
+			// admin 아이디가 일치하는지 확인
+			boolean isAdmin = adminRepository.existsByAdminId(adminId);
+			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 			
 			// 특정 이메일에 해당하는 댓글 리스트 조회
 			List<CommentViewEntity> commentViewEntities = commentViewRepository.findByUserEmail(userEmail);

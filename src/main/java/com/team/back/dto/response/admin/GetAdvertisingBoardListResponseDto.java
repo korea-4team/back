@@ -16,16 +16,21 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetAdvertisingBoardListResponseDto extends ResponseDto {
 	
-	private List<AdvertisingListResponseDto> advertigingBoardList;
+	private List<AdvertisingListResponseDto> advertisingBoardList;
 
 	private GetAdvertisingBoardListResponseDto(String code, String message, List<AdvertisingListResponseDto> advertisingBoardList) {
 		super(code, message);
-		this.advertigingBoardList = advertisingBoardList;
+		this.advertisingBoardList = advertisingBoardList;
 	}
 
 	public static ResponseEntity<? super GetAdvertisingBoardListResponseDto> success(List<AdvertisingListResponseDto> advertisingBoardList) {
 		GetAdvertisingBoardListResponseDto result = new GetAdvertisingBoardListResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertisingBoardList);
 		return ResponseEntity.status(HttpStatus.OK).body(result);
+	}
+
+	public static ResponseEntity<ResponseDto> notAdminId() {
+		ResponseDto result = new ResponseDto(ResponseCode.NOT_ADMIN_ID, ResponseMessage.NOT_ADMIN_ID);
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
 	}
 
 }

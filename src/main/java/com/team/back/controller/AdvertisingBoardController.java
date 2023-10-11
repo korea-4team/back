@@ -40,7 +40,7 @@ public class AdvertisingBoardController {
   private final AdvertisingService advertisingService;
 
   // 게시물 불러오기
-  @GetMapping("/board-list")
+  @GetMapping("/board-list/{boardNumber}")
   public ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(
     @PathVariable(value="boardNumber", required = true) Integer boardNumber
   ) {
@@ -58,7 +58,7 @@ public class AdvertisingBoardController {
   }
 
 
-  // 특정 게시물의 좋아요 리스트 불러오기
+  // 특정 게시물의 좋아요 기능 메서드
   @GetMapping("/detail/{board-number}/favorite")
   public ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> advertisingFavoriteList(
     @AuthenticationPrincipal String writerEmail,
@@ -68,7 +68,7 @@ public class AdvertisingBoardController {
     return response;
   }
   // 특정 게시물 지역별 리스트 불러오기
-  @GetMapping("/board-list/{location}")
+  @GetMapping("/board-list/location/{location}")
   public ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(
     @PathVariable(value = "location", required = true) String location
   ) {
@@ -86,7 +86,7 @@ public class AdvertisingBoardController {
   }
 
   //한줄 리뷰 작성
-  @PostMapping("/detail/{board_number}/short-review")
+  @PostMapping("/detail/{boardNumber}/short-review")
   public ResponseEntity<? super PostShortReviewResponseDto> postShortReviewList(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber,
@@ -101,10 +101,9 @@ public class AdvertisingBoardController {
   @PostMapping("/write")
   public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(
     @AuthenticationPrincipal String email,
-    @PathVariable(value = "bordNumber",required = true) Integer boardNumber,
     @RequestBody @Valid PostAdvertisingRequestDto requestDto
   ){
-    ResponseEntity<? super PostAdvertisingBoardResponseDto> response = advertisingService.postAdvertisingBoard(boardNumber, email, requestDto);
+    ResponseEntity<? super PostAdvertisingBoardResponseDto> response = advertisingService.postAdvertisingBoard(email, requestDto);
     return response;
   }
 
@@ -141,7 +140,7 @@ public class AdvertisingBoardController {
   }
 
   //메뉴 등록
-  @PostMapping("/write/menu-list")
+  @PostMapping("/write/{boardNumber}/menu-list")
   public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber

@@ -22,7 +22,7 @@ public class AdvertisingViewEntity {
   private String imageUrl;
   private int viewCount;
   private int shortReviewCount;
-  private int favorite;
+  private int favoriteCount;
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;

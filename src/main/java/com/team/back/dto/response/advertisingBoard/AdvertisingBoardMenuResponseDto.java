@@ -13,6 +13,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class AdvertisingBoardMenuResponseDto {
 
+  private int menuNumber;
   private int boardNumber;
   private String title;
   private String contents;
@@ -20,6 +21,7 @@ public class AdvertisingBoardMenuResponseDto {
   private String price;
 
   public AdvertisingBoardMenuResponseDto(MenuListResultSet resultSet){
+    this.menuNumber = resultSet.getMenuNumber();
     this.boardNumber = resultSet.getBoardNumber();
     this.contents = resultSet.getContents();
     this.imageUrl = resultSet.getImageUrl();
@@ -29,6 +31,7 @@ public class AdvertisingBoardMenuResponseDto {
   }
 
   public AdvertisingBoardMenuResponseDto (AdvertisingMenuEntity advertisingMenuEntity){
+    this.menuNumber = advertisingMenuEntity.getMenuNumber();
     this.boardNumber = advertisingMenuEntity.getBoardNumber();
     this.contents = advertisingMenuEntity.getContents();
     this.imageUrl = advertisingMenuEntity.getImageUrl();

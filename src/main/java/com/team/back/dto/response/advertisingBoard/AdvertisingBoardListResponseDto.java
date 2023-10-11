@@ -29,7 +29,7 @@ public class AdvertisingBoardListResponseDto {
     this.contents = resultSet.getContents();
     this.imageUrl = resultSet.getImageUrl();
     this.viewCount = resultSet.getViewCount();
-    this.shortReviewCount = resultSet.getShortCommentCount();
+    this.shortReviewCount = resultSet.getShortReviewCount();
     this.favoriteCount = resultSet.getFavoriteCount();
     this.writeDatetime = resultSet.getWriteDatetime();
     this.writerNickname = resultSet.getWriterNickname();
@@ -42,7 +42,7 @@ public class AdvertisingBoardListResponseDto {
     this.imageUrl = advertisingViewEntity.getImageUrl();
     this.viewCount = advertisingViewEntity.getViewCount();
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
-    this.favoriteCount = advertisingViewEntity.getFavorite();
+    this.favoriteCount = advertisingViewEntity.getFavoriteCount();
     this.writeDatetime = advertisingViewEntity.getWriteDatetime();
     this.writerNickname = advertisingViewEntity.getWriterNickname();
   }
