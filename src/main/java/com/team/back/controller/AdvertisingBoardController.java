@@ -77,11 +77,11 @@ public class AdvertisingBoardController {
   }
 
   // 업종별 리스트 불러오기
-  @GetMapping("/{business-Type}")
+  @GetMapping("/{businessType}")
   public ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(
-    @PathVariable(value = "businessType",required = true) String businessTypeString
+    @PathVariable(value = "businessType",required = true) String businessType
   ) {
-    ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> response = advertisingService.getAdvertisingBoardBusinessTypeList(businessTypeString);
+    ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> response = advertisingService.getAdvertisingBoardBusinessTypeList(businessType);
     return response;
   }
 

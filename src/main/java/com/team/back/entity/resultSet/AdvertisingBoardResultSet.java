@@ -12,5 +12,8 @@ public interface AdvertisingBoardResultSet {
   String getWriteDatetime();
   String getWriterNickname();
   String getWriterEmail();
+  String getTagWord();
+  String getLocation();
+  String getBusinessType();
   
 }
