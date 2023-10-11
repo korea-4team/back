@@ -49,7 +49,7 @@ public interface AdvertisingService {
   // 업종별
   ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(String businessType);
   // 메뉴
-  ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(Integer boardNumber, String email);
+  // ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(Integer boardNumber, String email);
   //예약
   ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email, String time, int people);
 }
