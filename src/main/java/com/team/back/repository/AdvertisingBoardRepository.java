@@ -12,6 +12,7 @@ import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 @Repository
 public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoardEntity, Integer>{
   boolean existsByBoardNumber(Integer boardNumber);
+  boolean existsByWriterEmail(String writerEmail);
   
   AdvertisingBoardEntity findByBoardNumber(Integer boardNumber);
   
