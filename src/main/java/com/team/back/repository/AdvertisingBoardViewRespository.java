@@ -12,7 +12,6 @@ import com.team.back.entity.AdvertisingViewEntity;
 public interface AdvertisingBoardViewRespository extends JpaRepository<AdvertisingViewEntity, Integer>{
 
   AdvertisingViewEntity findByBoardNumber(Integer boardNumber);
-  // List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
   List<AdvertisingViewEntity> findByWriterEmailOrderByWriteDatetimeDesc(String writerEmail);
   List<AdvertisingViewEntity> findByLocationOrderByWriteDatetimeDesc(String location);
   List<AdvertisingViewEntity> findByBusinessTypeOrderByWriteDatetimeDesc(String businessType);
@@ -20,7 +19,7 @@ public interface AdvertisingBoardViewRespository extends JpaRepository<Advertisi
  
   List<AdvertisingViewEntity> findByWriterEmail(String writerEmail);
   List<AdvertisingViewEntity> findByTitleContainsOrBusinessTypeOrderByWriteDatetimeDesc(String title, String businessType);
-  List<AdvertisingViewEntity> findByTitleContainsOrLocationOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String location, String businessType, String tagWord);
-  List<AdvertisingViewEntity> findByTitleContainsOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String businessType, String tagWord);
+  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrLocationOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String contents, String location, String businessType, String tagWord);
+  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrBusinessTypeOrTagWordOrderByWriteDatetimeDesc(String title, String contents, String businessType, String tagWord);
   
 }
