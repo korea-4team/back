@@ -251,6 +251,8 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             // 데이터베이스 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
 
+            
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.databaseError();

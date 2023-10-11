@@ -38,7 +38,7 @@ public class AdvertisingBoardListResponseDto {
     this.writerNickname = resultSet.getWriterNickname();
     this.location = resultSet.getLocation();
     this.businessType = resultSet.getBusinessType();
-    this.tagWord = resultSet.getTagWord();
+    this.tagWord = resultSet.gettagWord();
   }
 
   public AdvertisingBoardListResponseDto(AdvertisingViewEntity advertisingViewEntity){

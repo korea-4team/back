@@ -40,7 +40,7 @@ public class AdvertisingListResponseDto {
 		this.writerNickname = resultSet.getWriterNickname();
 		this.businessType = resultSet.getBusinessType();
 		this.location = resultSet.getLocation();
-		this.tagWord = resultSet.getTagWord();
+		this.tagWord = resultSet.gettagWord();
 	}
 
 	public AdvertisingListResponseDto(AdvertisingViewEntity advertisingViewEntity) {
