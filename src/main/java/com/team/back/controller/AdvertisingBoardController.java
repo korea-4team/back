@@ -86,7 +86,7 @@ public class AdvertisingBoardController {
   }
 
   //한줄 리뷰 작성
-  @PostMapping("/detail/{board_number}/short-review")
+  @PostMapping("/detail/{boardNumber}/short-review")
   public ResponseEntity<? super PostShortReviewResponseDto> postShortReviewList(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber,
