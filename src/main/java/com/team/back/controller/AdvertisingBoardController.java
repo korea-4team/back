@@ -140,7 +140,7 @@ public class AdvertisingBoardController {
   }
 
   //메뉴 등록
-  @PostMapping("/write/menu-list")
+  @PostMapping("/write/{boardNumber}/menu-list")
   public ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber

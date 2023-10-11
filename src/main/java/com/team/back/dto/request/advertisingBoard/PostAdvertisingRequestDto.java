@@ -1,5 +1,7 @@
 package com.team.back.dto.request.advertisingBoard;
 
+import java.util.List;
+
 import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
@@ -25,4 +27,11 @@ public class PostAdvertisingRequestDto {
 
   @NotBlank
   private String businessType;
+
+  @NotBlank
+  private String tagWord;
+  
+  List<PostAdvertisingMenuRequestDto> menuList;
+
+
 }
