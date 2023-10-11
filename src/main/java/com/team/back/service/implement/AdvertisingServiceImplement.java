@@ -11,6 +11,7 @@ import com.team.back.dto.request.advertisingBoard.PatchAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingMenuRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
+import com.team.back.dto.request.advertisingBoard.PostTagRequestDto;
 import com.team.back.dto.response.admin.AdvertisingListResponseDto;
 import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
@@ -32,6 +33,7 @@ import com.team.back.entity.AdvertisingBoardFavoriteEntity;
 import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
+import com.team.back.entity.TagEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardFavoriteRepository;
@@ -39,6 +41,7 @@ import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.AdvertisingBoardViewRespository;
 import com.team.back.repository.AdvertisingMenuRepository;
 import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
+import com.team.back.repository.TagRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.AdvertisingService;
 
@@ -54,6 +57,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
     private final AdvertisingBoardViewRespository advertisingBoardViewRespository;
     private final AdvertisingMenuRepository advertisingMenuRepository;
+    private final TagRepository tagRepository;
 
     // 게시글 삭제
     @Override
@@ -268,6 +272,15 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             // 저장
             advertisingMenuRepository.saveAll(advertisingMenuEntities);
 
+            List<PostTagRequestDto> tagList = dto.getTagWord();
+
+            List<TagEntity> tagEntities = new ArrayList<>();
+            for(PostTagRequestDto tagDto: tagList) {
+                TagEntity tagEntity = new TagEntity(boardNumber, tagDto);
+                tagEntities.add(tagEntity);
+            }
+
+            tagRepository.saveAll(tagEntities);
 
         } catch (Exception exception) {
             exception.printStackTrace();
