@@ -14,16 +14,16 @@ import lombok.Getter;
 public class ShortReviewResponseDto {
 
   private int boardNumber;
-  private String title;
   private String contents;
   private int score;
   private String writeDatetime;
+  private String writerEmail;
   private String writerNickname;
 
 
   public ShortReviewResponseDto (ShortReviewResultSet resultSet){
     this.boardNumber = resultSet.getboardNumber();
-    this.contents = resultSet.getContnts();
+    this.contents = resultSet.getContents();
     this.writeDatetime = resultSet.getWriteDatetime();
     this.writerNickname = resultSet.getWriterNickname();
   }
@@ -54,7 +54,7 @@ public class ShortReviewResponseDto {
     this.boardNumber = advertisingShortReviewEntity.getBoardNumber();
     this.contents = advertisingShortReviewEntity.getContents();
     this.writeDatetime = advertisingShortReviewEntity.getWriteDatetime();
-    this.writerNickname = advertisingShortReviewEntity.getUserEmail();
+    this.writerEmail = advertisingShortReviewEntity.getUserEmail();
   }
 
   

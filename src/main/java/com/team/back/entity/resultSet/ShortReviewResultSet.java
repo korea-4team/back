@@ -5,7 +5,8 @@ public interface ShortReviewResultSet {
   int getboardNumber();
   int score();
   String getWriterNickname();
+  String getWriterEmail();
   String getWriteDatetime();
-  String getContnts();
+  String getContents();
   
 }
