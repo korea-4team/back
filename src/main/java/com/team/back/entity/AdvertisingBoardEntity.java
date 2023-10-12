@@ -60,7 +60,6 @@ public class AdvertisingBoardEntity {
     this.title = dto.getTitle();
     this.contents = dto.getContents();
     this.imageUrl = dto.getImageUrl();
-    this.tagWord = dto.getTagWord();
   }
 
   public void increaseViewCount() {
