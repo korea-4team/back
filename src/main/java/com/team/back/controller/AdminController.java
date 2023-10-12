@@ -39,29 +39,32 @@ public class AdminController {
     private final AdminService adminService;
 
     // description : 관리자 페이지 광고 전체 게시글 목록
-    @GetMapping("/{adminId}/advertising-board-list")
+    @GetMapping("/{adminId}/advertising-board-list/{section}")
     public ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(
-        @PathVariable(value = "adminId", required = true) String adminId
+        @PathVariable(value = "adminId", required = true) String adminId,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetAdvertisingBoardListResponseDto> response = adminService.getAdvertisingBoardList(adminId);
+        ResponseEntity<? super GetAdvertisingBoardListResponseDto> response = adminService.getAdvertisingBoardList(adminId, section);
         return response;
     }
 
     // description : 관리자 페이지 기행기 전체 게시글 목록
-    @GetMapping("/{adminId}/review-board-list")
+    @GetMapping("/{adminId}/review-board-list/{section}")
     public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(
-        @PathVariable(value = "adminId", required = true) String adminId
+        @PathVariable(value = "adminId", required = true) String adminId,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetReviewBoardListResponseDto> response = adminService.getReviewBoardList(adminId);
+        ResponseEntity<? super GetReviewBoardListResponseDto> response = adminService.getReviewBoardList(adminId ,section);
         return response;
     }
 
     // description : 전체 한 줄 리뷰 목록
-    @GetMapping("/{adminId}/short-review-list")
+    @GetMapping("/{adminId}/short-review-list/{section}")
     public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(
-        @PathVariable(value = "adminId", required = true) String adminId
+        @PathVariable(value = "adminId", required = true) String adminId,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getShortReviewList(adminId);
+        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getShortReviewList(adminId ,section);
         return response;
     }
 

@@ -33,14 +33,15 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 	private final NoticeBoardViewRepository noticeBoardViewRepository;
 
 	@Override
-	// description : 공지사항 게시물 리스트 불러오기 메서드
-	public ResponseEntity<? super GetNoticeBoardListResponseDto> getNoticeBoardList() {
+	// description : 공지사항 게시물 리스트 최신순으로 불러오기 메서드
+	public ResponseEntity<? super GetNoticeBoardListResponseDto> getNoticeBoardList(Integer section) {
 		
 		List<NoticeBoardListResponseDto> noticeBoardList = null;
 
 		try {
 			// 게시물 리스트 불러오기
-			List<NoticeBoardListResultSet> resultSets = noticeBoardRepository.getNoticeBoardList();
+			Integer limit = (section -1) * 30;
+			List<NoticeBoardListResultSet> resultSets = noticeBoardRepository.getNoticeBoardList(limit);
 
 			// 검색 결과를 ResponseDto 형태로 변환
 			noticeBoardList = NoticeBoardListResponseDto.copyList(resultSets);
