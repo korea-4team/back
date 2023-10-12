@@ -25,7 +25,8 @@ public interface BannerRepository extends JpaRepository<BannerEntity, Integer>{
         "write_datetime AS writeDatetime, " +
         "writer_email AS writerEmail, " +
         "event_board_number AS eventBoardNumber " +
-        "FROM banner ",
+        "FROM banner " +
+        "ORDER BY sequence",
     nativeQuery = true
 	)
     List<MainBannerListResultSet> getMainBannerList();
