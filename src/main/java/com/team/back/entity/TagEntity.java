@@ -30,4 +30,7 @@ public class TagEntity {
     this.tagWord = dto.getTagWord();
     this.boardNumber = boardNumber;
   }
+
+	public TagEntity(TagEntity tag) {
+	}
 }

@@ -133,16 +133,21 @@ public class AdvertisingServiceImplement implements AdvertisingService {
         System.out.println(boardNumber);
 
         AdvertisingViewEntity advertisingViewEntity = null;
+        List<TagEntity> tagEntities = new ArrayList<>();
 
         try {
             // 게시물 번호에 해당하는 게시물 조회
             advertisingViewEntity = advertisingBoardViewRespository.findByBoardNumber(boardNumber);
+            tagEntities = tagRepository.findByBoardNumber(boardNumber);
+
             // 존재하는 게시물인지 확인
             if (advertisingViewEntity == null)
                 return GetAdvertisingboardResponseDto.noExistedBoard();
+                
             // 게시물 조회수 증가
             AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
-            advertisingBoardEntity.increaseCommentCount();
+            advertisingBoardEntity.increaseViewCount();
+
             // 데이터 베이스에 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
 
@@ -151,7 +156,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             return ResponseDto.databaseError();
         }
 
-        return GetAdvertisingboardResponseDto.success(advertisingViewEntity);
+        return GetAdvertisingboardResponseDto.success(advertisingViewEntity, tagEntities);
     }
 
     // 최근 게시물 불러오기
