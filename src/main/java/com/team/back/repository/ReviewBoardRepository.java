@@ -110,7 +110,9 @@ public interface ReviewBoardRepository extends JpaRepository<ReviewBoardEntity, 
         "U.nickname AS writerNickName " +
         "FROM review_board AS RB "+
         "INNER JOIN user AS U " +
-        "ON RB.writer_email = U.email ",
+        "ON RB.writer_email = U.email "+
+        "ORDER BY RB.write_datetime DESC " +
+        "LIMIT ?1, 30",
         nativeQuery=true
     )
     List<ReviewBoardListResultSet> getReviewBoardList();

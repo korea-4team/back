@@ -24,7 +24,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "AB.contents AS contents, " +
     "AB.image_url AS iamgeUrl, " +
     "AB.view_count AS viewCount, " +
-    "AB.comment_count AS commentCount, " +
+    "AB.short_review_count AS shortReviewCount, " +
     "AB.favorite_count AS favoriteCount, " +
     "AB.write_datetime AS writeDatetime, " +
     "U.nickname AS writerNickname " +
@@ -120,7 +120,9 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "INNER JOIN user AS U "+
     "ON AB.writer_email = U.email "+
     "LEFT OUTER JOIN tag AS T "+
-    "ON AB.tag_word = T.tag_word ",
+    "ON AB.tag_word = T.tag_word " +
+    "ORDER BY AB.write_datetime DESC " +
+    "LIMIT ?1, 30 ",
     nativeQuery=true
   )
   List<AdvertisingBoardResultSet> getAdvertisingBoardList();

@@ -13,7 +13,7 @@ import com.team.back.dto.response.noticeBoard.PostNoticeBoardResponseDto;
 public interface NoticeBoardService {
 
 	// 공지사항 게시물 리스트 불러오기 메서드
-	ResponseEntity<? super GetNoticeBoardListResponseDto> getNoticeBoardList();
+	ResponseEntity<? super GetNoticeBoardListResponseDto> getNoticeBoardList(Integer section);
 
 	// 공지사항 게시물 상세보기 메서드
 	ResponseEntity<? super GetNoticeBoardResponseDto> getNoticeBoard(Integer boardNumber);

@@ -32,9 +32,11 @@ public class NoticeBoardController {
 	private final NoticeBoardService noticeBoardService;
 	
 	// 공지사항 게시물 리스트 불러오기 메서드
-	@GetMapping("/board-list")
-	public ResponseEntity<? super GetNoticeBoardListResponseDto> GetNoticeBoardList() {
-		ResponseEntity<? super GetNoticeBoardListResponseDto> response = noticeBoardService.getNoticeBoardList();
+	@GetMapping("/board-list/{section}")
+	public ResponseEntity<? super GetNoticeBoardListResponseDto> GetNoticeBoardList(
+		@PathVariable(value = "section", required = true) Integer section
+	) {
+		ResponseEntity<? super GetNoticeBoardListResponseDto> response = noticeBoardService.getNoticeBoardList(section);
 		return response;
 	}
 

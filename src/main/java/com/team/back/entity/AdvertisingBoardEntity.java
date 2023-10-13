@@ -38,7 +38,6 @@ public class AdvertisingBoardEntity {
   private String writerEmail;
   private String location;
   private String businessType;
-  private String tagWord;
 
 
   public AdvertisingBoardEntity(String writerEmail, PostAdvertisingRequestDto dto){
@@ -53,7 +52,6 @@ public class AdvertisingBoardEntity {
     this.writerEmail = writerEmail;
     this.location = dto.getLocation();
     this.businessType = dto.getBusinessType();
-    this.tagWord = dto.getTagWord();
   }
 
 
@@ -62,7 +60,6 @@ public class AdvertisingBoardEntity {
     this.title = dto.getTitle();
     this.contents = dto.getContents();
     this.imageUrl = dto.getImageUrl();
-    this.tagWord = dto.getTagWord();
   }
 
   public void increaseViewCount() {

@@ -15,6 +15,7 @@ import com.team.back.dto.request.myPage.PatchUserRequestDto;
 import com.team.back.dto.request.myPage.RegistrationRequestDto;
 import com.team.back.dto.response.myPage.GetBoardListResponseDto;
 import com.team.back.dto.response.myPage.GetMyCommentListResponseDto;
+import com.team.back.dto.response.myPage.GetMyReservationListResponseDto;
 import com.team.back.dto.response.myPage.GetMyShortReviewListResponseDto;
 import com.team.back.dto.response.myPage.GetMyStoreReservationListResponseDto;
 import com.team.back.dto.response.myPage.GetStoreInfoResponseDto;
@@ -37,6 +38,14 @@ public class MyPageController {
         @AuthenticationPrincipal String email
     ) {
         ResponseEntity<? super PostRegistrationResponseDto> response = myPageService.registration(requestBody, email);
+        return response;
+    }
+
+    @GetMapping("registration-list")
+    public ResponseEntity<? super GetMyReservationListResponseDto> getRegistrationList(
+        @AuthenticationPrincipal String email
+    ) {
+        ResponseEntity<? super GetMyReservationListResponseDto> response = myPageService.getMyReservationList(email);
         return response;
     }
 
