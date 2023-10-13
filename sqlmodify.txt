@@ -167,6 +167,16 @@ CREATE TABLE banner (
     FOREIGN KEY (writer_email) REFERENCES admin (admin_id)
 )
 
+CREATE TABLE advertising_board_menu (
+    menu_number INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    board_number INT NOT NULL,
+    title VARCHAR(20) NOT NULL,
+    contents VARCHAR(100) NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    price VARCHAR(10) NOT NULL,
+    FOREIGN KEY (board_number) REFERENCES advertising_board (board_number)
+)
+
 CREATE VIEW event_board_view AS
 SELECT
     E.board_number AS board_number,
