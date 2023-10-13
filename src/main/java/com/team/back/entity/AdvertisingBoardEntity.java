@@ -77,5 +77,8 @@ public class AdvertisingBoardEntity {
   public void decreaseFavoriteCount() {
     this.favoriteCount--;
   }
+
+
+  
   
 }

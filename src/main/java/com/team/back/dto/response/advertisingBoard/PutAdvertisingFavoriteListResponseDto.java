@@ -1,15 +1,12 @@
 package com.team.back.dto.response.advertisingBoard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
-import com.team.back.entity.UserEntity;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
