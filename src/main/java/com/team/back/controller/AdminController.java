@@ -147,7 +147,7 @@ public class AdminController {
     }
 
     // description : 메인 페이지 배너 작성 기능
-    @PostMapping("/write/{eventBoardNumber}/main-banner")
+    @PostMapping("/{eventBoardNumber}/main-banner")
     public ResponseEntity<? super PostMainBannerResponseDto> postMainBanner(
         @AuthenticationPrincipal String adminId,
         @PathVariable(value = "eventBoardNumber", required = true) int eventBoardNumber,
@@ -158,7 +158,7 @@ public class AdminController {
     }
 
     // description : 메인 페이지 배너 수정 기능
-    @PatchMapping("/update/{bannerNumber}/main-banner")
+    @PatchMapping("/{bannerNumber}/main-banner")
     public ResponseEntity<? super PatchMainBannerResponseDto> patchMainBanner(
         @AuthenticationPrincipal String adminId, @PathVariable(value = "bannerNumber", required = true) Integer bannerNumber, @RequestBody @Valid PatchBannerRequestDto requestBody
     ) {
@@ -167,7 +167,7 @@ public class AdminController {
     }
 
     // description : 메인 페이지 배너 삭제 기능
-    @DeleteMapping("/delete/{bannerNumber}/main-banner")
+    @DeleteMapping("/{bannerNumber}/main-banner")
     public ResponseEntity<? super DeleteBannerResponseDto> deleteMainBanner(
         @AuthenticationPrincipal String adminId, @PathVariable(value = "bannerNumber", required = true) Integer bannerNumber
     ) {

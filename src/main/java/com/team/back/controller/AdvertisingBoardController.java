@@ -61,7 +61,7 @@ public class AdvertisingBoardController {
 
 
   // 특정 게시물의 좋아요 기능 메서드
-  @PutMapping("/detail/{boardNumber}/favorite")
+  @PutMapping("/{boardNumber}/favorite")
   public ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> advertisingFavoriteList(
     @AuthenticationPrincipal String writerEmail,
     @PathVariable(value = "boardNumber", required = true) Integer boardNumber
@@ -89,7 +89,7 @@ public class AdvertisingBoardController {
   }
 
   //한줄 리뷰 작성
-  @PostMapping("/detail/{boardNumber}/short-review")
+  @PostMapping("/{boardNumber}/short-review")
   public ResponseEntity<? super PostShortReviewResponseDto> postShortReviewList(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber,
@@ -101,7 +101,7 @@ public class AdvertisingBoardController {
   }
 
   //게시글 작성
-  @PostMapping("/write")
+  @PostMapping("")
   public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(
     @AuthenticationPrincipal String email,
     @RequestBody @Valid PostAdvertisingRequestDto requestDto
@@ -111,7 +111,7 @@ public class AdvertisingBoardController {
   }
 
   // 게시글 수정
-  @PatchMapping("/update/{boardNumber}")
+  @PatchMapping("/{boardNumber}")
   public ResponseEntity<? super PatchAdvertisingBoardResponseDto> patchAdvertisingBoard(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber,
@@ -122,7 +122,7 @@ public class AdvertisingBoardController {
   }
 
   //게시글 삭제
-  @DeleteMapping("/delete/{boardNumber}")
+  @DeleteMapping("/{boardNumber}")
   public ResponseEntity<? super DeleteAdvertisingBoardResponseDto> deleteAdvertisingBoard(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber
@@ -133,7 +133,7 @@ public class AdvertisingBoardController {
   }
 
   // 한줄 리뷰 삭제
-  @DeleteMapping("/detail/{boardNumber}/short-review/delete")
+  @DeleteMapping("/{boardNumber}/short-review")
   public ResponseEntity<? super DeleteShortCommentAdvertisingBoardResponseDto> deleteShortCommentAdvertisingBoard(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber
@@ -155,7 +155,7 @@ public class AdvertisingBoardController {
 
 
   //예약
-  @PostMapping("/detail/{boardNumber}/reservation")
+  @PostMapping("/{boardNumber}/reservation")
   public ResponseEntity<? super PostReservationResponseDto> postReservation(
     @AuthenticationPrincipal String email,
     @PathVariable(value = "boardNumber",required = true) Integer boarNumber
@@ -165,7 +165,7 @@ public class AdvertisingBoardController {
   }
 
   //한줄리뷰 불러오기
-  @GetMapping("/detail/{boardNumber}/short-review/list")
+  @GetMapping("/{boardNumber}/short-review/list")
   public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber
   ){
