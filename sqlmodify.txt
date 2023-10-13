@@ -1,0 +1,233 @@
+-- Active: 1691054099566@@127.0.0.1@3306
+CREATE DATABASE 4team_project
+    DEFAULT CHARACTER SET = 'utf8mb4';
+
+USE 4team_project
+
+CREATE TABLE user (
+    email VARCHAR(100) PRIMARY KEY NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    nickname VARCHAR(12) NOT NULL UNIQUE,
+    tel_number VARCHAR(13) NOT NULL UNIQUE,
+    address TEXT NOT NULL,
+    address_detail TEXT,
+    role VARCHAR(10) NOT NULL DEFAULT 'user'
+)
+
+CREATE TABLE advertising_board (
+    board_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    title TEXT NOT NULL,
+    contents TEXT NOT NULL,
+    image_url TEXT,
+    view_count INT NOT NULL DEFAULT 0,
+    short_review_count INT NOT NULL DEFAULT 0,
+    favorite_count INT NOT NULL DEFAULT 0,
+    location VARCHAR(20) NOT NULL,
+    business_type VARCHAR(20) NOT NULL,
+    write_datetime DATETIME NOT NULL DEFAULT now(),
+    writer_email VARCHAR(100) NOT NULL,
+    FOREIGN KEY (writer_email) REFERENCES user (email)
+)
+
+CREATE TABLE advertising_board_favorite (
+    board_number INT NOT NULL,
+    user_email VARCHAR(100) NOT NULL,
+    PRIMARY KEY (board_number, user_email),
+    FOREIGN KEY (board_number) REFERENCES advertising_board (board_number),
+    FOREIGN KEY (user_email) REFERENCES user (email)
+)
+
+CREATE TABLE tag (
+    tag_word VARCHAR(20) NOT NULL,
+    board_number INT NOT NULL ,
+    PRIMARY KEY (tag_word, board_number),
+    FOREIGN KEY (board_number) REFERENCES advertising_board (board_number)
+)
+
+CREATE TABLE business_number (
+    store_number VARCHAR(12) PRIMARY KEY NOT NULL UNIQUE,
+    store_name TEXT NOT NULL,
+    address TEXT NOT NULL,
+    address_detail TEXT,
+    business_type VARCHAR(10) NOT NULL,
+    owner_name VARCHAR(20) NOT NULL,
+    user_email VARCHAR(100) NOT NULL,
+    start_hours DATETIME NOT NULL,
+    finish_hours DATETIME NOT NULL,
+    tel_number VARCHAR(20) NOT NULL UNIQUE,
+    board_number INT,
+    FOREIGN KEY (board_number) REFERENCES advertising_board (board_number),
+    FOREIGN KEY (user_email) REFERENCES user (email)
+);
+
+CREATE TABLE business_application (
+	sequence INT AUTO_INCREMENT PRIMARY KEY,
+	user_email VARCHAR(100) NOT NULL,
+	store_number VARCHAR(12) NOT NULL,
+	store_name TEXT NOT NULL,
+	address TEXT NOT NULL,
+	address_detail TEXT,
+	business_type VARCHAR(10) NOT NULL,
+	store_start_hours TIME NOT NULL,
+	store_finish_hours TIME NOT NULL,
+	store_tel_number VARCHAR(20) NOT NULL,
+	FOREIGN KEY (user_email) REFERENCES user (email)
+);
+
+CREATE TABLE short_review (
+    short_review_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    write_datetime DATETIME DEFAULT now(),
+    contents TEXT NOT NULL,
+    score DOUBLE NOT NULL DEFAULT 1,
+    board_number INT NOT NULL,
+    user_email VARCHAR(100) NOT NULL,
+    FOREIGN KEY (board_number) REFERENCES advertising_board (board_number),
+    FOREIGN KEY (user_email) REFERENCES user (email)
+);
+
+CREATE TABLE reservation (
+    reservation_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    date DATETIME NOT NULL DEFAULT now(),
+    reservation_date DATETIME NOT NULL,
+    people INT NOT NULL DEFAULT 1,
+    accompany_infant TINYINT NOT NULL DEFAULT FALSE,
+    board_number INT NOT NULL,
+    user_email VARCHAR(100) NOT NULL,
+    FOREIGN KEY (board_number) REFERENCES advertising_board (board_number),
+    FOREIGN KEY (user_email) REFERENCES user (email)
+)
+
+CREATE TABLE review_board (
+    board_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    title TEXT NOT NULL,
+    contents TEXT NOT NULL,
+    image_url TEXT,
+    view_count INT NOT NULL DEFAULT 0,
+    comment_count INT NOT NULL DEFAULT 0,
+    favorite_count INT NOT NULL DEFAULT 0,
+    write_datetime DATETIME NOT NULL DEFAULT now(),
+    writer_email VARCHAR(100) NOT NULL,
+    location VARCHAR(10) NOT NULL,
+    business_type VARCHAR(10) NOT NULL,
+    FOREIGN KEY (writer_email) REFERENCES user (email)
+)
+
+CREATE TABLE review_board_favorite (
+    board_number INT NOT NULL,
+    user_email VARCHAR(100) NOT NULL,
+    PRIMARY KEY (board_number, user_email),
+    FOREIGN KEY (board_number) REFERENCES review_board (board_number),
+    FOREIGN KEY (user_email) REFERENCES user (email)
+)
+
+CREATE TABLE review_board_comment (
+    comment_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    board_number INT NOT NULL,
+    user_email VARCHAR(100) NOT NULL,
+    contents TEXT NOT NULL,
+    write_datetime DATETIME NOT NULL DEFAULT now(),
+    FOREIGN KEY (board_number) REFERENCES review_board (board_number),
+    FOREIGN KEY (user_email) REFERENCES user (email)
+)
+
+CREATE TABLE admin (
+    admin_id VARCHAR(100) PRIMARY KEY NOT NULL UNIQUE,
+    admin_password TEXT NOT NULL,
+    admin_nickname VARCHAR(12) NOT NULL DEFAULT 'admin'
+)
+
+CREATE TABLE event_board (
+    board_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    title TEXT NOT NULL,
+    contents TEXT NOT NULL,
+    image_url TEXT,
+    write_datetime DATETIME NOT NULL DEFAULT now(),
+    writer_email VARCHAR(100) NOT NULL,
+    FOREIGN KEY (writer_email) REFERENCES admin (admin_id)
+)
+
+CREATE TABLE notice_board (
+    board_number INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
+    title TEXT NOT NULL,
+    contents TEXT NOT NULL,
+    image_url TEXT,
+    write_datetime DATETIME NOT NULL DEFAULT now(),
+    writer_email VARCHAR(100) NOT NULL,
+    FOREIGN KEY (writer_email) REFERENCES admin (admin_id)
+)
+
+CREATE TABLE banner (
+    banner_number INT PRIMARY KEY NOT NULL AUTO_INCREMENT UNIQUE,
+    image_url VARCHAR(255) NOT NULL,
+    sequence INT NOT NULL UNIQUE,
+    write_datetime DATETIME NOT NULL DEFAULT now(),
+    writer_email VARCHAR(100) NOT NULL ,
+    event_board_number INT NOT NULL UNIQUE,
+    FOREIGN KEY (event_board_number) REFERENCES event_board (board_number),
+    FOREIGN KEY (writer_email) REFERENCES admin (admin_id)
+)
+
+CREATE VIEW event_board_view AS
+SELECT
+    E.board_number AS board_number,
+    E.title AS title,
+    E.contents AS contents,
+    E.image_url AS image_url,
+    E.write_datetime AS write_datetime,
+    E.writer_email AS writer_email,
+    A.admin_nickname AS writer_nickname
+FROM event_board AS E
+INNER JOIN admin AS A
+ON E.writer_email = A.admin_id
+
+CREATE VIEW notice_board_view AS
+SELECT
+    N.board_number AS board_number,
+    N.title AS title,
+    N.contents AS contents,
+    N.image_url AS image_url,
+    N.write_datetime AS write_datetime,
+    A.admin_id AS writer_email,
+    A.admin_nickname AS writer_nickname
+FROM notice_board AS N
+INNER JOIN admin AS A
+ON N.writer_email = A.admin_id;
+
+CREATE VIEW review_board_view AS
+SELECT 
+    RB.board_number AS board_number,
+    RB.title AS title,
+    RB.contents AS contents,
+    RB.image_url AS image_url,
+    RB.view_count AS view_count,
+    RB.comment_count AS comment_count,
+    RB.favorite_count AS favorite_count,
+    RB.write_datetime AS write_datetime,
+    RB.location AS location,
+    RB.business_type AS business_type,
+    U.email AS writer_email,
+    U.nickname AS writer_nickname
+FROM review_board AS RB
+INNER JOIN user AS U
+ON RB.writer_email = U.email;
+
+CREATE VIEW advertising_board_view AS
+SELECT 
+    AB.board_number AS board_number,
+    AB.title AS title,
+    AB.contents AS contents,
+    AB.image_url AS image_url,
+    AB.view_count AS view_count,
+    AB.short_review_count AS short_review_count,
+    AB.favorite_count AS favorite_count,
+    AB.write_datetime AS write_datetime,
+    AB.location AS location,
+    AB.business_type AS business_type,
+    U.email AS writer_email,
+    U.nickname AS writer_nickname,
+    T.tag_word AS tag_word
+FROM advertising_board AS AB
+INNER JOIN user AS U
+ON AB.writer_email = U.email
+INNER JOIN tag AS T
+ON AB.tag_word = T.tag_word;
