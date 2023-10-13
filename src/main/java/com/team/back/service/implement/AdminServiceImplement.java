@@ -68,7 +68,7 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 전체 광고 게시글 리스트 불러오기
 	@Override
-	public ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(String adminId) {
+	public ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(String adminId, Integer section) {
 		
 		List<AdvertisingListResponseDto> advertisingBoardList = null;
 
@@ -79,7 +79,8 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 
 			// 광고 게시글 리스트 불러오기
-			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList();
+			Integer limit = (section -1) * 30;
+			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(limit);
 			
 			// Dto 형태로 변환
 			advertisingBoardList = AdvertisingListResponseDto.copyList(resultSets);
@@ -93,7 +94,7 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 전체 기행기 게시글 리스트 불러오기
 	@Override
-	public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(String adminId) {
+	public ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(String adminId, Integer section) {
 	
 		List<ReviewBoardListResponseDto> reviewBoardList = null;
 
@@ -104,7 +105,9 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 
 			// 기행기 게시글 리스트 불러오기
-			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList();
+			Integer limit = (section -1) * 30;
+			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(limit);
+
 			// 검색 결과를 Dto 형태로 변환
 			reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
 			
@@ -119,7 +122,7 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 전체 한 줄 리뷰 리스트 불러오기
 	@Override
-	public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId) {
+	public ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId, Integer section) {
 		
 		List<ShortReviewResponseDto> shortReviewList = null;
 
@@ -130,7 +133,8 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 
 			// 댓글 리스트 불러오기
-			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList();
+			Integer limit = (section -1) * 30;
+			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList(limit);
 
 			// 검색 결과를 Dto 형태로 변환
 			shortReviewList = ShortReviewResponseDto.copyList(resultSets);

@@ -20,13 +20,13 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 public interface AdminService {
 	
 	// description : 관리자페이지 광고 게시글 목록
-	ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(String adminId);
+	ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(String adminId, Integer section);
 
 	// description : 관리자페이지 기행기 게시글 목록
-	ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(String adminId);
+	ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(String adminId, Integer section);
 
 	// description : 관리자페이지 한 줄 리뷰 목록
-	ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId);
+	ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId, Integer section);
 
 	// description : 관리자페이지 유저 목록
 	ResponseEntity<? super GetUserListResponseDto> getUserList(String adminId);
