@@ -25,6 +25,7 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
+  private String tagWord;
 
   
   private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity){
@@ -39,6 +40,7 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
     this.viewCount = advertisingViewEntity.getViewCount();
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
     this.favoriteCount = advertisingViewEntity.getFavoriteCount();  
+    this.tagWord = advertisingViewEntity.getTagWord();
   }
 
   public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity){
