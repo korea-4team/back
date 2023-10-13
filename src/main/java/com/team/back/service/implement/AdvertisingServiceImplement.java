@@ -17,6 +17,7 @@ import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseD
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardBusinessTypeListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationListResponsedto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
@@ -412,6 +413,26 @@ public class AdvertisingServiceImplement implements AdvertisingService {
         }
         return PostReservationResponseDto.success();
 
+    }
+
+    @Override
+    public ResponseEntity<? super GetAdvertisingBoardLocationBusinessTypeListResponseDto> getAdvertisingBoardLocationBusinessTypeList(
+            String location, String businessType) {
+                List<AdvertisingBoardListResponseDto> advertisingBoardList = new ArrayList<>();
+
+                try{
+                    //지역 및 업종이 일치하는지 게시물 조회
+                    List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByLocationOrBusinessTypeOrderByWriteDatetimeDesc(location, businessType);
+
+                    //dto 변환
+                    advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
+
+                }catch(Exception exception){
+                    exception.printStackTrace();
+                    return ResponseDto.databaseError();
+                }
+                return GetAdvertisingBoardLocationBusinessTypeListResponseDto.success(advertisingBoardList);
+       
     }
 
 }

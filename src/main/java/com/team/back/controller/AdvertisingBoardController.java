@@ -19,6 +19,7 @@ import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardBusinessTypeListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationListResponsedto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
@@ -169,6 +170,17 @@ public class AdvertisingBoardController {
     @PathVariable(value = "boardNumber",required = true) Integer boardNumber
   ){
     ResponseEntity<? super GetShortReviewListResponseDto> response = advertisingService.getShortReviewList(boardNumber);
+    return response;
+  }
+
+
+  //지역 업종 같이
+  @GetMapping("/board-list/{location}/{businessType}")
+  public ResponseEntity<? super GetAdvertisingBoardLocationBusinessTypeListResponseDto> getAdvertisingBoardLocationBusinessTypeListResponseDto(
+    @PathVariable(value = "location", required = true) String location,
+    @PathVariable(value = "businessType", required = true) String businessType
+  ) {
+    ResponseEntity<? super GetAdvertisingBoardLocationBusinessTypeListResponseDto> response = advertisingService.getAdvertisingBoardLocationBusinessTypeList(location, businessType);
     return response;
   }
 

@@ -9,6 +9,7 @@ import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardBusinessTypeListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationBusinessTypeListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardLocationListResponsedto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingboardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
@@ -47,8 +48,8 @@ public interface AdvertisingService {
   ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(String location);
   // 업종별
   ResponseEntity<? super GetAdvertisingBoardBusinessTypeListResponseDto> getAdvertisingBoardBusinessTypeList(String businessType);
-  // 메뉴
-  // ResponseEntity<? super PostAdvertisingBoardMenuListResponseDto> postAdvertisingBoardMenuList(Integer boardNumber, String email);
+  // 장소 지역 동시
+   ResponseEntity<? super GetAdvertisingBoardLocationBusinessTypeListResponseDto> getAdvertisingBoardLocationBusinessTypeList(String location, String businessType);
   //예약
   ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email, String time, int people);
 }
