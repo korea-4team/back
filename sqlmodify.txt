@@ -222,7 +222,7 @@ INNER JOIN user AS U
 ON RB.writer_email = U.email;
 
 CREATE VIEW advertising_board_view AS
-SELECT 
+SELECT
     AB.board_number AS board_number,
     AB.title AS title,
     AB.contents AS contents,
