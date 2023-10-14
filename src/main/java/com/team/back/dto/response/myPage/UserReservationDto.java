@@ -11,7 +11,7 @@ import lombok.Getter;
 public class UserReservationDto {
     private int reservationNumber;
     private String date;
-    private String reserviationDate;
+    private String reservationDate;
     private int people;
     private boolean accompanyInfant;
     private int boardNumber;
@@ -22,7 +22,7 @@ public class UserReservationDto {
     private UserReservationDto (UserReservationListResultSet resultSet) {
         this.reservationNumber = resultSet.getReservationNumber();
         this.date = resultSet.getDate();
-        this.reserviationDate = resultSet.getReservationDate();
+        this.reservationDate = resultSet.getReservationDate();
         this.people = resultSet.getPeople();
         this.accompanyInfant = resultSet.getAccompanyInfant() == 1;
         this.boardNumber = resultSet.getBoardNumber();
