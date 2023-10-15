@@ -35,5 +35,8 @@ public class AdvertisingMenuEntity {
     this.price = dto.getPrice();
   }
 
+  public AdvertisingMenuEntity(AdvertisingMenuEntity menu) {
+
+  }
   
 }

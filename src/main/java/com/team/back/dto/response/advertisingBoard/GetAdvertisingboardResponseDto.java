@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
+import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.TagEntity;
 
@@ -32,15 +33,25 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private String businessType;
   private String location;
   private List<String> tagList;
+  private List<AdvertisingBoardMenuResponseDto> menuList;
 
-  
-  private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities){
+  private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingMenuEntity> menuEntities){
     super(code, message);
+
     List<String> tagwordList = new ArrayList<>();
 
     for(TagEntity tag : tagEntities) {
       String tagword = tag.getTagWord();
       tagwordList.add(tagword);
+    }
+
+    List<AdvertisingBoardMenuResponseDto> menuBoardList = new ArrayList<>();
+
+    for(AdvertisingMenuEntity menu : menuEntities) {
+
+      AdvertisingBoardMenuResponseDto menuBoard = new AdvertisingBoardMenuResponseDto(menu);
+      menuBoardList.add(menuBoard);
+      
     }
 
     this.boardNumber = advertisingViewEntity.getBoardNumber();
@@ -56,10 +67,11 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
     this.businessType = advertisingViewEntity.getBusinessType();
     this.location = advertisingViewEntity.getLocation();
     this.tagList = tagwordList;
+    this.menuList = menuBoardList;
   }
 
-  public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities){
-    GetAdvertisingboardResponseDto result = new GetAdvertisingboardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertisingViewEntity, tagEntities);
+  public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingMenuEntity> menuEntities){
+    GetAdvertisingboardResponseDto result = new GetAdvertisingboardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertisingViewEntity, tagEntities, menuEntities);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 
