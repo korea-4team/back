@@ -13,5 +13,7 @@ public class PostShortReviewRequestDto {
 
   @NotBlank
   private String contents;
+
+  private double score;
   
 }

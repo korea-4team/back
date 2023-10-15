@@ -2,8 +2,8 @@ package com.team.back.entity.resultSet;
 
 public interface ShortReviewResultSet {
 
-  int getboardNumber();
-  int score();
+  int getShortReviewNumber();
+  double getScore();
   String getWriterNickname();
   String getWriterEmail();
   String getWriteDatetime();

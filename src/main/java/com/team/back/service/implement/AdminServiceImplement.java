@@ -30,9 +30,9 @@ import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.BannerEntity;
 import com.team.back.entity.BusinessNumberEntity;
 import com.team.back.entity.CommentViewEntity;
-import com.team.back.entity.ReviewBoardViewEntity;
 import com.team.back.entity.UserEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
+import com.team.back.entity.resultSet.CommentListResultSet;
 import com.team.back.entity.resultSet.MainBannerListResultSet;
 import com.team.back.entity.resultSet.ReviewBoardListResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
@@ -41,10 +41,10 @@ import com.team.back.repository.AdminRepository;
 import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.BannerRepository;
 import com.team.back.repository.BusinessNumberRepository;
+import com.team.back.repository.CommentRepository;
 import com.team.back.repository.CommentViewRepository;
 import com.team.back.repository.EventBoardRepository;
 import com.team.back.repository.ReviewBoardRepository;
-import com.team.back.repository.ReviewBoardViewRepository;
 import com.team.back.repository.ShortReviewAdvertisingBoardRepository;
 import com.team.back.repository.UserRepository;
 import com.team.back.service.AdminService;
@@ -57,10 +57,9 @@ public class AdminServiceImplement implements AdminService {
 
 	private final UserRepository userRepository;
 	private final ReviewBoardRepository reviewBoardRepository;
-	private final ReviewBoardViewRepository reviewBoardViewRepository;
 	private final AdvertisingBoardRepository advertisingBoardRepository;
 	private final ShortReviewAdvertisingBoardRepository shortReviewAdvertisingBoardRepository;
-	private final CommentViewRepository commentViewRepository;
+	private final CommentRepository commentRepository;
 	private final AdminRepository adminRepository;
 	private final BannerRepository bannerRepository;
 	private final BusinessNumberRepository businessNumberRepository;
@@ -80,7 +79,7 @@ public class AdminServiceImplement implements AdminService {
 
 			// 광고 게시글 리스트 불러오기
 			Integer limit = (section -1) * 30;
-			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(limit);
+			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdminAdvertisingBoardList(limit);
 			
 			// Dto 형태로 변환
 			advertisingBoardList = AdvertisingListResponseDto.copyList(resultSets);
@@ -134,7 +133,7 @@ public class AdminServiceImplement implements AdminService {
 
 			// 댓글 리스트 불러오기
 			Integer limit = (section -1) * 30;
-			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getShortReviewList(limit);
+			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getAdminShortReviewList(limit);
 
 			// 검색 결과를 Dto 형태로 변환
 			shortReviewList = ShortReviewResponseDto.copyList(resultSets);
@@ -150,7 +149,7 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 유저 리스트 불러오기
 	@Override
-	public ResponseEntity<? super GetUserListResponseDto> getUserList(String adminId) {
+	public ResponseEntity<? super GetUserListResponseDto> getUserList(String adminId, Integer section) {
 
 		List<UserListResponseDto> userList = null;
 
@@ -161,7 +160,8 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 
 			// 유저 리스트 불러오기
-			List<UserListResultSet> resultSets = userRepository.getUserList();
+			Integer limit = (section -1) * 30;
+			List<UserListResultSet> resultSets = userRepository.getUserList(limit);
 
 			// 검색 결과를 ResponseDto 형태로 변환
 			userList = UserListResponseDto.copyList(resultSets);
@@ -210,7 +210,7 @@ public class AdminServiceImplement implements AdminService {
 
 			// admin 아이디가 일치하는지 확인
 			boolean isAdmin = adminRepository.existsByAdminId(adminId);
-			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+			if(!isAdmin) return GetStoreInfoResponseDto.notAdminId();
 
 			// 존재하는 유저인지 확인
 			boolean existedUser = userRepository.existsByEmail(userEmail);
@@ -230,7 +230,7 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 해당 유저 작성 기행기 게시글 리스트
 	@Override
-	public ResponseEntity<? super GetReviewBoardListResponseDto> getUserReviewBoardList(String adminId, String userEmail) {
+	public ResponseEntity<? super GetReviewBoardListResponseDto> getUserReviewBoardList(String adminId, String userEmail, Integer section) {
 		
 		List<ReviewBoardListResponseDto> reviewBoardList = null;
 
@@ -238,13 +238,14 @@ public class AdminServiceImplement implements AdminService {
 
 			// admin 아이디가 일치하는지 확인
 			boolean isAdmin = adminRepository.existsByAdminId(adminId);
-			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+			if(!isAdmin) return GetReviewBoardListResponseDto.notAdminId();
 
-			// 특정 이메일에 해당하는 기행기 리스트 조회
-			List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByWriterEmail(userEmail);
+			 // 해당 유저가 작성한 최신 기행기 게시물 리스트 불러오기
+			 Integer limit = (section - 1) * 30;
+			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getUserReviewBoardList(userEmail,limit);
 
 			// 검색 결과를 Dto 형태로 변환
-			reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
+			reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
 			
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -256,7 +257,7 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 해당 유저 한 줄 리뷰 리스트
 	@Override
-	public ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(String adminId, String userEmail) {
+	public ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(String adminId, String userEmail, Integer section) {
 	
 		List<ShortReviewResponseDto> shortReviewList = null;
 
@@ -266,11 +267,12 @@ public class AdminServiceImplement implements AdminService {
 			boolean isAdmin = adminRepository.existsByAdminId(adminId);
 			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
 
-			// 특정 이메일에 해당하는 한 줄 리뷰 리스트 조회
-			List<AdvertisingShortReviewEntity> shortReviewEntities = shortReviewAdvertisingBoardRepository.findByUserEmail(userEmail);
+			// 해당 유저가 작성한 한 줄 리뷰 리스트 조회
+			Integer limit = (section - 1) * 30;
+			List<ShortReviewResultSet> resultSets = shortReviewAdvertisingBoardRepository.getUserShortReviewList(userEmail, limit);
 
 			// 검색 결과를 Dto 형태로 반환
-			shortReviewList = ShortReviewResponseDto.copyEntityList(shortReviewEntities);
+			shortReviewList = ShortReviewResponseDto.copyList(resultSets);
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -283,20 +285,22 @@ public class AdminServiceImplement implements AdminService {
 
 	// description : 해당 유저 댓글 리스트
 	@Override
-	public ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(String adminId, String userEmail) {
+	public ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(String adminId, String userEmail, Integer section) {
+		
 		List<CommentListResponseDto> commentList = null;
 
 		try {
 
 			// admin 아이디가 일치하는지 확인
 			boolean isAdmin = adminRepository.existsByAdminId(adminId);
-			if(!isAdmin) return GetAdvertisingBoardListResponseDto.notAdminId();
+			if(!isAdmin) return GetCommentListResponseDto.notAdminId();
 			
-			// 특정 이메일에 해당하는 댓글 리스트 조회
-			List<CommentViewEntity> commentViewEntities = commentViewRepository.findByUserEmail(userEmail);
+			// 해당 유저가 작성한 댓글 리스트 조회
+			Integer limit = (section - 1) * 30;
+			List<CommentListResultSet> resultSets = commentRepository.getUserCommentList(userEmail, limit);
 
 			// 검색 결과를 Dto 형태로 반환
-			commentList = CommentListResponseDto.copyEntityList(commentViewEntities);
+			commentList = CommentListResponseDto.copyList(resultSets);
 
 		} catch (Exception exception) {
 			exception.printStackTrace();

@@ -37,10 +37,12 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     "RC.write_datetime AS writeDatetime " +
     "FROM review_board_comment AS RC INNER JOIN user AS U " +
     "ON RC.user_email = U.email " +
-    "ORDER BY RC.write_datetime DESC",
+    "WHERE RC.user_email = ?1 " +
+    "ORDER BY RC.write_datetime DESC " +
+    "LIMIT ?2, 30",
     nativeQuery=true
   )
-  List<CommentListResultSet> getUserCommentList();
+  List<CommentListResultSet> getUserCommentList(String userEmail, Integer section);
 
   @Query(
         value = 

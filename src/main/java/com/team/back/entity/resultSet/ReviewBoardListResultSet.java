@@ -11,6 +11,7 @@ public interface ReviewBoardListResultSet {
   int getFavoriteCount();
   String getWriteDatetime();
   String getWriterNickname();
+  String getWriterEmail();
   String getLocation();
   String getBusinessType();
 
