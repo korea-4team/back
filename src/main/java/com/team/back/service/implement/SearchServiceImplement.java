@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.team.back.dto.ResponseDto;
-import com.team.back.dto.response.admin.AdvertisingListResponseDto;
 import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetSearchAdvertisingBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetSearchReviewBoardResponseDto;
@@ -38,17 +37,17 @@ public class SearchServiceImplement implements SearchService {
     public ResponseEntity<? super GetSearchResponseDto> getSearchBoard(String searchWord, String loaction) {
 
         List<ReviewBoardListResponseDto> reviewBoardList = null;
-        List<AdvertisingListResponseDto> advertisingBoardList = null;
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
 
         try {
             if (loaction == null) {
                 List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, searchWord);
-                advertisingBoardList = AdvertisingListResponseDto.copyEntityList(advertisingViewEntities);
+                advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             } else {
                 List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrLocationOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, loaction, searchWord, searchWord);
-                advertisingBoardList = AdvertisingListResponseDto.copyEntityList(advertisingViewEntities);
+                advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrLocationOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, loaction);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             }

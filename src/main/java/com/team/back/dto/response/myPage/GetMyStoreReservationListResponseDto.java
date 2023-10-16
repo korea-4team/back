@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
-import com.team.back.entity.resultSet.UserReservationListResultSet;
 import com.team.back.entity.resultSet.UserStoreReservationListResultSet;
 
 import lombok.Getter;
