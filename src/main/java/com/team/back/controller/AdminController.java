@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.dto.request.banner.PatchBannerRequestDto;
 import com.team.back.dto.request.banner.PostBannerRequestDto;
-import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.banner.DeleteBannerResponseDto;
 import com.team.back.dto.response.banner.GetMainBannerDetailResponseDto;
@@ -40,11 +40,11 @@ public class AdminController {
 
     // description : 관리자 페이지 광고 전체 게시글 목록
     @GetMapping("/{adminId}/advertising-board-list/{section}")
-    public ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(
+    public ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getAdvertisingBoardList(
         @PathVariable(value = "adminId", required = true) String adminId,
         @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetAdvertisingBoardListResponseDto> response = adminService.getAdvertisingBoardList(adminId, section);
+        ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> response = adminService.getAdvertisingBoardList(adminId, section);
         return response;
     }
 

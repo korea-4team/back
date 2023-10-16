@@ -12,7 +12,6 @@ import com.team.back.dto.request.advertisingBoard.PostAdvertisingMenuRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostTagRequestDto;
-import com.team.back.dto.response.admin.AdvertisingListResponseDto;
 import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
@@ -207,14 +206,14 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
     @Override
     public ResponseEntity<? super GetUserListAdvertisingResponseDto> getUserListAdvertising(String writerEmail) {
-        List<AdvertisingListResponseDto> advertisingBoardList = new ArrayList<>();
+        List<AdvertisingBoardListResponseDto> advertisingBoardList = new ArrayList<>();
 
 
         try{
 
             List<AdvertisingViewEntity> advertisingBoardEntities = advertisingBoardViewRespository.findByWriterEmailOrderByWriteDatetimeDesc(writerEmail);
 
-            advertisingBoardList = AdvertisingListResponseDto.copyEntityList(advertisingBoardEntities);
+            advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingBoardEntities);
 
         } catch (Exception exception) {
             exception.printStackTrace();

@@ -4,9 +4,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.banner.PatchBannerRequestDto;
 import com.team.back.dto.request.banner.PostBannerRequestDto;
-import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.banner.DeleteBannerResponseDto;
 import com.team.back.dto.response.banner.GetMainBannerDetailResponseDto;
@@ -20,7 +20,7 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 public interface AdminService {
 	
 	// description : 관리자페이지 광고 게시글 목록
-	ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(String adminId, Integer section);
+	ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getAdvertisingBoardList(String adminId, Integer section);
 
 	// description : 관리자페이지 기행기 게시글 목록
 	ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(String adminId, Integer section);
