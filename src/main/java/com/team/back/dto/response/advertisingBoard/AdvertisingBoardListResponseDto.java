@@ -21,10 +21,10 @@ public class AdvertisingBoardListResponseDto {
   private int shortReviewCount;
   private int favoriteCount;
   private String writeDatetime;
+	private String writerEmail;
   private String writerNickname;
   private String location;
   private String businessType;
-  private String tagWord;
 
   public AdvertisingBoardListResponseDto (AdvertisingBoardResultSet resultSet){
     this.boardNumber = resultSet.getBoardNumber();
@@ -35,10 +35,10 @@ public class AdvertisingBoardListResponseDto {
     this.shortReviewCount = resultSet.getShortReviewCount();
     this.favoriteCount = resultSet.getFavoriteCount();
     this.writeDatetime = resultSet.getWriteDatetime();
+		this.writerEmail = resultSet.getWriterEmail();
     this.writerNickname = resultSet.getWriterNickname();
     this.location = resultSet.getLocation();
     this.businessType = resultSet.getBusinessType();
-    this.tagWord = resultSet.gettagWord();
   }
 
   public AdvertisingBoardListResponseDto(AdvertisingViewEntity advertisingViewEntity){
@@ -50,10 +50,10 @@ public class AdvertisingBoardListResponseDto {
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
     this.favoriteCount = advertisingViewEntity.getFavoriteCount();
     this.writeDatetime = advertisingViewEntity.getWriteDatetime();
+		this.writerEmail = advertisingViewEntity.getWriterEmail();
     this.writerNickname = advertisingViewEntity.getWriterNickname();
     this.location = advertisingViewEntity.getLocation();
     this.businessType = advertisingViewEntity.getBusinessType();
-    this.tagWord = advertisingViewEntity.getTagWord();
   }
 
   public static List<AdvertisingBoardListResponseDto> copyEntityList(List<AdvertisingViewEntity> advertisingViewEntities){

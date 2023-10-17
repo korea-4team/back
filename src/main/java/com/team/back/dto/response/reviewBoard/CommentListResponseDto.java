@@ -19,7 +19,7 @@ public class CommentListResponseDto {
     public CommentListResponseDto(CommentListResultSet resultSet) {
         this.nickname = resultSet.getNickname();
         this.writeDatetime = resultSet.getWriteDatetime();
-        this.contents = resultSet.getContnts();
+        this.contents = resultSet.getContents();
     }
 
     public static List<CommentListResponseDto> copyList(List<CommentListResultSet> resultSets) {

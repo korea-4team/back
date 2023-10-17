@@ -4,9 +4,9 @@ import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.banner.PatchBannerRequestDto;
 import com.team.back.dto.request.banner.PostBannerRequestDto;
-import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.banner.DeleteBannerResponseDto;
 import com.team.back.dto.response.banner.GetMainBannerDetailResponseDto;
@@ -20,7 +20,7 @@ import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 public interface AdminService {
 	
 	// description : 관리자페이지 광고 게시글 목록
-	ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(String adminId, Integer section);
+	ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getAdvertisingBoardList(String adminId, Integer section);
 
 	// description : 관리자페이지 기행기 게시글 목록
 	ResponseEntity<? super GetReviewBoardListResponseDto> getReviewBoardList(String adminId, Integer section);
@@ -29,7 +29,7 @@ public interface AdminService {
 	ResponseEntity<? super GetShortReviewListResponseDto> getShortReviewList(String adminId, Integer section);
 
 	// description : 관리자페이지 유저 목록
-	ResponseEntity<? super GetUserListResponseDto> getUserList(String adminId);
+	ResponseEntity<? super GetUserListResponseDto> getUserList(String adminId, Integer section);
 
 	// description : 관리자페이지 유저 상세정보
 	ResponseEntity<? super GetUserDetailResponseDto> getUserDetail(String adminId, String userEmail);
@@ -38,13 +38,13 @@ public interface AdminService {
 	ResponseEntity<? super GetStoreInfoResponseDto> getUserStoreInfo(String adminId, String userEmail);
 
 	// description : 관리자 페이지 해당 유저 작성 기행기 게시글 리스트
-	ResponseEntity<? super GetReviewBoardListResponseDto> getUserReviewBoardList(String adminId, String userEmail);
+	ResponseEntity<? super GetReviewBoardListResponseDto> getUserReviewBoardList(String adminId, String userEmail, Integer section);
 
 	// description : 관리자 페이지 해당 유저 작성 한 줄 리뷰 리스트
-	ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(String adminId, String userEmail);
+	ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(String adminId, String userEmail, Integer section);
 
 	// description : 관리자 페이지 해당 유저 작성 댓글 리스트
-	ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(String adminId, String userEmail);
+	ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(String adminId, String userEmail, Integer section);
 
 	// description : 메인 페이지 배너 리스트 불러오기
 	ResponseEntity<? super GetMainBannerListResponseDto> getMainBannerList(String adminId);

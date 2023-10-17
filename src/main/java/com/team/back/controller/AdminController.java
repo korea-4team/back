@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.team.back.dto.request.banner.PatchBannerRequestDto;
 import com.team.back.dto.request.banner.PostBannerRequestDto;
-import com.team.back.dto.response.admin.GetAdvertisingBoardListResponseDto;
 import com.team.back.dto.response.admin.GetUserDetailResponseDto;
 import com.team.back.dto.response.admin.GetUserListResponseDto;
+import com.team.back.dto.response.advertisingBoard.GetCurrentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetShortReviewListResponseDto;
 import com.team.back.dto.response.banner.DeleteBannerResponseDto;
 import com.team.back.dto.response.banner.GetMainBannerDetailResponseDto;
@@ -40,11 +40,11 @@ public class AdminController {
 
     // description : 관리자 페이지 광고 전체 게시글 목록
     @GetMapping("/{adminId}/advertising-board-list/{section}")
-    public ResponseEntity<? super GetAdvertisingBoardListResponseDto> getAdvertisingBoardList(
+    public ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> getAdvertisingBoardList(
         @PathVariable(value = "adminId", required = true) String adminId,
         @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetAdvertisingBoardListResponseDto> response = adminService.getAdvertisingBoardList(adminId, section);
+        ResponseEntity<? super GetCurrentAdvertisingBoardResponseDto> response = adminService.getAdvertisingBoardList(adminId, section);
         return response;
     }
 
@@ -69,16 +69,17 @@ public class AdminController {
     }
 
     // description : 유저 목록
-    @GetMapping("/{adminId}/user-list")
+    @GetMapping("/{adminId}/user-list/{section}")
     public ResponseEntity<? super GetUserListResponseDto> getUserList(
-        @PathVariable(value = "adminId", required = true) String adminId
+        @PathVariable(value = "adminId", required = true) String adminId,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetUserListResponseDto> response = adminService.getUserList(adminId);
+        ResponseEntity<? super GetUserListResponseDto> response = adminService.getUserList(adminId, section);
         return response;
     }
 
     // description : 유저 상세 정보
-    @GetMapping("/{adminId}/user-list/{userEmail}")
+    @GetMapping("/{adminId}/user-detail/{userEmail}")
     public ResponseEntity<? super GetUserDetailResponseDto> getUserDetail(
         @PathVariable(value = "adminId", required = true) String adminId,
         @PathVariable(value = "userEmail", required = true) String userEmail
@@ -98,32 +99,35 @@ public class AdminController {
     }
 
     // description : 해당 유저 작성기행기 게시글 리스트
-    @GetMapping("/{adminId}/user-list/{userEmail}/review-board-list")
+    @GetMapping("/{adminId}/user-list/{userEmail}/review-board-list/{section}")
     public ResponseEntity<? super GetReviewBoardListResponseDto> getUserReviewBoardList(
         @PathVariable(value = "adminId", required = true) String adminId,
-        @PathVariable(value = "userEmail", required = true) String userEmail
+        @PathVariable(value = "userEmail", required = true) String userEmail,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetReviewBoardListResponseDto> response = adminService.getUserReviewBoardList(adminId, userEmail);
+        ResponseEntity<? super GetReviewBoardListResponseDto> response = adminService.getUserReviewBoardList(adminId, userEmail, section);
         return response;
     }
     
     // description : 해당 유저 작성 한 줄 리뷰 리스트
-    @GetMapping("/{adminId}/user-list/{userEmail}/short-review-list")
+    @GetMapping("/{adminId}/user-list/{userEmail}/short-review-list/{section}")
     public ResponseEntity<? super GetShortReviewListResponseDto> getUserShortReviewList(
         @PathVariable(value = "adminId", required = true) String adminId,
-        @PathVariable(value = "userEmail", required = true) String userEmail
+        @PathVariable(value = "userEmail", required = true) String userEmail,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getUserShortReviewList(adminId, userEmail);
+        ResponseEntity<? super GetShortReviewListResponseDto> response = adminService.getUserShortReviewList(adminId, userEmail,section);
         return response;
     }
 
     // description : 해당 유저 작성 댓글 리스트
-    @GetMapping("/{adminId}/user-list/{userEmail}/comment-list")
+    @GetMapping("/{adminId}/user-list/{userEmail}/comment-list/{section}")
     public ResponseEntity<? super GetCommentListResponseDto> getUserCommentList(
         @PathVariable(value = "adminId", required = true) String adminId,
-        @PathVariable(value = "userEmail", required = true) String userEmail
+        @PathVariable(value = "userEmail", required = true) String userEmail,
+        @PathVariable(value = "section", required = true) Integer section
     ) {
-        ResponseEntity<? super GetCommentListResponseDto> response = adminService.getUserCommentList(adminId, userEmail);
+        ResponseEntity<? super GetCommentListResponseDto> response = adminService.getUserCommentList(adminId, userEmail,section);
         return response;
     }
 

@@ -29,8 +29,9 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
 			"address_detail as addressDetail, " +
 			"role, " +
 			"tel_number as telNumber " +
-			"FROM user ",
+			"FROM user "+
+			"LIMIT ?1, 30",
 		nativeQuery = true
 	)
-    List<UserListResultSet> getUserList();
+    List<UserListResultSet> getUserList(Integer section);
 }

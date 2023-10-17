@@ -13,19 +13,21 @@ import lombok.Getter;
 @AllArgsConstructor
 public class ShortReviewResponseDto {
 
-  private int boardNumber;
+  private int shortReviewNumber;
   private String contents;
-  private int score;
+  private double score;
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
 
 
   public ShortReviewResponseDto (ShortReviewResultSet resultSet){
-    this.boardNumber = resultSet.getboardNumber();
+    this.shortReviewNumber = resultSet.getShortReviewNumber();
     this.contents = resultSet.getContents();
+    this.writerEmail = resultSet.getWriterEmail();
     this.writeDatetime = resultSet.getWriteDatetime();
     this.writerNickname = resultSet.getWriterNickname();
+    this.score = resultSet.getScore();
   }
 
   public static List<ShortReviewResponseDto> copyList(List<ShortReviewResultSet> resultSets){
@@ -51,7 +53,7 @@ public class ShortReviewResponseDto {
   }
 
   public ShortReviewResponseDto (AdvertisingShortReviewEntity advertisingShortReviewEntity){
-    this.boardNumber = advertisingShortReviewEntity.getBoardNumber();
+    this.shortReviewNumber = advertisingShortReviewEntity.getBoardNumber();
     this.contents = advertisingShortReviewEntity.getContents();
     this.writeDatetime = advertisingShortReviewEntity.getWriteDatetime();
     this.writerEmail = advertisingShortReviewEntity.getUserEmail();
