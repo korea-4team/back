@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
+import com.team.back.entity.AdminEntity;
 import com.team.back.entity.UserEntity;
 
 import lombok.Getter;
@@ -30,8 +31,20 @@ public class GetSignInUserResponseDto extends ResponseDto {
         this.telNumber = userEntity.getTelNumber();
     }
 
+    private GetSignInUserResponseDto(AdminEntity adminEntity) {
+        super(ResponseCode.SUCCESS, ResponseMessage.SUCCESS);
+        this.email = adminEntity.getAdminId();
+        this.nickname = adminEntity.getAdminNickname();
+        this.role = adminEntity.getAdminId();
+    }
+
     public static ResponseEntity<GetSignInUserResponseDto> success(UserEntity userEntity) {
         GetSignInUserResponseDto result = new GetSignInUserResponseDto(userEntity);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+    
+    public static ResponseEntity<GetSignInUserResponseDto> success(AdminEntity adminEntity) {
+        GetSignInUserResponseDto result = new GetSignInUserResponseDto(adminEntity);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
