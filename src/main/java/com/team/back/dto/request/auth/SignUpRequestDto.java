@@ -28,8 +28,6 @@ public class SignUpRequestDto {
 
     private String addressDetail;
 
-    private String role;
-
     @NotBlank @Pattern(regexp = "^[0-9]{11,12}$")
     private String telNumber;
 }
