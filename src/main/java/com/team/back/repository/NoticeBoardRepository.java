@@ -27,8 +27,7 @@ public interface NoticeBoardRepository extends JpaRepository<NoticeBoardEntity, 
 			"FROM notice_board AS N " +
 			"INNER JOIN admin AS A " +
 			"ON N.writer_email = A.admin_id " +
-			"ORDER BY N.write_datetime DESC, N.board_number DESC " +
-			"LIMIT ?1, 30",
+			"ORDER BY N.write_datetime DESC, N.board_number DESC ",
 		nativeQuery = true
 	)
 	List<NoticeBoardListResultSet> getNoticeBoardList(Integer section);
