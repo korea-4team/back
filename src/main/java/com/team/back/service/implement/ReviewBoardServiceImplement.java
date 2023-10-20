@@ -57,8 +57,7 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
 
         try {
             // description: 최신 기행기 게시물 리스트 불러오기 //
-            Integer limit = (section - 1) * 30;
-            List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(limit);
+            List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList();
 
             // description: 검색 결과를 ReseponseDto 형태로 변환 //
             reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
