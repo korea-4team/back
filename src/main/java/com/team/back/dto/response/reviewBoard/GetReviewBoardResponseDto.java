@@ -22,6 +22,8 @@ public class GetReviewBoardResponseDto extends ResponseDto {
   private String writeDatetime;
   private String writerEmail;
   private String writerNickname;
+  private String location;
+  private String businessType;
   
   private GetReviewBoardResponseDto(String code, String message, ReviewBoardViewEntity reviewBoardViewEntity) {
     super(code, message);
@@ -32,6 +34,8 @@ public class GetReviewBoardResponseDto extends ResponseDto {
     this.writeDatetime = reviewBoardViewEntity.getWriteDatetime();
     this.writerEmail = reviewBoardViewEntity.getWriterEmail();
     this.writerNickname = reviewBoardViewEntity.getWriterNickname();
+    this.location = reviewBoardViewEntity.getLocation();
+    this.businessType = reviewBoardViewEntity.getBusinessType();
   }
 
   public static ResponseEntity<GetReviewBoardResponseDto> success(ReviewBoardViewEntity reviewBoardViewEntity) {

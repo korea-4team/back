@@ -93,12 +93,10 @@ public class SearchServiceImplement implements SearchService {
 
         try {
             if (location == null) {
-                Integer limit = (section - 1) * 30;
-                List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(searchWord, limit);
+                List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
             }else {
-                Integer limit = (section - 1) * 30;
-                List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(searchWord, location, limit);
+                List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(searchWord, location);
                 reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
             }
             
