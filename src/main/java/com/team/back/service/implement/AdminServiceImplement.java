@@ -102,8 +102,7 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetReviewBoardListResponseDto.notAdminId();
 
 			// 기행기 게시글 리스트 불러오기
-			Integer limit = (section -1) * 30;
-			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(limit);
+			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList();
 
 			// 검색 결과를 Dto 형태로 변환
 			reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
@@ -239,8 +238,7 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetReviewBoardListResponseDto.notAdminId();
 
 			 // 해당 유저가 작성한 최신 기행기 게시물 리스트 불러오기
-			 Integer limit = (section - 1) * 30;
-			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getUserReviewBoardList(userEmail,limit);
+			List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getUserReviewBoardList(userEmail);
 
 			// 검색 결과를 Dto 형태로 변환
 			reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
