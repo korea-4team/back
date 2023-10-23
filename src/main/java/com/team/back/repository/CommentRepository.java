@@ -20,7 +20,9 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
     "SELECT " +
     "U.nickname AS nickname, " +
     "RC.contents AS contents, " +
-    "RC.write_datetime AS writeDatetime " +
+    "RC.write_datetime AS writeDatetime, " +
+    "RC.user_email AS writerEmail, " +
+    "RC.comment_number AS commentNumber " +
     "FROM review_board_comment AS RC INNER JOIN user AS U " +
     "ON RC.user_email = U.email " +
     "WHERE board_number = ?1 " +

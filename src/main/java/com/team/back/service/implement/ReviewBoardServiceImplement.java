@@ -369,8 +369,16 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             boolean equalWriter = commentEntity.getUserEmail().equals(userEmail);
             if (!equalWriter) return DeleteCommentResponseDto.noPermission();
 
+            Integer boardNumber = commentEntity.getBoardNumber();
+
             // description: 댓글 데이터 삭제 //
             commentRepository.deleteByCommentNumber(commentNumber);
+
+            // description: 게시물에서 댓글 수 감소 //
+            ReviewBoardEntity reviewBoardEntity = reviewBoardRepository.findByBoardNumber(boardNumber);
+            reviewBoardEntity.decreaseCommentCount();
+            reviewBoardRepository.save(reviewBoardEntity);
+            
             
         } catch (Exception exception) {
             exception.printStackTrace();

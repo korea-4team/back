@@ -66,6 +66,10 @@ public class ReviewBoardEntity {
     this.commentCount++;
   }
 
+  public void decreaseCommentCount() {
+    this.commentCount--;
+  }
+
   public void increaseFavoriteCount() {
     this.favoriteCount++;
   }
