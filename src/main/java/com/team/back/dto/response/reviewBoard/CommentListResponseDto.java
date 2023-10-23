@@ -12,11 +12,16 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class CommentListResponseDto {
+
+    private String writerEmail;
+    private int commentNumber;
     private String nickname;
     private String writeDatetime;
     private String contents;
     
     public CommentListResponseDto(CommentListResultSet resultSet) {
+        this.writerEmail = resultSet.getWriterEmail();
+        this.commentNumber = resultSet.getCommentNumber();
         this.nickname = resultSet.getNickname();
         this.writeDatetime = resultSet.getWriteDatetime();
         this.contents = resultSet.getContents();
@@ -34,6 +39,8 @@ public class CommentListResponseDto {
     }
 
     public CommentListResponseDto (CommentViewEntity commentViewEntity) {
+        this.writerEmail = commentViewEntity.getUserEmail();
+        this.commentNumber = commentViewEntity.getCommentNumber();
         this.contents = commentViewEntity.getContents();
         this.nickname = commentViewEntity.getUserNickname();
         this.writeDatetime = commentViewEntity.getWriteDatetime();
