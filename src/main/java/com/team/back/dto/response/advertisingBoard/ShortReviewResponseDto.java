@@ -12,7 +12,6 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class ShortReviewResponseDto {
-
   private int shortReviewNumber;
   private String contents;
   private double score;
