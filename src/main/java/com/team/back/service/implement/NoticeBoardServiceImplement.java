@@ -40,8 +40,7 @@ public class NoticeBoardServiceImplement implements NoticeBoardService {
 
 		try {
 			// 게시물 리스트 불러오기
-			Integer limit = (section -1) * 30;
-			List<NoticeBoardListResultSet> resultSets = noticeBoardRepository.getNoticeBoardList(limit);
+			List<NoticeBoardListResultSet> resultSets = noticeBoardRepository.getNoticeBoardList(section);
 
 			// 검색 결과를 ResponseDto 형태로 변환
 			noticeBoardList = NoticeBoardListResponseDto.copyList(resultSets);
