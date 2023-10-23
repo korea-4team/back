@@ -37,7 +37,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   @Query(
     value =
     "SELECT " +
-    "S.board_number AS boardNumber, " +
+    "S.short_review_number AS shortReviewNumber, " +
     "S.contents AS contents, " +
     "S.score AS score, " +
     "S.write_datetime AS writeDatetime, "+
@@ -45,8 +45,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
     "U.nickname AS writerNickname " +
     "FROM short_review AS S INNER JOIN user AS U " +
     "ON S.user_email = U.email "+
-    "ORDER BY S.write_datetime DESC " +
-    "LIMIT ?1, 30",
+    "ORDER BY S.write_datetime DESC ",
     nativeQuery = true
   )
   List<ShortReviewResultSet> getAdminShortReviewList(Integer section);
@@ -65,8 +64,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
     "LEFT JOIN user U " +
     "ON S.user_email = U.email " +
     "WHERE S.user_email = ?1 " +
-    "ORDER BY S.write_datetime DESC "+
-    "LIMIT ?2, 30",
+    "ORDER BY S.write_datetime DESC ",
     nativeQuery=true
   )
   List<ShortReviewResultSet> getUserShortReviewList(String userEmail, Integer section);
