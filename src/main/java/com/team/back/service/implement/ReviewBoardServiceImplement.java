@@ -12,7 +12,9 @@ import com.team.back.dto.request.reviewBoard.PostReviewBoardRequestDto;
 import com.team.back.dto.response.reviewBoard.CommentListResponseDto;
 import com.team.back.dto.response.reviewBoard.DeleteCommentResponseDto;
 import com.team.back.dto.response.reviewBoard.DeleteReviewBoardResponseDto;
+import com.team.back.dto.response.reviewBoard.FavoriteListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
+import com.team.back.dto.response.reviewBoard.GetFavoriteListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardBusinessTypeListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationBusinessTypeListResponseDto;
@@ -28,6 +30,7 @@ import com.team.back.entity.CommentEntity;
 import com.team.back.entity.ReviewBoardFavoriteEntity;
 import com.team.back.entity.ReviewBoardEntity;
 import com.team.back.entity.ReviewBoardViewEntity;
+import com.team.back.entity.UserEntity;
 import com.team.back.entity.resultSet.CommentListResultSet;
 import com.team.back.entity.resultSet.ReviewBoardListResultSet;
 import com.team.back.repository.CommentRepository;
@@ -385,6 +388,27 @@ public class ReviewBoardServiceImplement implements ReviewBoardService {
             return ResponseDto.databaseError();
         }
         return DeleteCommentResponseDto.success();
+    }
+
+    @Override
+    public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(Integer boardNumber) {
+        
+        List<FavoriteListResponseDto> favoriteList = null;
+
+        try {
+
+        // description: 게시물 번호의 좋아요 리스트 조회 //
+        List<UserEntity> userEntities = userRepository.getFavoriteList(boardNumber);
+
+        // description: Entity를 dto로 변환 //
+        favoriteList = FavoriteListResponseDto.copyEntityList(userEntities);
+        
+        } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+        }
+
+        return GetFavoriteListResponseDto.success(favoriteList);
     }
     
 }

@@ -56,6 +56,8 @@ public class ReviewBoardEntity {
     this.title = dto.getTitle();
     this.contents = dto.getContents();
     this.imageUrl = dto.getImageUrl();
+    this.location = dto.getLocation();
+    this.businessType = dto.getBusinessType();
   }
 
   public void increaseViewCount() {

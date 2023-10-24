@@ -34,21 +34,22 @@ public class SearchServiceImplement implements SearchService {
 
     // 검색 게시물 최신 리스트 불러오기 //
     @Override
-    public ResponseEntity<? super GetSearchResponseDto> getSearchBoard(String searchWord, String loaction) {
+    public ResponseEntity<? super GetSearchResponseDto> getSearchBoard(String searchWord, String location) {
 
         List<ReviewBoardListResponseDto> reviewBoardList = null;
         List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
 
         try {
-            if (loaction == null) {
+            if (location.equals("전체")) {
+                // System.out.println(location);
                 List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, searchWord);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             } else {
-                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrLocationOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, loaction, searchWord, searchWord);
+                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrLocationContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, location, searchWord, searchWord);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
-                List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrLocationOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, loaction);
+                List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.getWithLocationSearch(searchWord, searchWord, searchWord, location);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             }
         } catch (Exception exception) {
