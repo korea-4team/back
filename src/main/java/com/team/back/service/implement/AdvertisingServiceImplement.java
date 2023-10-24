@@ -106,22 +106,23 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             Integer boardNumber, String email) {
         try {
             // 유저가 아닐때
+                System.out.println("email : " + boardNumber);
             boolean hasUser = userRepository.existsByEmail(email);
             if (!hasUser)
                 return DeleteShortCommentAdvertisingBoardResponseDto.noExistedBoard();
 
             // 게시물이 없을때
-            AdvertisingBoardEntity advertisingViewEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
+            AdvertisingShortReviewEntity advertisingViewEntity = shortReviewAdvertisingBoardRepository.findByShortReviewNumber(boardNumber);
             if (advertisingViewEntity == null)
                 return DeleteShortCommentAdvertisingBoardResponseDto.noExistedBoard();
 
             // 작성자 이메일과 입력받은 이메일이 같은가
-            boolean equalWriter = advertisingViewEntity.getWriterEmail().equals(email);
+            boolean equalWriter = advertisingViewEntity.getUserEmail().equals(email);
             if (!equalWriter)
                 return DeleteShortCommentAdvertisingBoardResponseDto.noPerMission();
 
             // 댓글 데이터 삭제
-            shortReviewAdvertisingBoardRepository.deleteByBoardNumber(boardNumber);
+            shortReviewAdvertisingBoardRepository.deleteByShortReviewNumber(boardNumber);
 
         } catch (Exception exception) {
             exception.printStackTrace();
