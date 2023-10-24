@@ -33,7 +33,8 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private String businessType;
   private String location;
   private List<String> tagList;
-  private List<AdvertisingBoardMenuResponseDto> menuList;
+  private List<AdvertisingBoardMenuResponseDto> menuList;  private String tagWord;
+
 
   private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingMenuEntity> menuEntities){
     super(code, message);
@@ -63,11 +64,7 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
     this.writerNickname = advertisingViewEntity.getWriterNickname();
     this.viewCount = advertisingViewEntity.getViewCount();
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
-    this.favoriteCount = advertisingViewEntity.getFavoriteCount();
-    this.businessType = advertisingViewEntity.getBusinessType();
-    this.location = advertisingViewEntity.getLocation();
-    this.tagList = tagwordList;
-    this.menuList = menuBoardList;
+    this.favoriteCount = advertisingViewEntity.getFavoriteCount();  
   }
 
   public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingMenuEntity> menuEntities){

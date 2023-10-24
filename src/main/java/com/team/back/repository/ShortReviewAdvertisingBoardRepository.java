@@ -14,10 +14,13 @@ import com.team.back.entity.resultSet.UserShortReviewListResultSet;
 @Repository
 public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<AdvertisingShortReviewEntity, Integer>{
   
+  AdvertisingShortReviewEntity findByShortReviewNumber(Integer shortReviewNumber);
   List<AdvertisingShortReviewEntity> findByUserEmail(String userEmail);
   
   @Transactional
   void deleteByBoardNumber(Integer boardNumber);
+  @Transactional
+  void deleteByShortReviewNumber(Integer shortReviewNumber);
   
   @Query(
   value =
@@ -25,6 +28,8 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   "SR.board_number AS boardNumber, " +
   "U.nickname AS nickname, " +
   "SR.contents AS contents, " +
+  "SR.short_review_number AS shortReviewNumber, " +
+  "SR.score AS score, " +
   "SR.write_datetime AS writeDatetime " +
   "FROM short_review AS SR INNER JOIN user AS U " +
   "ON SR.user_email = U.email " +
