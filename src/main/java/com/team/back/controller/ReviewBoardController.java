@@ -20,6 +20,7 @@ import com.team.back.dto.request.reviewBoard.PostReviewBoardRequestDto;
 import com.team.back.dto.response.reviewBoard.DeleteCommentResponseDto;
 import com.team.back.dto.response.reviewBoard.DeleteReviewBoardResponseDto;
 import com.team.back.dto.response.reviewBoard.GetCommentListResponseDto;
+import com.team.back.dto.response.reviewBoard.GetFavoriteListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardBusinessTypeListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardListResponseDto;
 import com.team.back.dto.response.reviewBoard.GetReviewBoardLocationBusinessTypeListResponseDto;
@@ -93,6 +94,15 @@ public class ReviewBoardController {
         @PathVariable(value = "boardNumber", required = true) Integer boardNumber
     ) {
         ResponseEntity<? super GetCommentListResponseDto> response = reviewBoardService.getCommentList(boardNumber);
+        return response;
+    }
+
+    // API : 특정 게시물의 좋아요 리스트 불러오기 메서드 //
+    @GetMapping("/{boardNumber}/favorite-list")
+    public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(
+        @PathVariable(value="boardNumber", required=true) Integer boardNumber
+    ) {
+        ResponseEntity<? super GetFavoriteListResponseDto> response = reviewBoardService.getFavoriteList(boardNumber);
         return response;
     }
 

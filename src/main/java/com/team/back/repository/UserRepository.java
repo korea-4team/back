@@ -33,4 +33,16 @@ public interface UserRepository extends JpaRepository<UserEntity, String> {
 		nativeQuery = true
 	)
     List<UserListResultSet> getUserList(Integer section);
+
+		@Query(
+			value=
+			"SELECT * " +
+			"FROM user " +
+			"WHERE email IN ( " +
+				"SELECT  user_email " +
+				"FROM review_board_favorite " +
+				"WHERE board_number = ?1 " +
+			")", nativeQuery=true
+		)
+		List<UserEntity> getFavoriteList(Integer boardNumber);
 }
