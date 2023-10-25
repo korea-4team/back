@@ -26,6 +26,7 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
   value =
   "SELECT " +
   "SR.board_number AS boardNumber, " +
+  "U.email AS email, " +
   "U.nickname AS nickname, " +
   "SR.contents AS contents, " +
   "SR.short_review_number AS shortReviewNumber, " +

@@ -8,9 +8,11 @@ import com.team.back.entity.resultSet.ShortReviewResultSet;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @AllArgsConstructor
+@ToString
 public class ShortReviewResponseDto {
   private int shortReviewNumber;
   private String contents;
@@ -23,9 +25,9 @@ public class ShortReviewResponseDto {
   public ShortReviewResponseDto (ShortReviewResultSet resultSet){
     this.shortReviewNumber = resultSet.getShortReviewNumber();
     this.contents = resultSet.getContents();
-    this.writerEmail = resultSet.getWriterEmail();
+    this.writerEmail = resultSet.getEmail();
     this.writeDatetime = resultSet.getWriteDatetime();
-    this.writerNickname = resultSet.getWriterNickname();
+    this.writerNickname = resultSet.getNickname();
     this.score = resultSet.getScore();
   }
 
@@ -34,6 +36,7 @@ public class ShortReviewResponseDto {
 
     for (ShortReviewResultSet resultSet : resultSets){
       ShortReviewResponseDto shortreview = new ShortReviewResponseDto(resultSet);
+      System.out.println(shortreview);
       shortList.add(shortreview);
     }
 

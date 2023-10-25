@@ -64,10 +64,11 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     public ResponseEntity<? super DeleteAdvertisingBoardResponseDto> deleteAdvertisingBoard(Integer boardNumber,
             String email) {
         try {
+            System.out.println(email);
             // 유저가 아닐때
             boolean hasUser = userRepository.existsByEmail(email);
             if (!hasUser)
-                return DeleteAdvertisingBoardResponseDto.noExistedBoard();
+                return DeleteAdvertisingBoardResponseDto.noExistedUser();
 
             // 게시물이 없을때
             AdvertisingBoardEntity advertisingViewEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
