@@ -4,8 +4,8 @@ public interface ShortReviewResultSet {
 
   int getShortReviewNumber();
   double getScore();
-  String getWriterNickname();
-  String getWriterEmail();
+  String getNickname();
+  String getEmail();
   String getWriteDatetime();
   String getContents();
   
