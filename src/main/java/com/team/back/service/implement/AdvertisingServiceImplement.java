@@ -288,7 +288,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             List<PostTagRequestDto> tagList = dto.getTagWord();
 
             List<TagEntity> tagEntities = new ArrayList<>();
-            for(PostTagRequestDto tagDto: tagList) {
+            for(PostTagRequestDto tagDto : tagList) {
                 TagEntity tagEntity = new TagEntity(boardNumber, tagDto);
                 tagEntities.add(tagEntity);
             }
