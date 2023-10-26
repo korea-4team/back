@@ -67,7 +67,7 @@ public class SearchServiceImplement implements SearchService {
         List<AdvertisingBoardListResponseDto> advertisingBoardList = null;
 
         try {
-            if (location == null) {
+            if (location.equals("전체")) {
                 Integer limit = (section - 1) * 30;
                 List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, limit);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);
@@ -93,7 +93,7 @@ public class SearchServiceImplement implements SearchService {
         List<ReviewBoardListResponseDto> reviewBoardList = null;
 
         try {
-            if (location == null) {
+            if (location.equals("전체")) {
                 List<ReviewBoardListResultSet> resultSets = reviewBoardRepository.getReviewBoardList(searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyList(resultSets);
             }else {

@@ -24,13 +24,12 @@ public interface EventBoardRepository extends JpaRepository<EventBoardEntity, In
             "E.contents AS contents, " +
             "E.image_url AS imageUrl, " +
             "E.write_datetime AS writeDatetime, " +
-            "A.admin_id AS adminId, " +
-            "A.admin_nickname AS adminNickname " +
+            "A.admin_id AS writerEmail, " +
+            "A.admin_nickname AS writerNickname " +
             "FROM event_board AS E " +
             "INNER JOIN admin AS A " +
             "ON E.writer_email = A.admin_id " +
-            "ORDER BY E.write_datetime DESC " +
-            "LIMIT ?1, 30",
+            "ORDER BY E.write_datetime DESC, E.board_number DESC ",
         nativeQuery = true
     )
     List<EventBoardListResultSet> getEventBoardList(Integer section);
