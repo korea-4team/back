@@ -33,9 +33,9 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "U.email AS writerEmail, " +
     "U.nickname AS writerNickname " +
     "FROM advertising_board AS AB " +
-    "INNER JOIN user AS U " +
+    "LEFT JOIN user AS U " +
     "ON AB.writer_email = U.email " +
-    "INNER JOIN tag AS T " +
+    "LEFT JOIN tag AS T " +
     "ON AB.board_number = T.board_number " +
     "ORDER BY AB.write_datetime DESC " +
     "LIMIT ?1, 30",
