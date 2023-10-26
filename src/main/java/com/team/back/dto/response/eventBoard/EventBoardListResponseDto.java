@@ -17,8 +17,8 @@ public class EventBoardListResponseDto {
 	private String contents;
 	private String imageUrl;
 	private String writeDatetime;
-	private String writerEmail;
-	private String writerNickname;
+	private String adminEmail;
+	private String adminNickname;
     
     public EventBoardListResponseDto(EventBoardListResultSet resultSet) {
         this.boardNumber = resultSet.getBoardNumber();
@@ -26,8 +26,8 @@ public class EventBoardListResponseDto {
         this.contents = resultSet.getContents();
         this.imageUrl = resultSet.getImageUrl();
         this.writeDatetime = resultSet.getWriteDatetime();
-        this.writerEmail = resultSet.getWriterEmail();
-        this.writerNickname = resultSet.getWriterNickname();
+        this.adminEmail = resultSet.getWriterEmail();
+        this.adminNickname = resultSet.getWriterNickname();
     }
 
     public EventBoardListResponseDto(EventBoardViewEntity eventBoardViewEntity) {
@@ -36,8 +36,8 @@ public class EventBoardListResponseDto {
         this.contents = eventBoardViewEntity.getContents();
         this.imageUrl = eventBoardViewEntity.getImageUrl();
         this.writeDatetime = eventBoardViewEntity.getWriteDatetime();
-        this.writerEmail = eventBoardViewEntity.getWriterEmail();
-        this.writerNickname = eventBoardViewEntity.getWriterNickname();
+        this.adminEmail = eventBoardViewEntity.getWriterEmail();
+        this.adminNickname = eventBoardViewEntity.getWriterNickname();
     }
 
     public static List<EventBoardListResponseDto> copyList(List<EventBoardListResultSet> resultSets) {
