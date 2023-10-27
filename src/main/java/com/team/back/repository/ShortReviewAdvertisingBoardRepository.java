@@ -47,8 +47,8 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
     "S.contents AS contents, " +
     "S.score AS score, " +
     "S.write_datetime AS writeDatetime, "+
-    "S.user_email AS writerEmail, " +
-    "U.nickname AS writerNickname " +
+    "S.user_email AS email, " +
+    "U.nickname AS nickname " +
     "FROM short_review AS S INNER JOIN user AS U " +
     "ON S.user_email = U.email "+
     "ORDER BY S.write_datetime DESC ",

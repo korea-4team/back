@@ -36,7 +36,6 @@ public class ShortReviewResponseDto {
 
     for (ShortReviewResultSet resultSet : resultSets){
       ShortReviewResponseDto shortreview = new ShortReviewResponseDto(resultSet);
-      System.out.println(shortreview);
       shortList.add(shortreview);
     }
 
