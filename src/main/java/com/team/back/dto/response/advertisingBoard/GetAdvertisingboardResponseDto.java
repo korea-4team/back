@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import com.team.back.common.response.ResponseCode;
 import com.team.back.common.response.ResponseMessage;
 import com.team.back.dto.ResponseDto;
+import com.team.back.entity.AdvertisingBoardImageEntity;
 import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.TagEntity;
@@ -23,7 +24,7 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private int boardNumber;
   private String title;
   private String contents;
-  private String imageUrl;
+  private List<String> imageUrls;
   private int viewCount;
   private int shortReviewCount;
   private int favoriteCount;
@@ -33,10 +34,11 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private String businessType;
   private String location;
   private List<String> tagList;
-  private List<AdvertisingBoardMenuResponseDto> menuList;  private String tagWord;
+  private List<AdvertisingBoardMenuResponseDto> menuList;  
+  private String tagWord;
 
 
-  private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingMenuEntity> menuEntities){
+  private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingBoardMenuResponseDto> menuList, List<AdvertisingBoardImageEntity> imageEntities){
     super(code, message);
 
     List<String> tagwordList = new ArrayList<>();
@@ -46,29 +48,31 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
       tagwordList.add(tagword);
     }
 
-    List<AdvertisingBoardMenuResponseDto> menuBoardList = new ArrayList<>();
+    List<String> imageUrls = new ArrayList<>();
 
-    for(AdvertisingMenuEntity menu : menuEntities) {
-
-      AdvertisingBoardMenuResponseDto menuBoard = new AdvertisingBoardMenuResponseDto(menu);
-      menuBoardList.add(menuBoard);
-      
+    for(AdvertisingBoardImageEntity imageEntity : imageEntities) {
+      String imageUrl = imageEntity.getImageUrl();
+      imageUrls.add(imageUrl);
     }
 
     this.boardNumber = advertisingViewEntity.getBoardNumber();
     this.title = advertisingViewEntity.getTitle();
     this.contents = advertisingViewEntity.getContents();
-    this.imageUrl = advertisingViewEntity.getImageUrl();
+    this.imageUrls = imageUrls;
     this.writeDatetime = advertisingViewEntity.getWriteDatetime();
     this.writerEmail = advertisingViewEntity.getWriterEmail();
     this.writerNickname = advertisingViewEntity.getWriterNickname();
     this.viewCount = advertisingViewEntity.getViewCount();
     this.shortReviewCount = advertisingViewEntity.getShortReviewCount();
     this.favoriteCount = advertisingViewEntity.getFavoriteCount();  
+    this.location = advertisingViewEntity.getLocation();
+    this.businessType = advertisingViewEntity.getBusinessType();
+    this.tagList = tagwordList;
+    this.menuList = menuList;
   }
 
-  public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingMenuEntity> menuEntities){
-    GetAdvertisingboardResponseDto result = new GetAdvertisingboardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertisingViewEntity, tagEntities, menuEntities);
+  public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingBoardMenuResponseDto> menuList, List<AdvertisingBoardImageEntity> imageEntities){
+    GetAdvertisingboardResponseDto result = new GetAdvertisingboardResponseDto(ResponseCode.SUCCESS, ResponseMessage.SUCCESS, advertisingViewEntity, tagEntities, menuList, imageEntities);
     return ResponseEntity.status(HttpStatus.OK).body(result);
   }
 

@@ -3,6 +3,7 @@ package com.team.back.dto.response.advertisingBoard;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.team.back.entity.AdvertisingBoardMenuImageEntity;
 import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.resultSet.MenuListResultSet;
 
@@ -17,35 +18,40 @@ public class AdvertisingBoardMenuResponseDto {
   private int boardNumber;
   private String title;
   private String contents;
-  private String imageUrl;
+  private List<String> imageUrls;
   private String price;
 
-  public AdvertisingBoardMenuResponseDto(MenuListResultSet resultSet){
+  public AdvertisingBoardMenuResponseDto(MenuListResultSet resultSet, List<AdvertisingBoardMenuImageEntity> imageEntities){
+
+    List<String> imageUrls = new ArrayList<>();
+    for (AdvertisingBoardMenuImageEntity entity: imageEntities) {
+      String imageUrl = entity.getImageUrl();
+      imageUrls.add(imageUrl);
+    }
+
     this.menuNumber = resultSet.getMenuNumber();
     this.boardNumber = resultSet.getBoardNumber();
     this.contents = resultSet.getContents();
-    this.imageUrl = resultSet.getImageUrl();
+    this.imageUrls = imageUrls;
     this.title = resultSet.getTitle();
     this.price = resultSet.getPrice();
 
   }
 
-  public AdvertisingBoardMenuResponseDto (AdvertisingMenuEntity advertisingMenuEntity){
+  public AdvertisingBoardMenuResponseDto (AdvertisingMenuEntity advertisingMenuEntity, List<AdvertisingBoardMenuImageEntity> imageEntities){
+
+    List<String> imageUrls = new ArrayList<>();
+    for (AdvertisingBoardMenuImageEntity entity: imageEntities) {
+      String imageUrl = entity.getImageUrl();
+      imageUrls.add(imageUrl);
+    }
+
     this.menuNumber = advertisingMenuEntity.getMenuNumber();
     this.boardNumber = advertisingMenuEntity.getBoardNumber();
     this.contents = advertisingMenuEntity.getContents();
-    this.imageUrl = advertisingMenuEntity.getImageUrl();
+    this.imageUrls = imageUrls;
     this.title = advertisingMenuEntity.getTitle();
     this.price = advertisingMenuEntity.getPrice();
   }
   
-  public static List<AdvertisingBoardMenuResponseDto> copyEntityList(List<AdvertisingMenuEntity> advertisingMenuEntities){
-    List<AdvertisingBoardMenuResponseDto> menuList = new ArrayList<>();
-
-    for (AdvertisingMenuEntity entity: advertisingMenuEntities){
-      AdvertisingBoardMenuResponseDto menu = new AdvertisingBoardMenuResponseDto(entity);
-      menuList.add(menu);
-    }
-    return menuList;
-  }
 }

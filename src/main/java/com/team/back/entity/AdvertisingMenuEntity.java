@@ -11,12 +11,14 @@ import com.team.back.dto.request.advertisingBoard.PostAdvertisingMenuRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name="advertising_board_menu")
 @Table(name = "advertising_board_menu")
+@ToString
 public class AdvertisingMenuEntity {
 
   @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -24,14 +26,12 @@ public class AdvertisingMenuEntity {
   private int boardNumber;
   private String title;
   private String contents;
-  private String imageUrl;
   private String price;
 
   public AdvertisingMenuEntity(int boardNumber, PostAdvertisingMenuRequestDto dto) {
     this.boardNumber = boardNumber;
     this.title = dto.getTitle();
     this.contents = dto.getContents();
-    this.imageUrl = dto.getImageUrl();
     this.price = dto.getPrice();
   }
 
