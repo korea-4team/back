@@ -41,8 +41,6 @@ public class AdvertisingShortReviewEntity {
     this.userEmail = userEmail;
     this.contents = dto.getContents();
     this.writeDatetime = writeDatetime;
-    this.score = dto.getScore();
+    this.score = 1;
   }
-
-  
 }

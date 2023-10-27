@@ -215,10 +215,7 @@ public class AdminServiceImplement implements AdminService {
 
 			// 유저 이메일에 해당하는 사업자 등록 정보
 			businessNumberEntity = businessNumberRepository.findByUserEmail(userEmail);
-
-			//  가게 정보가 존재하는지 확인
-			// businessNumberEntity = businessNumberRepository.findByUserEmail(userEmail);
-			// if (businessNumberEntity == null) return GetStoreInfoResponseDto.notExistStore();
+			if (businessNumberEntity == null) return GetStoreInfoResponseDto.notExistStore();
 
 		} catch (Exception exception) {
 			exception.printStackTrace();
