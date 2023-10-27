@@ -13,6 +13,7 @@ import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostTagRequestDto;
 import com.team.back.dto.response.advertisingBoard.AdvertisingBoardListResponseDto;
+import com.team.back.dto.response.advertisingBoard.AdvertisingBoardMenuResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.DeleteShortCommentAdvertisingBoardResponseDto;
 import com.team.back.dto.response.advertisingBoard.GetAdvertisingBoardBusinessTypeListResponseDto;
@@ -30,6 +31,8 @@ import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListRes
 import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
 import com.team.back.entity.AdvertisingBoardFavoriteEntity;
+import com.team.back.entity.AdvertisingBoardImageEntity;
+import com.team.back.entity.AdvertisingBoardMenuImageEntity;
 import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
@@ -37,6 +40,8 @@ import com.team.back.entity.TagEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardFavoriteRepository;
+import com.team.back.repository.AdvertisingBoardImageRepository;
+import com.team.back.repository.AdvertisingBoardMenuImageRepository;
 import com.team.back.repository.AdvertisingBoardRepository;
 import com.team.back.repository.AdvertisingBoardViewRespository;
 import com.team.back.repository.AdvertisingMenuRepository;
@@ -58,6 +63,8 @@ public class AdvertisingServiceImplement implements AdvertisingService {
     private final AdvertisingBoardViewRespository advertisingBoardViewRespository;
     private final AdvertisingMenuRepository advertisingMenuRepository;
     private final TagRepository tagRepository;
+    private final AdvertisingBoardImageRepository advertisingBoardImageRepository;
+    private final AdvertisingBoardMenuImageRepository advertisingBoardMenuImageRepository;
 
     // 게시글 삭제
     @Override
@@ -141,16 +148,28 @@ public class AdvertisingServiceImplement implements AdvertisingService {
         AdvertisingViewEntity advertisingViewEntity = null;
         List<TagEntity> tagEntities = new ArrayList<>();
         List<AdvertisingMenuEntity> menuEntities = new ArrayList<>();
+        List<AdvertisingBoardImageEntity> imageEntities = new ArrayList<>();
+        List<AdvertisingBoardMenuResponseDto> menuBoardList = new ArrayList<>();
 
         try {
             // 게시물 번호에 해당하는 게시물 조회
             advertisingViewEntity = advertisingBoardViewRespository.findByBoardNumber(boardNumber);
             tagEntities = tagRepository.findByBoardNumber(boardNumber);
             menuEntities = advertisingMenuRepository.findByBoardNumber(boardNumber);
+            imageEntities = advertisingBoardImageRepository.findByBoardNumber(boardNumber);
 
             // 존재하는 게시물인지 확인
             if (advertisingViewEntity == null)
                 return GetAdvertisingboardResponseDto.noExistedBoard();
+
+            for(AdvertisingMenuEntity menu : menuEntities) {
+
+                int menuNumber = menu.getMenuNumber();
+                List<AdvertisingBoardMenuImageEntity> boardImageEntities = advertisingBoardMenuImageRepository.findByMenuNumber(menuNumber);
+                AdvertisingBoardMenuResponseDto menuBoard = new AdvertisingBoardMenuResponseDto(menu, boardImageEntities);
+                menuBoardList.add(menuBoard);
+            
+            }
                 
             // 게시물 조회수 증가
             AdvertisingBoardEntity advertisingBoardEntity = advertisingBoardRepository.findByBoardNumber(boardNumber);
@@ -164,7 +183,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
             return ResponseDto.databaseError();
         }
 
-        return GetAdvertisingboardResponseDto.success(advertisingViewEntity, tagEntities, menuEntities);
+        return GetAdvertisingboardResponseDto.success(advertisingViewEntity, tagEntities, menuBoardList, imageEntities);
     }
 
     // 최근 게시물 불러오기
@@ -269,27 +288,43 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
             // 데이터베이스 저장
             advertisingBoardRepository.save(advertisingBoardEntity);
+            int boardNumber = advertisingBoardEntity.getBoardNumber();
+
+            // image urls 저장
+            List<String> imageUrls = dto.getImageUrls();
+            List<AdvertisingBoardImageEntity> advertisingBoardImageEntities = new ArrayList<>();
+            for (String imageUrl: imageUrls) {
+                AdvertisingBoardImageEntity advertisingBoardImageEntity = new AdvertisingBoardImageEntity(boardNumber, imageUrl);
+                advertisingBoardImageEntities.add(advertisingBoardImageEntity);
+            }
+            
+            advertisingBoardImageRepository.saveAll(advertisingBoardImageEntities);
 
             List<PostAdvertisingMenuRequestDto> menuList = dto.getMenuList();
 
-            // 글 번호 불러오기
-            int boardNumber = advertisingBoardEntity.getBoardNumber();
-
             // 메뉴 작성한 것 불러오기
-            List<AdvertisingMenuEntity> advertisingMenuEntities = new ArrayList<>();
             for (PostAdvertisingMenuRequestDto menuDto: menuList) {
+
                 AdvertisingMenuEntity advertisingMenuEntity = new AdvertisingMenuEntity(boardNumber, menuDto);
-                advertisingMenuEntities.add(advertisingMenuEntity);
+                advertisingMenuRepository.save(advertisingMenuEntity);
+
+                int menuNumber = advertisingMenuEntity.getMenuNumber();
+                List<String> menuImageUrls = menuDto.getImageUrls();
+
+                List<AdvertisingBoardMenuImageEntity> advertisingBoardMenuImageEntities = new ArrayList<>();
+                for (String imageUrl: menuImageUrls) {
+                    AdvertisingBoardMenuImageEntity advertisingBoardMenuImageEntity = new AdvertisingBoardMenuImageEntity(menuNumber, imageUrl);
+                    advertisingBoardMenuImageEntities.add(advertisingBoardMenuImageEntity);
+                }
+
+                advertisingBoardMenuImageRepository.saveAll(advertisingBoardMenuImageEntities);
             }
 
-            // 저장
-            advertisingMenuRepository.saveAll(advertisingMenuEntities);
-
-            List<PostTagRequestDto> tagList = dto.getTagWord();
+            List<String> tagList = dto.getTagList();
 
             List<TagEntity> tagEntities = new ArrayList<>();
-            for(PostTagRequestDto tagDto : tagList) {
-                TagEntity tagEntity = new TagEntity(boardNumber, tagDto);
+            for(String tag : tagList) {
+                TagEntity tagEntity = new TagEntity(boardNumber, tag);
                 tagEntities.add(tagEntity);
             }
 

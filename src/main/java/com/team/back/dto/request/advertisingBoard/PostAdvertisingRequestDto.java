@@ -19,7 +19,7 @@ public class PostAdvertisingRequestDto {
   @NotBlank
   private String contents;
   
-  private String imageUrl;
+  private List<String> imageUrls;
 
   @NotBlank
   private String location;
@@ -27,7 +27,7 @@ public class PostAdvertisingRequestDto {
   @NotBlank
   private String businessType;
 
-  List<PostTagRequestDto> tagWord;
+  List<String> tagList;
   
   List<PostAdvertisingMenuRequestDto> menuList;
 

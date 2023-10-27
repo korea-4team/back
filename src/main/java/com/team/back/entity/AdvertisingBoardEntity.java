@@ -30,7 +30,6 @@ public class AdvertisingBoardEntity {
   private int boardNumber;
   private String title;
   private String contents;
-  private String imageUrl;
   private int viewCount;
   private int shortReviewCount;
   private int favoriteCount;
@@ -47,7 +46,6 @@ public class AdvertisingBoardEntity {
 
     this.title = dto.getTitle();
     this.contents = dto.getContents();
-    this.imageUrl = dto.getImageUrl();
     this.writeDatetime = writeDatetime;
     this.writerEmail = writerEmail;
     this.location = dto.getLocation();
@@ -59,7 +57,6 @@ public class AdvertisingBoardEntity {
   public void patch(PatchAdvertisingRequestDto dto){
     this.title = dto.getTitle();
     this.contents = dto.getContents();
-    this.imageUrl = dto.getImageUrl();
   }
 
   public void increaseViewCount() {

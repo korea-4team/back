@@ -26,11 +26,6 @@ public class TagEntity {
   @Id
   private String tagWord;
   
-  public TagEntity(int boardNumber, PostTagRequestDto dto) {
-    this.tagWord = dto.getTagWord();
-    this.boardNumber = boardNumber;
-  }
-
 	public TagEntity(TagEntity tag) {
 	}
 }
