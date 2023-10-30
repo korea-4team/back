@@ -41,13 +41,13 @@ public class SearchServiceImplement implements SearchService {
 
         try {
             if (location.equals("전체")) {
-                // System.out.println(location);
                 List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, searchWord);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             } else {
-                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrLocationContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, location, searchWord, searchWord);
+                // System.out.println(location);
+                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.getWithLocationSearch(searchWord, searchWord, searchWord, searchWord, location);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.getWithLocationSearch(searchWord, searchWord, searchWord, location);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
@@ -68,12 +68,10 @@ public class SearchServiceImplement implements SearchService {
 
         try {
             if (location.equals("전체")) {
-                Integer limit = (section - 1) * 30;
-                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, limit);
+                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);
             } else {
-                Integer limit = (section - 1) * 30;
-                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, location, limit);
+                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, location);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);
             }
             

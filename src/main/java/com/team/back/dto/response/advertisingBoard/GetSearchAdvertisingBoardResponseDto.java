@@ -16,15 +16,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public class GetSearchAdvertisingBoardResponseDto extends ResponseDto{
 
-  private List<AdvertisingBoardListResponseDto> advertisingboardList;
+  private List<AdvertisingBoardListResponseDto> advertisingBoardList;
   
-  private GetSearchAdvertisingBoardResponseDto(String code,String message, List<AdvertisingBoardListResponseDto> advertisingboardList) {
+  private GetSearchAdvertisingBoardResponseDto(String code,String message, List<AdvertisingBoardListResponseDto> advertisingBoardList) {
     super(code,message);
-    this.advertisingboardList = advertisingboardList;
+    this.advertisingBoardList = advertisingBoardList;
   }
 
-  public static ResponseEntity<GetSearchAdvertisingBoardResponseDto> success(List<AdvertisingBoardListResponseDto> advertisingboardList){
-    GetSearchAdvertisingBoardResponseDto rersult = new GetSearchAdvertisingBoardResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS,advertisingboardList);
+  public static ResponseEntity<GetSearchAdvertisingBoardResponseDto> success(List<AdvertisingBoardListResponseDto> advertisingBoardList){
+    GetSearchAdvertisingBoardResponseDto rersult = new GetSearchAdvertisingBoardResponseDto(ResponseCode.SUCCESS,ResponseMessage.SUCCESS,advertisingBoardList);
     return ResponseEntity.status(HttpStatus.OK).body(rersult);
   }
   
