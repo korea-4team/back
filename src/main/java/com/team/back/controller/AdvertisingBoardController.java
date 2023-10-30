@@ -1,6 +1,8 @@
 package com.team.back.controller;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -101,6 +103,7 @@ public class AdvertisingBoardController {
   }
 
   //게시글 작성
+  private static final Logger logger = LoggerFactory.getLogger(AdvertisingBoardController.class);
   @PostMapping("")
   public ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(
     @AuthenticationPrincipal String email,

@@ -15,7 +15,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
   boolean existsByWriterEmail(String writerEmail);
   
   AdvertisingBoardEntity findByBoardNumber(Integer boardNumber);
-  
+
   @Query(
     value =
     "SELECT " +

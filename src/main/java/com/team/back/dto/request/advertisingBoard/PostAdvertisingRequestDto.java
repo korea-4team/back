@@ -31,5 +31,8 @@ public class PostAdvertisingRequestDto {
   
   List<PostAdvertisingMenuRequestDto> menuList;
 
+  PostAdvertisingDetailRequestDto dtail;
+
+
 
 }

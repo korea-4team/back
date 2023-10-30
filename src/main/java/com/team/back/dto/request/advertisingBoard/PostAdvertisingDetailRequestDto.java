@@ -9,16 +9,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class PatchAdvertisingRequestDto {
+public class PostAdvertisingDetailRequestDto {
 
-  @NotBlank
-  private String title;
+    public String storeName;
+    public String storeTel;
+    public String storeTime;
+    public String storeNumber;
+    public String storeAddress;
 
-  @NotBlank
-  private String contents;
 
-  private String imageUrl;
-
-  private String tagWord;
 
 }

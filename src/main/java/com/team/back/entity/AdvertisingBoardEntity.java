@@ -26,8 +26,8 @@ public class AdvertisingBoardEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-
   private int boardNumber;
+
   private String title;
   private String contents;
   private int viewCount;
@@ -37,6 +37,8 @@ public class AdvertisingBoardEntity {
   private String writerEmail;
   private String location;
   private String businessType;
+
+
 
 
   public AdvertisingBoardEntity(String writerEmail, PostAdvertisingRequestDto dto){
@@ -50,6 +52,7 @@ public class AdvertisingBoardEntity {
     this.writerEmail = writerEmail;
     this.location = dto.getLocation();
     this.businessType = dto.getBusinessType();
+
   }
 
 
