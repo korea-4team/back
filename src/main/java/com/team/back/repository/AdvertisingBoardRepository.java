@@ -80,11 +80,10 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "OR AB.contents LIKE %?1% " +
     "OR AB.business_type LIKE %?1% " + 
     "OR T.tag_word LIKE %?1% " +
-    "ORDER BY AB.write_datetime DESC " +
-    "LIMIT ?2, 30",
+    "ORDER BY AB.write_datetime DESC ",
     nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, Integer section);
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord);
 
     @Query(
     value =
@@ -116,12 +115,12 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "WHERE (AB.title LIKE %?1% " +
     "OR AB.contents LIKE %?1% " +
     "OR AB.business_type LIKE %?1%) " +
-    "AND AB.location LIKE %?2% " +
     "OR T.tag_word LIKE %?1% " +
+    "AND AB.location LIKE %?2% " +
     "ORDER BY AB.write_datetime DESC ",
     nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, String location, Integer section);
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, String location);
 
   List<AdvertisingBoardEntity> findByLocationOrderByWriteDatetimeDesc(String location);
 
