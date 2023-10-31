@@ -29,6 +29,8 @@ import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
 import com.team.back.dto.response.advertisingBoard.ShortReviewResponseDto;
+import com.team.back.dto.response.reviewBoard.FavoriteListResponseDto;
+import com.team.back.dto.response.reviewBoard.GetFavoriteListResponseDto;
 import com.team.back.entity.AdvertisingBoardEntity;
 import com.team.back.entity.AdvertisingBoardFavoriteEntity;
 import com.team.back.entity.AdvertisingBoardImageEntity;
@@ -37,6 +39,7 @@ import com.team.back.entity.AdvertisingMenuEntity;
 import com.team.back.entity.AdvertisingShortReviewEntity;
 import com.team.back.entity.AdvertisingViewEntity;
 import com.team.back.entity.TagEntity;
+import com.team.back.entity.UserEntity;
 import com.team.back.entity.resultSet.AdvertisingBoardResultSet;
 import com.team.back.entity.resultSet.ShortReviewResultSet;
 import com.team.back.repository.AdvertisingBoardFavoriteRepository;
@@ -481,6 +484,27 @@ public class AdvertisingServiceImplement implements AdvertisingService {
                 }
                 return GetAdvertisingBoardLocationBusinessTypeListResponseDto.success(advertisingBoardList);
        
+    }
+
+     @Override
+    public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(Integer boardNumber) {
+        
+        List<FavoriteListResponseDto> favoriteList = null;
+
+        try {
+
+        // description: 게시물 번호의 좋아요 리스트 조회 //
+        List<UserEntity> userEntities = userRepository.getFavoriteList(boardNumber);
+
+        // description: Entity를 dto로 변환 //
+        favoriteList = FavoriteListResponseDto.copyEntityList(userEntities);
+        
+        } catch (Exception exception) {
+        exception.printStackTrace();
+        return ResponseDto.databaseError();
+        }
+
+        return GetFavoriteListResponseDto.success(favoriteList);
     }
 
 }

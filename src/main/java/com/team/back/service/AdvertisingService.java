@@ -20,6 +20,7 @@ import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseD
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
+import com.team.back.dto.response.reviewBoard.GetFavoriteListResponseDto;
 
 
 
@@ -52,4 +53,7 @@ public interface AdvertisingService {
    ResponseEntity<? super GetAdvertisingBoardLocationBusinessTypeListResponseDto> getAdvertisingBoardLocationBusinessTypeList(String location, String businessType);
   //예약
   ResponseEntity<? super PostReservationResponseDto> postReservation(Integer boardNumber, String email, String time, int people);
+
+  ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(Integer boardNumber);
+
 }

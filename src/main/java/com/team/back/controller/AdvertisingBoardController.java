@@ -31,6 +31,7 @@ import com.team.back.dto.response.advertisingBoard.PostAdvertisingBoardResponseD
 import com.team.back.dto.response.advertisingBoard.PostReservationResponseDto;
 import com.team.back.dto.response.advertisingBoard.PostShortReviewResponseDto;
 import com.team.back.dto.response.advertisingBoard.PutAdvertisingFavoriteListResponseDto;
+import com.team.back.dto.response.reviewBoard.GetFavoriteListResponseDto;
 import com.team.back.service.AdvertisingService;
 
 import lombok.RequiredArgsConstructor;
@@ -71,6 +72,14 @@ public class AdvertisingBoardController {
     ResponseEntity<? super PutAdvertisingFavoriteListResponseDto> response = advertisingService.putAdvertisingFavoriteList(boardNumber,writerEmail);
     return response;
   }
+
+  @GetMapping("/{boardNumber}/favorite-list")
+  public ResponseEntity<? super GetFavoriteListResponseDto> getFavoriteList(
+        @PathVariable(value="boardNumber", required=true) Integer boardNumber
+    ) {
+        ResponseEntity<? super GetFavoriteListResponseDto> response = advertisingService.getFavoriteList(boardNumber);
+        return response;
+    }
 
   // 특정 게시물 지역별 리스트 불러오기
   @GetMapping("/board-list/location/{location}")
