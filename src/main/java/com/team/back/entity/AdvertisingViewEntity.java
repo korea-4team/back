@@ -28,6 +28,13 @@ public class AdvertisingViewEntity {
   private String writerNickname;
   private String location;
   private String businessType;
-  private String tagWord;
+  private String storeName;
+  private String storeTel;
+  private String storeTime;
+  private String storeNumber;
+  private String storeAddress;
+  private String bookTime;
+  private String book;
+  private String bookKids;
   
 }

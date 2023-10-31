@@ -35,7 +35,16 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
   private String location;
   private List<String> tagList;
   private List<AdvertisingBoardMenuResponseDto> menuList;  
-  private String tagWord;
+
+  private String storeName;
+  private String storeTel;
+  private String storeTime;
+  private String storeNumber;
+  private String storeAddress;
+
+  private String bookTime;
+  private String book;
+  private String bookKids;
 
 
   private GetAdvertisingboardResponseDto(String code, String message, AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingBoardMenuResponseDto> menuList, List<AdvertisingBoardImageEntity> imageEntities){
@@ -69,6 +78,17 @@ public class GetAdvertisingboardResponseDto extends ResponseDto {
     this.businessType = advertisingViewEntity.getBusinessType();
     this.tagList = tagwordList;
     this.menuList = menuList;
+
+
+    this.storeName = advertisingViewEntity.getStoreName();
+    this.storeTel = advertisingViewEntity.getStoreTel();
+    this.storeTime = advertisingViewEntity.getStoreTime();
+    this.storeNumber = advertisingViewEntity.getStoreNumber();
+    this.storeAddress = advertisingViewEntity.getStoreAddress();
+
+    this.bookTime = advertisingViewEntity.getBookTime();
+    this.book = advertisingViewEntity.getBook();
+    this.bookKids = advertisingViewEntity.getBookKids();
   }
 
   public static ResponseEntity<GetAdvertisingboardResponseDto> success(AdvertisingViewEntity advertisingViewEntity, List<TagEntity> tagEntities, List<AdvertisingBoardMenuResponseDto> menuList, List<AdvertisingBoardImageEntity> imageEntities){

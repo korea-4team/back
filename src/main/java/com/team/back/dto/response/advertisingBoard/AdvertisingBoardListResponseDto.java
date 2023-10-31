@@ -25,7 +25,6 @@ public class AdvertisingBoardListResponseDto {
   private String writerNickname;
   private String location;
   private String businessType;
-  private String tagWord;
 
   public AdvertisingBoardListResponseDto (AdvertisingBoardResultSet resultSet){
     this.boardNumber = resultSet.getBoardNumber();
@@ -40,7 +39,6 @@ public class AdvertisingBoardListResponseDto {
     this.writerNickname = resultSet.getWriterNickname();
     this.location = resultSet.getLocation();
     this.businessType = resultSet.getBusinessType();
-    this.tagWord = resultSet.getTagWord();
 
   }
 
@@ -57,7 +55,6 @@ public class AdvertisingBoardListResponseDto {
     this.writerNickname = advertisingViewEntity.getWriterNickname();
     this.location = advertisingViewEntity.getLocation();
     this.businessType = advertisingViewEntity.getBusinessType();
-    this.tagWord = advertisingViewEntity.getTagWord();
   }
 
   public static List<AdvertisingBoardListResponseDto> copyEntityList(List<AdvertisingViewEntity> advertisingViewEntities){

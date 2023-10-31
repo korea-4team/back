@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.team.back.dto.ResponseDto;
 import com.team.back.dto.request.advertisingBoard.PatchAdvertisingRequestDto;
-import com.team.back.dto.request.advertisingBoard.PostAdvertisingDetailRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingMenuRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostAdvertisingRequestDto;
 import com.team.back.dto.request.advertisingBoard.PostShortReviewRequestDto;
@@ -143,8 +142,6 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
     @Override
     public ResponseEntity<? super GetAdvertisingboardResponseDto> getAdvertisingboard(Integer boardNumber) {
-
-        System.out.println(boardNumber);
 
         AdvertisingViewEntity advertisingViewEntity = null;
         List<TagEntity> tagEntities = new ArrayList<>();
@@ -410,7 +407,8 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
         try {
 
-            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByLocationOrderByWriteDatetimeDesc(location);
+            if (location.equals("전체")) location = "";
+            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.getLocation(location);
 
             advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
 
@@ -429,7 +427,9 @@ public class AdvertisingServiceImplement implements AdvertisingService {
         List<AdvertisingBoardListResponseDto> advertisingBoardList = new ArrayList<>();
 
         try {
-            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByBusinessTypeOrderByWriteDatetimeDesc(businessType);
+
+            if (businessType.equals("전체")) businessType = "";
+            List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.getBusinessType(businessType);
 
             advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
 
@@ -482,13 +482,6 @@ public class AdvertisingServiceImplement implements AdvertisingService {
                 }
                 return GetAdvertisingBoardLocationBusinessTypeListResponseDto.success(advertisingBoardList);
        
-    }
-
-    @Override
-    public ResponseEntity<? super PostAdvertisingDetailRequestDto> postAdvertisingBoard(
-            PostAdvertisingDetailRequestDto dto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'postAdvertisingBoard'");
     }
 
 }
