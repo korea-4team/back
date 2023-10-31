@@ -81,7 +81,6 @@ public interface ShortReviewAdvertisingBoardRepository extends JpaRepository<Adv
       "S.board_number AS shortReviewNumber, " +
       "S.write_datetime AS writeDatetime, " + 
       "S.contents AS contents, " +
-      "S.image_url AS imageUrl, " +
       "S.score AS score, " +
       "A.board_number AS boardNumber, " +
       "A.title AS boardTitle, " +
