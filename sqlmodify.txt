@@ -475,4 +475,4 @@ from ( (
                 `ab`.`board_number` = `t`.`board_number`
             )
         )
-    )
+    );
