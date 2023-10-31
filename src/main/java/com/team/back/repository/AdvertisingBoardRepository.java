@@ -115,7 +115,12 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "ON AB.board_number = T.board_number " +
     "WHERE (AB.title LIKE %?1% " +
     "OR AB.contents LIKE %?1% " +
+<<<<<<< HEAD
     "OR AB.business_type LIKE %?1%) " +
+=======
+    "OR AB.business_type LIKE %?1% " +
+    "OR T.tag_word LIKE %?1%) " +
+>>>>>>> 63c470769e4d15042a95e66ad073e5dad6f1be80
     "AND AB.location LIKE %?2% " +
     "OR T.tag_word LIKE %?1% " +
     "ORDER BY AB.write_datetime DESC ",

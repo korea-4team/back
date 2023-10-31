@@ -19,8 +19,23 @@ public interface AdvertisingBoardViewRespository extends JpaRepository<Advertisi
   List<AdvertisingViewEntity> findByLocationOrBusinessTypeOrderByWriteDatetimeDesc(String location, String businessType);
  
   List<AdvertisingViewEntity> findByWriterEmail(String writerEmail);
+<<<<<<< HEAD
   List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrLocationContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(String title, String contents, String location, String businessType);
   List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(String title, String contents, String businessType);
+=======
+  List<AdvertisingViewEntity> findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(String title, String contents, String businessType, String tagWord);
+
+      @Query(
+        value = 
+        "SELECT * " +
+        "FROM advertising_board_view " +
+        "WHERE (title LIKE %?1% OR contents LIKE %?2% OR business_type LIKE %?3% OR tag_word LIKE %?4%) " +
+        "AND location LIKE %?5% " +
+        "ORDER BY write_datetime DESC",
+        nativeQuery=true
+    )
+  List<AdvertisingViewEntity> getWithLocationSearch(String title, String contents, String businessType, String tagWord, String location);
+>>>>>>> 63c470769e4d15042a95e66ad073e5dad6f1be80
   
   @Query(
     value=

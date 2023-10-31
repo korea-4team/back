@@ -41,13 +41,22 @@ public class SearchServiceImplement implements SearchService {
 
         try {
             if (location.equals("전체")) {
+<<<<<<< HEAD
                 // System.out.println(location);
                 List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
+=======
+                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, searchWord);
+>>>>>>> 63c470769e4d15042a95e66ad073e5dad6f1be80
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             } else {
+<<<<<<< HEAD
                 List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrLocationContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, location, searchWord);
+=======
+                // System.out.println(location);
+                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.getWithLocationSearch(searchWord, searchWord, searchWord, searchWord, location);
+>>>>>>> 63c470769e4d15042a95e66ad073e5dad6f1be80
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.getWithLocationSearch(searchWord, searchWord, searchWord, location);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);

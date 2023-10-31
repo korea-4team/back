@@ -58,7 +58,7 @@ public interface CommentRepository extends JpaRepository<CommentEntity, Integer>
         "FROM review_board_comment C " +
         "LEFT JOIN review_board R " +
         "ON C.board_number = R.board_number " +
-        "WHERE C.user_email = 1? " +
+        "WHERE C.user_email = ?1 " +
         "ORDER BY C.write_datetime DESC",
         nativeQuery=true
   )
