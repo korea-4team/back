@@ -77,6 +77,7 @@ public class AdvertisingBoardController {
   public ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> getAdvertisingBoardLocationList(
     @PathVariable(value = "location", required = true) String location
   ) {
+    logger.info(location);
     ResponseEntity<? super GetAdvertisingBoardLocationListResponsedto> response = advertisingService.getAdvertisingBoardLocationList(location);
     return response;
   }
@@ -109,6 +110,7 @@ public class AdvertisingBoardController {
     @AuthenticationPrincipal String email,
     @RequestBody @Valid PostAdvertisingRequestDto requestDto
   ){
+    logger.info("Received DTO data: {}", requestDto);
     ResponseEntity<? super PostAdvertisingBoardResponseDto> response = advertisingService.postAdvertisingBoard(email, requestDto);
     return response;
   }

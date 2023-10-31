@@ -1,7 +1,6 @@
 package com.team.back.service;
 
 
-import com.team.back.dto.request.advertisingBoard.PostAdvertisingDetailRequestDto;
 import org.springframework.http.ResponseEntity;
 
 import com.team.back.dto.request.advertisingBoard.PatchAdvertisingRequestDto;
@@ -41,8 +40,6 @@ public interface AdvertisingService {
   ResponseEntity<? super PatchAdvertisingBoardResponseDto> patchAdvertisingBoard(Integer boardNumber, String email,PatchAdvertisingRequestDto requestDto);
   // 게시물 작성
   ResponseEntity<? super PostAdvertisingBoardResponseDto> postAdvertisingBoard(String email, PostAdvertisingRequestDto dto);
-  //
-  ResponseEntity<? super PostAdvertisingDetailRequestDto> postAdvertisingBoard(PostAdvertisingDetailRequestDto dto);
   // 한줄 리뷰 작성
   ResponseEntity<? super PostShortReviewResponseDto> postShortReview(Integer boardNumber, String email, PostShortReviewRequestDto dto);
   // 좋아요
