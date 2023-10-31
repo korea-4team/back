@@ -75,8 +75,7 @@ public class AdminServiceImplement implements AdminService {
 			if(!isAdmin) return GetCurrentAdvertisingBoardResponseDto.notAdminId();
 
 			// 광고 게시글 리스트 불러오기
-			Integer limit = (section -1) * 30;
-			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdminAdvertisingBoardList(limit);
+			List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdminAdvertisingBoardList();
 			
 			// Dto 형태로 변환
 			advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);

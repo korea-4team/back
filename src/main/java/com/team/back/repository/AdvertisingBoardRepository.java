@@ -43,11 +43,10 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
         "ON ab.board_number = I.board_number " +
     "LEFT JOIN tag AS T " +
     "ON AB.board_number = T.board_number " +
-    "ORDER BY AB.write_datetime DESC " +
-    "LIMIT ?1, 30",
+    "ORDER BY AB.write_datetime DESC ",
     nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> getAdvertisingBoardList(Integer section);
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList();
 
     @Query(
     value =
@@ -80,11 +79,10 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "OR AB.contents LIKE %?1% " +
     "OR AB.business_type LIKE %?1% " +
     "OR T.tag_word LIKE %?1% " +
-    "ORDER BY AB.write_datetime DESC " +
-    "LIMIT ?2, 30",
+    "ORDER BY AB.write_datetime DESC ",
     nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, Integer section);
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord);
 
     @Query(
     value =
@@ -121,7 +119,7 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
     "ORDER BY AB.write_datetime DESC ",
     nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, String location, Integer section);
+  List<AdvertisingBoardResultSet> getAdvertisingBoardList(String searchWord, String location);
 
   List<AdvertisingBoardEntity> findByLocationOrderByWriteDatetimeDesc(String location);
 
@@ -152,10 +150,9 @@ public interface AdvertisingBoardRepository extends JpaRepository<AdvertisingBoa
         "ON ab.board_number = I.board_number " +
     "LEFT JOIN tag AS T " +
     "ON AB.board_number = T.board_number " +
-    "ORDER BY AB.write_datetime DESC " +
-    "LIMIT ?1, 30",
+    "ORDER BY AB.write_datetime DESC ",
     nativeQuery=true
   )
-  List<AdvertisingBoardResultSet> getAdminAdvertisingBoardList(Integer section);
+  List<AdvertisingBoardResultSet> getAdminAdvertisingBoardList();
 
 }
