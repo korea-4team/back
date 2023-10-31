@@ -38,6 +38,15 @@ public class AdvertisingBoardEntity {
   private String location;
   private String businessType;
 
+  private String storeName;
+  private String storeTel;
+  private String storeTime;
+  private String storeNumber;
+  private String storeAddress;
+
+  private String bookTime;
+  private String book;
+  private String bookKids;
 
 
 
@@ -52,6 +61,16 @@ public class AdvertisingBoardEntity {
     this.writerEmail = writerEmail;
     this.location = dto.getLocation();
     this.businessType = dto.getBusinessType();
+
+    this. storeName = dto.getStoreName();
+    this.storeTel = dto.getStoreTel();
+    this.storeTime = dto.getStoreTime();
+    this.storeNumber = dto.getStoreNumber();
+    this.storeAddress = dto.getStoreAddress();
+
+    this.bookTime = dto.getBookTime();
+    this.book = dto.getBook();
+    this.bookKids = dto.getBookKids();
 
   }
 

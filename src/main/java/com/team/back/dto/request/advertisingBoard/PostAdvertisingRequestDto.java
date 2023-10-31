@@ -27,11 +27,26 @@ public class PostAdvertisingRequestDto {
   @NotBlank
   private String businessType;
 
+  private String storeName;
+
+  private String storeTel;
+
+  private String storeTime;
+
+  private String storeNumber;
+
+  private String storeAddress;
+
+  private String bookTime;
+
+  private String book;
+
+  private String bookKids;
+
   List<String> tagList;
   
   List<PostAdvertisingMenuRequestDto> menuList;
 
-  PostAdvertisingDetailRequestDto dtail;
 
 
 

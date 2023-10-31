@@ -41,13 +41,13 @@ public class SearchServiceImplement implements SearchService {
 
         try {
             if (location.equals("전체")) {
-                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrTagWordContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord, searchWord);
+                // System.out.println(location);
+                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.findByTitleContainsOrContentsContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, searchWord);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
             } else {
-                // System.out.println(location);
-                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.getWithLocationSearch(searchWord, searchWord, searchWord, searchWord, location);
+                List<AdvertisingViewEntity> advertisingViewEntities = advertisingBoardViewRespository.findByTitleContainsOrContentsContainsOrLocationContainsOrBusinessTypeContainsOrderByWriteDatetimeDesc(searchWord, searchWord, location, searchWord);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyEntityList(advertisingViewEntities);
                 List<ReviewBoardViewEntity> reviewBoardViewEntities = reviewBoardViewRepository.getWithLocationSearch(searchWord, searchWord, searchWord, location);
                 reviewBoardList = ReviewBoardListResponseDto.copyEntityList(reviewBoardViewEntities);
@@ -68,10 +68,12 @@ public class SearchServiceImplement implements SearchService {
 
         try {
             if (location.equals("전체")) {
-                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord);
+                Integer limit = (section - 1) * 30;
+                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, limit);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);
             } else {
-                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, location);
+                Integer limit = (section - 1) * 30;
+                List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(searchWord, location, limit);
                 advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);
             }
             
