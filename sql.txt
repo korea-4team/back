@@ -269,3 +269,9 @@ ALTER Table advertising_board ADD store_time TEXT(255)
 ALTER Table advertising_board ADD book_kids TEXT(255)
 
 ALTER Table advertising_board ADD store_address TEXT(255)
+
+ALTER Table advertising_board ADD store_number TEXT(255)
+
+ALTER Table advertising_board ADD book TEXT(255)
+
+ALTER Table advertising_board ADD book_time TEXT(255)
