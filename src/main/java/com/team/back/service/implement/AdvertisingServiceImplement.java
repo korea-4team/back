@@ -192,8 +192,7 @@ public class AdvertisingServiceImplement implements AdvertisingService {
 
         try {
             // 리스트 불러오기
-            Integer limit = (section - 1) * 30;
-            List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList(limit);
+            List<AdvertisingBoardResultSet> resultSets = advertisingBoardRepository.getAdvertisingBoardList();
 
             // 검색결과 responsedto로 변환
             advertisingBoardList = AdvertisingBoardListResponseDto.copyList(resultSets);

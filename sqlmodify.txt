@@ -438,3 +438,41 @@ SELECT
     ON AB.board_number = T.board_number  
     ORDER BY AB.write_datetime DESC  
     LIMIT 0, 30;
+
+
+DROP VIEW advertising_board_view;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root` @`localhost` SQL SECURITY DEFINER VIEW `advertising_board_view` AS
+select
+    `ab`.`board_number` AS `board_number`,
+    `ab`.`title` AS `title`,
+    `ab`.`contents` AS `contents`,
+    `ab`.`image_url` AS `image_url`,
+    `ab`.`view_count` AS `view_count`,
+    `ab`.`short_review_count` AS `short_review_count`,
+    `ab`.`favorite_count` AS `favorite_count`,
+    `ab`.`write_datetime` AS `write_datetime`,
+    `ab`.`location` AS `location`,
+    `ab`.`business_type` AS `business_type`,
+    `ab`.`store_name` AS `store_name`,
+    `ab`.`store_tel` AS `store_tel`,
+    `ab`.`store_time` AS `store_time`,
+    `ab`.`store_number` AS `store_number`,
+    `ab`.`store_address` AS `store_address`,
+    `ab`.`book_time` AS `book_time`,
+    `ab`.`book` AS `book`,
+    `ab`.`book_kids` AS `book_kids`,
+    `u`.`email` AS `writer_email`,
+    `u`.`nickname` AS `writer_nickname`,
+    `t`.`tag_word` AS `tag_word`
+from ( (
+            `advertising_board` `ab`
+            left join `user` `u` on( (
+                    `ab`.`writer_email` = `u`.`email`
+                )
+            )
+        )
+        left join `tag` `t` on( (
+                `ab`.`board_number` = `t`.`board_number`
+            )
+        )
+    )
