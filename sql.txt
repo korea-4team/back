@@ -167,6 +167,7 @@ CREATE TABLE business_application (
 	store_tel_number VARCHAR(20) NOT NULL,
 	FOREIGN KEY (user_email) REFERENCES user (email)
 );
+
 CREATE VIEW user_view AS
 SELECT email as user_email, password as user_password, nickname as user_nickname, tel_number as user_tel_number, address as user_address, address_detail as user_address_detail, role as user_role
 FROM user;
@@ -212,32 +213,6 @@ SELECT
     AB.write_datetime AS write_datetime,
     AB.location AS location,
     AB.business_type AS business_type,
-    U.email AS writer_email,
-    U.nickname AS writer_nickname,
-    T.tag_word AS tag_word
-FROM advertising_board AS AB
-INNER JOIN user AS U
-ON AB.writer_email = U.email
-INNER JOIN tag AS T
-ON AB.tag_word = T.tag_word;
-
-
-
-
-
-
-CREATE VIEW advertising_board_view AS
-SELECT 
-    AB.board_number AS board_number,
-    AB.title AS title,
-    AB.contents AS contents,
-    AB.image_url AS image_url,
-    AB.view_count AS view_count,
-    AB.short_review_count AS short_review_count,
-    AB.favorite_count AS favorite_count,
-    AB.write_datetime AS write_datetime,
-    AB.location AS location,
-    AB.business_type AS business_type,
     AB.store_name AS store_name,
     AB.store_tel AS store_tel,
     AB.store_time AS store_time,
@@ -268,4 +243,10 @@ ALTER Table advertising_board ADD store_time TEXT(255)
 
 ALTER Table advertising_board ADD book_kids TEXT(255)
 
+ALTER Table advertising_board ADD book_time TEXT(255)
+
+ALTER Table advertising_board ADD book TEXT(255)
+
 ALTER Table advertising_board ADD store_address TEXT(255)
+
+ALTER Table advertising_board ADD store_number TEXT(255)
